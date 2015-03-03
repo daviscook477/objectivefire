@@ -35,9 +35,9 @@ module.exports = function(grunt) {
     jshint : {
       options : {
         jshintrc: '.jshintrc',
-        ignores: []
+        ignores: ['<%=conf.src%>/angularfire_mod/**/*.js']
       },
-      all : ['src/**/*.js']
+      all : ['<%=conf.src%>/**/*.js']
     },
     karma: {
       unit: {
