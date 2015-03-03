@@ -1,7 +1,7 @@
 angular.module('objective-fire')
 .factory('ObjectiveFire', ["FireObject", function(FireObject) {
   /**
-  TODO: Define the ObjectiveFire Object
+  Registry of all exisiting classes of objects
   @class ObjectiveFire
   @constructor
   @param ref {Firebase} Firebase object at the URL that is your Firebase
