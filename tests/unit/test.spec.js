@@ -38,7 +38,8 @@ describe('test', function() {
   var lastName = new PrimitiveProperty("last");
   var dog = new ObjectProperty("dog", "dog");
   var dog2 = new ObjectProperty("dog2", "dog");
-  userProperties.addProperty(firstName).addProperty(lastName).addProperty(dog).addProperty(dog2);
+  var dogs = new ObjectArrayProperty("dogs", "dog");
+  userProperties.addProperty(firstName).addProperty(lastName).addProperty(dog).addProperty(dog2).addProperty(dogs);
   var userClass = new ObjectClass("user", userConstructor, userMethods, userProperties);
 
   objFire = new ObjectiveFire(new Firebase("https://objective-fire.firebaseio.com"));
@@ -52,12 +53,12 @@ describe('test', function() {
     var myUser = user.instance("user:1");
     function setTimeout1() {
       setTimeout(function() {
-	$timeout.flush();
-        setTimeout1();
+	       $timeout.flush();
+         setTimeout1();
       }, 1000);
     }
     setTimeout1();
-myUser.$load("dog2");
+    myUser.$load("dog2");
     myUser.$loaded().then(function() {
     expect(myUser.first).toEqual("Davis")
     expect(myUser.last).toEqual("Cook")
@@ -67,4 +68,46 @@ myUser.$load("dog2");
     });
   });
 
-})
+  it("will do stuff", function(done) {
+    var user = objFire.getObjectClass("user");
+    var myUser = user.new("A", "B");
+    var ref = new Firebase("https://objective-fire.firebaseio.com");
+    var ref2 = ref.child("user").child(myUser.$id);
+    ref2.on("value", function(snap) {
+      var data = snap.val();
+      expect(data.first).toEqual("A");
+      expect(data.last).toEqual("B");
+      done();
+    });
+  });
+
+  it("will do stuff #2", function(done) {
+    var user = objFire.getObjectClass("user");
+    var dog = objFire.getObjectClass("dog");
+    var myUser = user.new("A", "B");
+    myUser.$load("dogs");
+    myUser.$loaded().then(function() {
+      myUser.dogs.$loaded().then(function() {
+        myUser.dogs.$add(dog.new("Rover", "Black"));
+        console.log("Create dog");
+        myUser.dogs.$add(dog.new("Rover", "Black"));
+        console.log("Create dog");
+        myUser.dogs.$add(dog.new("Rover", "Black"));
+        console.log("Create dog");
+        myUser.dogs.$add(dog.new("Rover", "Black"));
+        console.log("Create dog");
+        myUser.dogs.$add(dog.new("Rover", "Black"));
+        console.log("Create dog");
+        myUser.dogs.$add(dog.new("Rover", "Black")); // why won't these update the local data and create the elements in the array
+        console.log("Create dog");
+        setTimeout(function() {
+          console.log(myUser.dogs);
+          myUser.$save(); // known bug - items in an array aren't created in the array right when using $add
+          done();
+        }, 2000)
+        expect(true).toEqual(true);
+      });
+    });
+  });
+
+});

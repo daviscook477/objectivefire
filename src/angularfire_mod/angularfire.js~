@@ -373,7 +373,6 @@
          * @protected
          */
         $$added: function(snap/*, prevChild*/) {
-console.log("recivieng it now");
           // check to make sure record does not exist
           var i = this.$indexFor($firebaseUtils.getKey(snap));
           if( i === -1 ) {
