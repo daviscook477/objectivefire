@@ -49,13 +49,15 @@ describe('test', function() {
   });
 
   it("will obtain data from the firebase", function(done) {
+console.log("iran");
     var user = objFire.getObjectClass("user");
     var myUser = user.instance("user:1");
     function setTimeout1() {
       setTimeout(function() {
-	       $timeout.flush();
+try{
+	       $timeout.flush();}catch(err){}
          setTimeout1();
-      }, 1000);
+      }, 0);
     }
     setTimeout1();
     myUser.$load("dog2");
@@ -98,15 +100,12 @@ describe('test', function() {
         console.log("Create dog");
         myUser.dogs.$add(dog.new("Rover", "Black"));
         console.log("Create dog");
-        myUser.dogs.$add(dog.new("Rover", "Black")); // why won't these update the local data and create the elements in the array
-        console.log("Create dog");
-        setTimeout(function() {
-          console.log(myUser.dogs);
+        myUser.dogs.$add(dog.new("Rover", "Black")).then(function() {
           myUser.$save(); // known bug - items in an array aren't created in the array right when using $add
           done();
-        }, 2000)
-        expect(true).toEqual(true);
-      });
+          expect(true).toEqual(true);
+        });
+      });// why won't these update the local data and create the elements in the array
     });
   });
 
