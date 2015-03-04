@@ -25,6 +25,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-karma": "^0.10.1",
     "grunt-ng-annotate": "^0.10.0",
+    "grunt-notify": "^0.4.1",
     "grunt-protractor-runner": "^1.2.1",
     "jasmine-core": "^2.2.0",
     "jasmine-spec-reporter": "^2.1.0",

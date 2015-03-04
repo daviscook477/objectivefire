@@ -69,7 +69,8 @@ module.exports = function(grunt) {
       testserver: {
         options: {
           hostname: 'localhost',
-          port: 3030
+          port: 3030,
+          base: '<%=conf.tests%>/e2e_mat'
         }
       }
     },
@@ -89,6 +90,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-protractor-runner'); // TODO: make protractor work
   grunt.registerTask('test', ['test:unit', 'test:e2e']);
   grunt.registerTask('test:e2e', ['concat', 'connect:testserver', 'protractor:singlerun']);
