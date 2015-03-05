@@ -1,5 +1,6 @@
+"use strict";
 angular.module('objective-fire')
-.factory('ObjectiveFire', ["FireObject", function(FireObject) {
+.factory('ObjectiveFire', ["FireObject", function(FireObject, Properties, ObjectClass) {
   /**
    * All classes should be registered in an instance of ObjectiveFire created at
    * your Firebase.
@@ -42,8 +43,8 @@ angular.module('objective-fire')
      *   },
      *   properties: { // see ObjectClass documentation
      *     a_primitive_property: {type: "primitive", name: "a_name"}, // these must match exactly
-     *     an_object_property: {type: "object", // creates an
-     *     an_object_array_property: "objectArray"
+     *     an_object_property: {type: "object", name: "a_name", objectClassName: "a_class_name"},
+     *     an_object_array_property: {type: "objectArray", name: "a_name", objectClassName: "a_class_name"}
      *   }
      * }
      * @method registerFromObject
@@ -51,7 +52,21 @@ angular.module('objective-fire')
      * @return The registered class.
      */
     registerFromObject: function(object) {
-      var theClass = undefined; // TODO: actual FireObject creation
+      var properties = new Properties(); // find proeprties
+      for (var param in object.properties) {
+        if (object.properties.hasOwnProperty(param)) {
+          var cur = object.properties[param];
+          var type = cur.type;
+          if (type === "primitive") {
+            properties.addPrimitiveProperty(cur.name);
+          } else if (type === "object") {
+            properties.addObjectProperty(cur.name, cur.objectClassName);
+          } else if (type === "objectArray") {
+            properties.addObjectArrayProperty(cur.name, cur.objectClassName);
+          }
+        }
+      }
+      var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
       this.objects[object.name] = theClass;
       return theClass;
     },

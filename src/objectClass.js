@@ -1,3 +1,4 @@
+"use strict";
 angular.module('objective-fire')
 .factory('ObjectClass', function() {
   /**

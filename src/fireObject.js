@@ -1,3 +1,4 @@
+"use strict";
 angular.module('objective-fire')
 .factory('FireObject', ["Factories", function(Factories) {
   /**
@@ -47,17 +48,18 @@ angular.module('objective-fire')
     var properties = this.objectClass.properties;
     var ops = properties.objectP;
     var oaps = properties.arrayP;
+    var i, name;
     // check any object properties and set them to be loaded
-    for (var i = 0; i < ops.length; i++) {
-      var name = ops[i].name;
+    for (i = 0; i < ops.length; i++) {
+      name = ops[i].name;
       if (name in obj) {
         obj._isLoaded[name] = true;
         obj._doLoad[name] = true;
       }
     }
     // check any object array properties and set them to be loaded
-    for (var i = 0; i < oaps.length; i++) {
-      var name = oaps[i].name;
+    for (i = 0; i < oaps.length; i++) {
+      name = oaps[i].name;
       if (name in obj) {
         obj._isLoaded[name] = true;
         obj._doLoad[name] = true;

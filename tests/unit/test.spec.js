@@ -108,5 +108,4 @@ try{
       });// why won't these update the local data and create the elements in the array
     });
   });
-
 });
