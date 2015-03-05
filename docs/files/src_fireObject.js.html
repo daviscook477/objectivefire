@@ -99,6 +99,9 @@ angular.module(&#x27;objective-fire&#x27;)
    * @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject.
    */
   function FireObject(objectClass, rootRef, objFire) {
+    if (typeof objectClass !== &quot;object&quot;) {
+      throw &quot;objectClass must be of type ObjectClass&quot;;
+    }
     this.objectClass = objectClass;
     this.rootRef = rootRef;
     this.objFire = objFire;

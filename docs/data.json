@@ -1399,7 +1399,7 @@
         },
         {
             "file": "src/fireObject.js",
-            "line": 21,
+            "line": 24,
             "description": "Creates a new instance of the class. It invokes the classes' constructor\nwith the arguments provided to this method. If no constructor is provided\nan empty object will be created.\nAny properties created by the constructor will be $save (d) to the Firebase.",
             "itemtype": "method",
             "name": "new",
@@ -1410,7 +1410,7 @@
         },
         {
             "file": "src/fireObject.js",
-            "line": 73,
+            "line": 76,
             "description": "Creates an instance of the class from data existing in the Firebase.\nAny parameters passed after id will be interpreted as properties to load.\nEx: myObject.instance(\"some_firebase_id\", \"some_property\", \"some_other_property\");\nThis would cause myObject to automatically $load() \"some_property\" and \"some_other_property\"",
             "itemtype": "method",
             "name": "instance",
