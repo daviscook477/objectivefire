@@ -17,25 +17,25 @@ angular.module('objective-fire')
    */
   function ObjectClass(name, objectConstructor, objectMethods, properties) {
     if (arguments.length !== 4) {
-      throw "ObjectClass constructor may only be invoked with all parameters defined";
+      throw new Error("ObjectClass constructor may only be invoked with all parameters defined");
     }
-    if (!this instanceof ObjectClass) { // failsafe for accidental function call instead of constructor call
+    if (!(this instanceof ObjectClass)) { // failsafe for accidental function call instead of constructor call
       return new ObjectClass(name, objectConstructor, objectMethods, properties);
     }
     if(typeof name !== "string") {
-      throw "name must be of type string";
+      throw new Error("name must be of type string");
     }
     if (typeof objectConstructor !== "function" && objectConstructor !== null) {
-      throw "objectConstructor must be of type function or null";
+      throw new Error("objectConstructor must be of type function or null");
     }
     if (typeof objectMethods !== "object" && objectMethods !== null) {
-      throw "objectMethods must be of type object or null";
+      throw new Error("objectMethods must be of type object or null");
     }
     if (typeof properties !== "object" && properties !== null) {
-      throw "properties must be of type object or null";
+      throw new Error("properties must be of type object or null");
     }
     if (properties === null) {
-      console.warn("did you mean to create an ObjectClass withtout properties?");
+      console.warn("did you mean to create an ObjectClass without properties?");
       properties = {
         primitive: [],
         objectP: [],

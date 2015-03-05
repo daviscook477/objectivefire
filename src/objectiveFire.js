@@ -13,7 +13,10 @@ angular.module('objective-fire')
    * that location in the Firebase.
    */
   function ObjectiveFire(ref) {
-    if (!this instanceof ObjectiveFire) {
+    if (!(ref instanceof Firebase)) {
+      throw new Error("must pass a Firebase reference to ObjectiveFire constructor");
+    }
+    if (!(this instanceof ObjectiveFire)) {
       return new ObjectiveFire(ref);
     }
     this.ref = ref;
@@ -25,11 +28,12 @@ angular.module('objective-fire')
      * Registers a class from an ObjectClass object.
      * @method registerFromObjectClass
      * @param objectClass {ObjectClass} The ObjectClass from which to create the class.
-     * @return The registered class.
+     * @return {FireObject} The registered class.
      */
     registerFromObjectClass: function(objectClass) {
-      this.objects[objectClass.name] = new FireObject(objectClass, this.ref, this);
-      return this;
+      var theFireObject = new FireObject(objectClass, this.ref, this);
+      this.objects[objectClass.name] = theFireObject
+      return theFireObject;
     },
     /**
      * Registers a class from an object that follows a specific format.
@@ -44,40 +48,47 @@ angular.module('objective-fire')
      *         another_method: function() {}
      *       },
      *       properties: { // see ObjectClass documentation
-     *         a_primitive_property: {type: "primitive", name: "a_name"}, // these must match exactly
-     *         an_object_property: {type: "object", name: "a_name", objectClassName: "a_class_name"},
-     *         an_object_array_property: {type: "objectArray", name: "a_name", objectClassName: "a_class_name"}
+     *         primitive: [{name: "a_name"},{name: "another_name"}], // Primitive Properties
+     *         objectP: [{name: "a_name", objectClassName: "a_class_name"}], // Object Properties
+     *         arrayP: [{name: "a_name", objectClassName: "a_class_name"}], // Object Array Properties
      *       }
      *     }
      ```
      * @method registerFromObject
      * @param object The object from which to create the class.
-     * @return The registered class.
+     * @return {FireObject} The registered class.
      */
     registerFromObject: function(object) {
-      var properties = new Properties(); // find proeprties
-      for (var param in object.properties) {
-        if (object.properties.hasOwnProperty(param)) {
-          var cur = object.properties[param];
-          var type = cur.type;
-          if (type === "primitive") {
-            properties.addPrimitiveProperty(cur.name);
-          } else if (type === "object") {
-            properties.addObjectProperty(cur.name, cur.objectClassName);
-          } else if (type === "objectArray") {
-            properties.addObjectArrayProperty(cur.name, cur.objectClassName);
-          }
+      var properties = new Properties(); // find properties
+      var i, prop;
+      if (properties.primitive) {
+        for (i = 0; i < properties.primitive.length; i++) {
+          prop = properties.primitive[i];
+          properties.addPrimitiveProperty(prop.name);
+        }
+      }
+      if (properties.objectP) {
+        for (i = 0; i < properties.objectP.length; i++) {
+          prop = properties.objectP[i];
+          properties.addObjectProperty(prop.name, prop.objectClassName);
+        }
+      }
+      if (properties.arrayP) {
+        for (i = 0; i < properties.arrayP.length; i++) {
+          prop = properties.arrayP[i];
+          properties.addObjectArrayProperty(prop.name, prop.objectClassName);
         }
       }
       var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
-      this.objects[object.name] = theClass;
-      return theClass;
+      var theFireObject = new FireObject(theClass, this.ref, this);
+      this.objects[object.name] = theFireObject;
+      return theFireObject;
     },
     /**
      * Gets registered class by name.
      * @method getByName
      * @param name {String} The name of the class.
-     * @return The class for the specified name.
+     * @return {FireObject} The class for the specified name.
      */
     getByName: function(name) {
       return this.objects[name];

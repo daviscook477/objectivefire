@@ -9,7 +9,7 @@ angular.module('objective-fire')
    * @param objectClassName {String} The name of the class of object this property is.
    */
   function ObjectProperty(name, objectClassName) {
-    if (!this instanceof ObjectProperty) {
+    if (!(this instanceof ObjectProperty)) {
       return new ObjectProperty(name, objectClassName);
     }
     if (typeof name !== "string") {
@@ -39,7 +39,7 @@ angular.module('objective-fire')
    * @param objectClassName {String} The name of the class of object this property is.
    */
   function ObjectArrayProperty(name, objectClassName) {
-    if (!this instanceof ObjectArrayProperty) {
+    if (!(this instanceof ObjectArrayProperty)) {
       return new ObjectArrayProperty(name, objectClassName);
     }
     if (typeof name !== "string") {
@@ -68,7 +68,7 @@ angular.module('objective-fire')
    * @param name {String} The name of this property.
    */
   function PrimitiveProperty(name) {
-    if (!this instanceof PrimitiveProperty) {
+    if (!(this instanceof PrimitiveProperty)) {
       return new PrimitiveProperty(name);
     }
     if (typeof name !== "string") {
@@ -90,7 +90,7 @@ angular.module('objective-fire')
    * @constructor
    */
   function Properties() {
-    if (!this instanceof Properties) {
+    if (!(this instanceof Properties)) {
       return new Properties();
     }
     /**
