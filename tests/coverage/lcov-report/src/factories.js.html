@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/factories.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">src/factories.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">76.3% <small>(103 / 135)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">57.14% <small>(24 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">76.3% <small>(103 / 135)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; factories.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+angular.module('objective-fire')
+.factory('Factories', ["$firebaseObject", "$firebaseArray", "$q", function($firebaseObject, $firebaseArray, $q) {
+  var factories = {
+    objectFactory: function(objectClass, rootRef, objFire) {
+      var obj = {};
+      obj._objectClass = objectClass;
+      obj._rootRef = rootRef;
+      obj._objFire = objFire;
+      var methods = objectClass.objectMethods;
+      for (var param in methods) { // apply methods to prototype
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (methods.hasOwnProperty(param)) {
+          obj[param] = methods[param];
+        }
+      }
+      // add objectivefire methods
+      obj.$load = function(name) {
+        var properties = this._objectClass.properties;
+        var ops = properties.objectP;
+        var oaps = properties.arrayP;
+        var deffered = $q.defer();
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof name !== "string") {
+<span class="cstat-no" title="statement not covered" >          throw "name must be of type string";</span>
+        }
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!this._doLoad[name]) { // if property is already loaded don't do anything
+          // find the actual property definition
+          var property, i;
+          var kind = "";
+          for (i = 0; i &lt; ops.length; i++) {
+            if (ops[i].name === name) {
+              property = ops[i];
+              kind = "op";
+              break;
+            }
+          }
+          for (i = 0; i &lt; oaps.length; i++) {
+            if (oaps[i].name === name) {
+              property = oaps[i];
+              kind = "oap";
+              break;
+            }
+          }
+          this._doLoad[name] = true; // require that the property is loaded
+          var objectClassName, objectClass;
+          <span class="missing-if-branch" title="if path not taken" >I</span>if (this._loaded) { // if already loaded then manually load the property
+<span class="cstat-no" title="statement not covered" >            if (kind === "op") {</span>
+<span class="cstat-no" title="statement not covered" >              objectClassName = property.objectClassName;</span>
+<span class="cstat-no" title="statement not covered" >              objectClass = objFire.getByName(objectClassName);</span>
+<span class="cstat-no" title="statement not covered" >              var obj = objectClass.instance(this[name]); </span>// create the object
+<span class="cstat-no" title="statement not covered" >              this[name] = obj;</span>
+<span class="cstat-no" title="statement not covered" >              this._isLoaded[name] = true;</span>
+<span class="cstat-no" title="statement not covered" >              deffered.resolve(this[name]);</span>
+            } else <span class="cstat-no" title="statement not covered" >if (kind === "oap") {</span>
+<span class="cstat-no" title="statement not covered" >              objectClassName = property.objectClassName;</span>
+<span class="cstat-no" title="statement not covered" >              objectClass = objFire.getByName(objectClassName);</span>
+<span class="cstat-no" title="statement not covered" >              var Factory = factories.arrayFactory(objectClass);</span>
+<span class="cstat-no" title="statement not covered" >              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));</span>
+<span class="cstat-no" title="statement not covered" >              this[name] = arr;</span>
+<span class="cstat-no" title="statement not covered" >              this._isLoaded[name] = true;</span>
+<span class="cstat-no" title="statement not covered" >              deffered.resolve(this[name]);</span>
+            }
+          } else { // if we haven't loaded, it will be loaded when the object is loaded
+            // this means that simply changing this._doLoad[name] will load it
+            // make sure it is actually loaded in the object loading (could not due to synchronization issues (I think))
+            this.$loaded().then(function(self) {
+              <span class="missing-if-branch" title="if path not taken" >I</span>if (!self._isLoaded[name]) { // if for some reason not loaded manually load the property
+<span class="cstat-no" title="statement not covered" >                if (kind === "op") {</span>
+<span class="cstat-no" title="statement not covered" >                  objectClassName = property.objectClassName;</span>
+<span class="cstat-no" title="statement not covered" >                  objectClass = objFire.getByName(objectClassName);</span>
+<span class="cstat-no" title="statement not covered" >                  var obj = objectClass.instance(self[name]); </span>// create the object
+<span class="cstat-no" title="statement not covered" >                  self[name] = obj;</span>
+                } else <span class="cstat-no" title="statement not covered" >if (kind === "oap") {</span>
+<span class="cstat-no" title="statement not covered" >                  objectClassName = property.objectClassName;</span>
+<span class="cstat-no" title="statement not covered" >                  objectClass = objFire.getByName(objectClassName);</span>
+<span class="cstat-no" title="statement not covered" >                  var Factory = factories.arrayFactory(objectClass);</span>
+<span class="cstat-no" title="statement not covered" >                  var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));</span>
+<span class="cstat-no" title="statement not covered" >                  self[name] = arr;</span>
+                }
+              }
+              self._isLoaded[name] = true;
+              deffered.resolve(self[name]);
+            });
+          }
+        } else {
+<span class="cstat-no" title="statement not covered" >          deffered.resolve(this[name]);</span>
+        }
+        return deffered.promise;
+      };
+      obj.$toJSON = function(rec) {
+        var properties = this._objectClass.properties;
+        var pps = properties.primitive;
+        var ops = properties.objectP;
+        var oaps = properties.arrayP;
+        var data = {}, i, name;
+        for (i = 0; i &lt; pps.length; i++) { // save primitives
+          name = pps[i].name;
+          data[name] = rec[name];
+        }
+        for (i = 0; i &lt; ops.length; i++) { // save object references
+          name = ops[i].name;
+          <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof rec[name] === "object") {
+<span class="cstat-no" title="statement not covered" >            data[name] = rec[name].$id; </span>// save just the id of the object
+          } else {
+            data[name] = rec[name];
+          }
+        }
+        for (i = 0; i &lt; oaps.length; i++) { // save object array references
+          name = oaps[i].name;
+          if (typeof rec[name] === "object") {
+            data[name] = [];
+            for (var j = 0; j &lt; rec[name].length; j++) {
+              data[name][j] = rec[name][j].$id; // save just the id of each element in the array
+            }
+          } else {
+            data[name]= rec[name]; // if it is not object it is just the reference so save the reference back
+          }
+        }
+        for (var param in data) { // sanatize firebase input
+          if (data[param] === undefined) {
+            data[param] = null;
+          }
+        }
+        return data; // return the data that we made
+      };
+      obj.$fromJSON = function(snap) {
+        var properties = this._objectClass.properties;
+        var pps = properties.primitive;
+        var ops = properties.objectP;
+        var oaps = properties.arrayP;
+        var data = snap.val();
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (data === null) {
+<span class="cstat-no" title="statement not covered" >          data = {};</span>
+        }
+        var newRec = {}, i, name;
+        for (i = 0; i &lt; pps.length; i++) { // replace all primitive properties
+          name = pps[i].name;
+          newRec[name] = data[name]; // simply replace primitives
+        }
+        var objectClassName, objectClass;
+        for (i = 0; i &lt; ops.length; i++) { // replace all object properties
+          name = ops[i].name;
+          if (this._doLoad[name]) { // only load property if it should be
+            // only create a new object if the object has changed
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (!this[name] || <span class="branch-1 cbranch-no" title="branch not covered" >this[name].$id !== data[name])</span> { // in the firebase only the object reference is stored so if the reference isn't the same as the id of the existing object they must be different
+              objectClassName = ops[i].objectClassName;
+              objectClass = this._objFire.getByName(objectClassName);
+              var obj = objectClass.instance(data[name]);
+              this._isLoaded[name] = true;
+              newRec[name] = obj;
+            } else {
+<span class="cstat-no" title="statement not covered" >              newRec[name] = this[name];</span>
+            }
+          } else {
+            newRec[name] = data[name]; // just save the reference if not supposed to load it
+          }
+        }
+        for (i = 0; i &lt; oaps.length; i++) { // replace all object array properties
+          name = oaps[i].name;
+          if (this._doLoad[name]) {
+            if (!this._isLoaded[name]) { // arrays actually must only be loaded once
+              objectClassName = oaps[i].objectClassName;
+              objectClass = this._objFire.getByName(objectClassName);
+              var Factory = factories.arrayFactory(objectClass);
+              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name)); // we are obtaining a constructor by a function with parameters then calling that function
+              this._isLoaded[name] = true;
+              newRec[name] = arr;
+            } else {
+              newRec[name] = this[name]; // pull the object of the current object if it exists
+            }
+          } else {
+            newRec[name] = data[name]; // just save the reference if not supposed to load it
+          }
+        }
+        return newRec;
+      };
+      return $firebaseObject.$extend(obj);
+    },
+    arrayFactory: function(fireObject) {
+      return $firebaseArray.$extend({
+        // things that must be accessible
+        _fireObject: fireObject,
+        // methods to override
+        $toJSON: function(rec) {
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (rec.$id) {
+            return rec.$id;
+          } else {
+<span class="cstat-no" title="statement not covered" >            return null;</span>
+          } // a record should be saved by its reference
+        },
+        $fromJSON: function(snap) {
+          var ob = this._fireObject.instance(snap.val());
+          return ob; // create an object from the snapshot
+        }
+      });
+    }
+  };
+  return factories;
+}]);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 05 2015 12:17:20 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>

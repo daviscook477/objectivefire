@@ -373,7 +373,6 @@
          * @protected
          */
         $$added: function(snap/*, prevChild*/) {
-console.log("recivieng it now");
           // check to make sure record does not exist
           var i = this.$indexFor($firebaseUtils.getKey(snap));
           if( i === -1 ) {
@@ -2303,7 +2302,6 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
                  throw new Error('Invalid key ' + k + ' (cannot contain .$[]#)');
                }
                else if( angular.isUndefined(v) ) {
-console.log(dat); console.log(rec);console.log($toJSON);
                  throw new Error('Key '+k+' was undefined. Cannot pass undefined in JSON. Use null instead.');
                }
              });

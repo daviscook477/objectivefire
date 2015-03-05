@@ -49,7 +49,6 @@ describe('test', function() {
   });
 
   it("will obtain data from the firebase", function(done) {
-console.log("iran");
     var user = objFire.getByName("user");
     var myUser = user.instance("user:1");
     function setTimeout1() {
@@ -91,15 +90,10 @@ try{
     myUser.$loaded().then(function() {
       myUser.dogs.$loaded().then(function() {
         myUser.dogs.$add(dog.new("Rover", "Black"));
-        console.log("Create dog");
         myUser.dogs.$add(dog.new("Rover", "Black"));
-        console.log("Create dog");
         myUser.dogs.$add(dog.new("Rover", "Black"));
-        console.log("Create dog");
         myUser.dogs.$add(dog.new("Rover", "Black"));
-        console.log("Create dog");
         myUser.dogs.$add(dog.new("Rover", "Black"));
-        console.log("Create dog");
         myUser.dogs.$add(dog.new("Rover", "Black")).then(function() {
           myUser.$save(); // known bug - items in an array aren't created in the array right when using $add
           done();

@@ -34,6 +34,14 @@ angular.module('objective-fire')
     if (typeof properties !== "object" || properties === null) {
       throw "properties must be of type object or null";
     }
+    if (properties === null) {
+      console.warn("did you mean to create an ObjectClass withtout properties?");
+      properties = {
+        primitive: [],
+        objectP: [],
+        arrayP: []
+      };
+    }
     this.name = name;
     this.objectConstructor = objectConstructor;
     this.objectMethods = objectMethods;

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/objectiveFire.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">src/objectiveFire.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">40% <small>(10 / 25)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">10% <small>(1 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">80% <small>(4 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">40% <small>(10 / 25)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; objectiveFire.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+angular.module('objective-fire')
+.factory('ObjectiveFire', ["FireObject", function(FireObject, Properties, ObjectClass) {
+  /**
+   * All classes should be registered in an instance of ObjectiveFire created at
+   * your Firebase.
+   * @class ObjectiveFire
+   * @constructor Creates instance of ObjectiveFire at the Firebase reference.
+   * @param ref {Firebase} Firebase object at the URL that is your Firebase.
+   * Provide a Firebase object - NOT a URL. This Firebase object may be a
+   * location in the Firebase - it doesn't have to be at the root. Doing
+   * as such will cause all objectivefire operations to be done from only within
+   * that location in the Firebase.
+   */
+  function ObjectiveFire(ref) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!this instanceof ObjectiveFire) {
+<span class="cstat-no" title="statement not covered" >      return new ObjectiveFire(ref);</span>
+    }
+    this.ref = ref;
+    // registry of objects
+    this.objects = {};
+  }
+  ObjectiveFire.prototype = {
+    /**
+     * Registers a class from an ObjectClass object.
+     * @method registerFromObjectClass
+     * @param objectClass {ObjectClass} The ObjectClass from which to create the class.
+     * @return The registered class.
+     */
+    registerFromObjectClass: function(objectClass) {
+      this.objects[objectClass.name] = new FireObject(objectClass, this.ref, this);
+      return this;
+    },
+    /**
+     * Registers a class from an object that follows a specific format.
+     * The object must provided in this format.
+     ```
+     *     // TODO: fix the broken formatting in the documentation
+     *     {
+     *       name: name, // see ObjectClass documentation
+     *       objectConstructor: objectConstructor, // see ObjectClass documentation
+     *       objectMethods: { // see ObjectClass documentation
+     *         a_method: function() {},
+     *         another_method: function() {}
+     *       },
+     *       properties: { // see ObjectClass documentation
+     *         a_primitive_property: {type: "primitive", name: "a_name"}, // these must match exactly
+     *         an_object_property: {type: "object", name: "a_name", objectClassName: "a_class_name"},
+     *         an_object_array_property: {type: "objectArray", name: "a_name", objectClassName: "a_class_name"}
+     *       }
+     *     }
+     ```
+     * @method registerFromObject
+     * @param object The object from which to create the class.
+     * @return The registered class.
+     */
+    registerFromObject: <span class="fstat-no" title="function not covered" >function(object) {</span>
+<span class="cstat-no" title="statement not covered" >      var properties = new Properties(); </span>// find proeprties
+<span class="cstat-no" title="statement not covered" >      for (var param in object.properties) {</span>
+<span class="cstat-no" title="statement not covered" >        if (object.properties.hasOwnProperty(param)) {</span>
+<span class="cstat-no" title="statement not covered" >          var cur = object.properties[param];</span>
+<span class="cstat-no" title="statement not covered" >          var type = cur.type;</span>
+<span class="cstat-no" title="statement not covered" >          if (type === "primitive") {</span>
+<span class="cstat-no" title="statement not covered" >            properties.addPrimitiveProperty(cur.name);</span>
+          } else <span class="cstat-no" title="statement not covered" >if (type === "object") {</span>
+<span class="cstat-no" title="statement not covered" >            properties.addObjectProperty(cur.name, cur.objectClassName);</span>
+          } else <span class="cstat-no" title="statement not covered" >if (type === "objectArray") {</span>
+<span class="cstat-no" title="statement not covered" >            properties.addObjectArrayProperty(cur.name, cur.objectClassName);</span>
+          }
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);</span>
+<span class="cstat-no" title="statement not covered" >      this.objects[object.name] = theClass;</span>
+<span class="cstat-no" title="statement not covered" >      return theClass;</span>
+    },
+    /**
+     * Gets registered class by name.
+     * @method getByName
+     * @param name {String} The name of the class.
+     * @return The class for the specified name.
+     */
+    getByName: function(name) {
+      return this.objects[name];
+    }
+  };
+  return ObjectiveFire;
+}]);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 05 2015 12:17:20 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>

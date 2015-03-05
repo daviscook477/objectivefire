@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fireObject.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">src/fireObject.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">88% <small>(44 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">66.67% <small>(8 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">88% <small>(44 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; fireObject.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+angular.module('objective-fire')
+.factory('FireObject', ["Factories", function(Factories) {
+  /**
+   * Internally used "class" of objects - it has methods for initiating new or
+   * existing objects of that class in the Firebase
+   *  This class should not be created directly! (Unless you know what you are doing)
+   * @class FireObject
+   * @constructor
+   * @param objectClass {ObjectClass} The class that this FireObject makes.
+   * @param rootRef {Firebase} Firebase object that is the root of the Firebase.
+   * @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject.
+   */
+  function FireObject(objectClass, rootRef, objFire) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof objectClass !== "object") {
+<span class="cstat-no" title="statement not covered" >      throw new Error("objectClass must be of type ObjectClass");</span>
+    }
+    this.objectClass = objectClass;
+    this.rootRef = rootRef;
+    this.objFire = objFire;
+    // the extended angularfire object factory
+    this.Factory = Factories.objectFactory(objectClass, rootRef, objFire);
+  }
+  /**
+   * Creates a new instance of the class. It invokes the classes' constructor
+   * with the arguments provided to this method. If no constructor is provided
+   * an empty object will be created.
+   * Any properties created by the constructor will be $save (d) to the Firebase.
+   * @method new
+   * @return New instance of the class
+   */
+  FireObject.prototype.new = function() {
+    // create a new location in the Firebase
+    var ref = this.rootRef.child(this.objectClass.name).push();
+    var obj = new this.Factory(ref); // create an object at that location
+    // private properties of the object
+    obj._loaded = false; // private property that states if the object has been loaded
+    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
+      obj._loaded = true;
+    });
+    obj._isLoaded = {}; // list of properties that are loaded
+    obj._doLoad = {}; // list of properties that should be loaded
+    // call constructor if it exists
+    if (this.objectClass.objectConstructor !== null &amp;&amp; typeof this.objectClass.objectConstructor === "function") {
+      // call the object constructor with the correct "this" and pass the arguments
+      this.objectClass.objectConstructor.apply(obj, arguments);
+    } else {
+      throw new Error("new may only be called for classes that have constructors");
+    }
+    // tell the object that all changed properties have been loaded
+&nbsp;
+    // this information should not be visible to users of objectivefire
+    var properties = this.objectClass.properties;
+    var ops = properties.objectP;
+    var oaps = properties.arrayP;
+    var i, name;
+    // check any object properties and set them to be loaded
+    for (i = 0; i &lt; ops.length; i++) {
+      name = ops[i].name;
+      if (name in obj) {
+        obj._isLoaded[name] = true;
+        obj._doLoad[name] = true;
+      }
+    }
+    // check any object array properties and set them to be loaded
+    for (i = 0; i &lt; oaps.length; i++) {
+      name = oaps[i].name;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (name in obj) {
+<span class="cstat-no" title="statement not covered" >        obj._isLoaded[name] = true;</span>
+<span class="cstat-no" title="statement not covered" >        obj._doLoad[name] = true;</span>
+      }
+    }
+    obj.$save(); // save the new constructed object
+    return obj;
+  };
+  /**
+   * Creates an instance of the class from data existing in the Firebase.
+   * Any parameters passed after id will be interpreted as properties to load.
+   * Ex: myObject.instance("some_firebase_id", "some_property", "some_other_property");
+   * This would cause myObject to automatically $load() "some_property" and "some_other_property"
+   * @method instance
+   * @param id {String} The id of this object in the Firebase. (it's key)
+   * @return Existing instance of the class
+   */
+  FireObject.prototype.instance = function(id) {
+    // get reference at this object location
+    var ref = this.rootRef.child(this.objectClass.name).child(id);
+    var toLoad = Array.prototype.slice.call(arguments, [1]); // pull all arguments except id
+    var obj = new this.Factory(ref); // create the object
+    // private properties again
+    obj._loaded = false; // private property that states if the object has been loaded
+    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
+      obj._loaded = true;
+    });
+    obj._isLoaded = {};
+    obj._doLoad = {};
+    for (var i = 0; i &lt; toLoad.length; i++) {
+<span class="cstat-no" title="statement not covered" >      if (typeof toLoad[i] !== "string") {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error("typeof properties to load must be string");</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        obj._doLoad[toLoad[i]] = true; </span>// set the property to be loaded
+      }
+    }
+    return obj;
+  };
+  return FireObject;
+}])
+;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 05 2015 12:17:20 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>

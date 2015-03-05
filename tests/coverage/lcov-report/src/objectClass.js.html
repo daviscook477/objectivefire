@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/objectClass.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">src/objectClass.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">63.64% <small>(14 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">55% <small>(11 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">63.64% <small>(14 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; objectClass.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+angular.module('objective-fire')
+.factory('ObjectClass', function() {
+  /**
+   * "Class" of objects. Similar to a class in other programming languages like java.
+   * It defines the constructor, methods, and properties of any object of the class.
+   * @class ObjectClass
+   * @constructor
+   * @param name {String} The name by which this class will be referenced.
+   * throughout ObjectiveFire.
+   * @param objectConstructor {Function} The constructor that will be used to
+   * create instances of this class. May be null.
+   * @param objectMethods {Object with Function} The methods that will be
+   * available on objects of this class. May be null.
+   * @param properties {Properties} The properties that objects of this class
+   * will have. May not be null.
+   */
+  function ObjectClass(name, objectConstructor, objectMethods, properties) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (arguments.length !== 4) {
+<span class="cstat-no" title="statement not covered" >      throw "ObjectClass constructor may only be invoked with all parameters defined";</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!this instanceof ObjectClass) { // failsafe for accidental function call instead of constructor call
+<span class="cstat-no" title="statement not covered" >      return new ObjectClass(name, objectConstructor, objectMethods, properties);</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(typeof name !== "string") {
+<span class="cstat-no" title="statement not covered" >      throw "name must be of type string";</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof objectConstructor !== "function" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >objectConstructor !== null)</span> {
+<span class="cstat-no" title="statement not covered" >      throw "objectConstructor must be of type function or null";</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof objectMethods !== "object" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >objectMethods !== null)</span> {
+<span class="cstat-no" title="statement not covered" >      throw "objectMethods must be of type object or null";</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof properties !== "object" || properties === null) {
+<span class="cstat-no" title="statement not covered" >      throw "properties must be of type object or null";</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (properties === null) {
+<span class="cstat-no" title="statement not covered" >      console.warn("did you mean to create an ObjectClass withtout properties?");</span>
+<span class="cstat-no" title="statement not covered" >      properties = {</span>
+        primitive: [],
+        objectP: [],
+        arrayP: []
+      };
+    }
+    this.name = name;
+    this.objectConstructor = objectConstructor;
+    this.objectMethods = objectMethods;
+    this.properties = properties;
+  }
+  return ObjectClass;
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 05 2015 12:17:20 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>

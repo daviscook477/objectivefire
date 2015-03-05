@@ -13,7 +13,7 @@ angular.module('objective-fire')
    */
   function FireObject(objectClass, rootRef, objFire) {
     if (typeof objectClass !== "object") {
-      throw "objectClass must be of type ObjectClass";
+      throw new Error("objectClass must be of type ObjectClass");
     }
     this.objectClass = objectClass;
     this.rootRef = rootRef;
@@ -45,7 +45,7 @@ angular.module('objective-fire')
       // call the object constructor with the correct "this" and pass the arguments
       this.objectClass.objectConstructor.apply(obj, arguments);
     } else {
-      throw "new may only be called for classes that have constructors";
+      throw new Error("new may only be called for classes that have constructors");
     }
     // tell the object that all changed properties have been loaded
 
@@ -96,7 +96,7 @@ angular.module('objective-fire')
     obj._doLoad = {};
     for (var i = 0; i < toLoad.length; i++) {
       if (typeof toLoad[i] !== "string") {
-        throw "typeof properties to load must be string";
+        throw new Error("typeof properties to load must be string");
       } else {
         obj._doLoad[toLoad[i]] = true; // set the property to be loaded
       }
