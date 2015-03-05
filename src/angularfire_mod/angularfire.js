@@ -77,8 +77,7 @@
    * var list = new ExtendedArray(ref);
    * </code></pre>
    */
-  angular.module('firebase').factory('$firebaseArray', ["$log", "$firebaseUtils",
-    function($log, $firebaseUtils) {
+  angular.module('firebase').factory('$firebaseArray', ["$log", "$firebaseUtils", function($log, $firebaseUtils) {
       /**
        * This constructor should probably never be called manually. It is used internally by
        * <code>$firebase.$asArray()</code>.
@@ -750,8 +749,7 @@
   ]);
 
   /** @deprecated */
-  angular.module('firebase').factory('$FirebaseArray', ['$log', '$firebaseArray',
-    function($log, $firebaseArray) {
+  angular.module('firebase').factory('$FirebaseArray', ["$log", "$firebaseArray", function($log, $firebaseArray) {
       return function() {
         $log.warn('$FirebaseArray has been renamed. Use $firebaseArray instead.');
         return $firebaseArray.apply(null, arguments);
@@ -765,8 +763,7 @@
   var FirebaseAuth;
 
   // Define a service which provides user authentication and management.
-  angular.module('firebase').factory('$firebaseAuth', [
-    '$q', '$firebaseUtils', '$log', function($q, $firebaseUtils, $log) {
+  angular.module('firebase').factory('$firebaseAuth', ["$q", "$firebaseUtils", "$log", function($q, $firebaseUtils, $log) {
       /**
        * This factory returns an object allowing you to manage the client's authentication state.
        *
@@ -1210,9 +1207,7 @@
    * var obj = new ExtendedObject(ref);
    * </code></pre>
    */
-  angular.module('firebase').factory('$firebaseObject', [
-    '$parse', '$firebaseUtils', '$log',
-    function($parse, $firebaseUtils, $log) {
+  angular.module('firebase').factory('$firebaseObject', ["$parse", "$firebaseUtils", "$log", function($parse, $firebaseUtils, $log) {
 
       /**
        * Creates a synchronized object with 2-way bindings between Angular and Firebase.
@@ -1686,8 +1681,7 @@
   ]);
 
   /** @deprecated */
-  angular.module('firebase').factory('$FirebaseObject', ['$log', '$firebaseObject',
-    function($log, $firebaseObject) {
+  angular.module('firebase').factory('$FirebaseObject', ["$log", "$firebaseObject", function($log, $firebaseObject) {
       return function() {
         $log.warn('$FirebaseObject has been renamed. Use $firebaseObject instead.');
         return $firebaseObject.apply(null, arguments);
@@ -1884,8 +1878,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
   'use strict';
 
   angular.module('firebase')
-    .factory('$firebaseConfig', ["$firebaseArray", "$firebaseObject", "$injector",
-      function($firebaseArray, $firebaseObject, $injector) {
+    .factory('$firebaseConfig', ["$firebaseArray", "$firebaseObject", "$injector", function($firebaseArray, $firebaseObject, $injector) {
         return function(configOpts) {
           // make a copy we can modify
           var opts = angular.extend({}, configOpts);
@@ -1905,8 +1898,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
       }
     ])
 
-    .factory('$firebaseUtils', ["$q", "$timeout", "firebaseBatchDelay",
-      function($q, $timeout, firebaseBatchDelay) {
+    .factory('$firebaseUtils', ["$q", "$timeout", "firebaseBatchDelay", function($q, $timeout, firebaseBatchDelay) {
 
         // ES6 style promises polyfill for angular 1.2.x
         // Copied from angular 1.3.x implementation: https://github.com/angular/angular.js/blob/v1.3.5/src/ng/q.js#L539

@@ -11,6 +11,10 @@ module.exports = function(grunt) {
             ' * License: MIT\n' +
             ' */\n',
     ngAnnotate: {
+      options: {
+        add: true,
+        remove: true
+      },
       src: {
         files: [{expand:true,src:'<%=conf.src%>/**/*.js'}]
       }

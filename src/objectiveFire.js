@@ -1,6 +1,6 @@
 "use strict";
 angular.module('objective-fire')
-.factory('ObjectiveFire', ["FireObject", function(FireObject, Properties, ObjectClass) {
+.factory('ObjectiveFire', ["FireObject", "Properties", "ObjectClass", function(FireObject, Properties, ObjectClass) {
   /**
    * All classes should be registered in an instance of ObjectiveFire created at
    * your Firebase.
@@ -32,7 +32,7 @@ angular.module('objective-fire')
      */
     registerFromObjectClass: function(objectClass) {
       var theFireObject = new FireObject(objectClass, this.ref, this);
-      this.objects[objectClass.name] = theFireObject
+      this.objects[objectClass.name] = theFireObject;
       return theFireObject;
     },
     /**
@@ -78,6 +78,12 @@ angular.module('objective-fire')
           prop = properties.arrayP[i];
           properties.addObjectArrayProperty(prop.name, prop.objectClassName);
         }
+      }
+      if (!object.objectConstructor) {
+        object.objectConstructor = null;
+      }
+      if (!object.objectMethods) {
+        object.objectMethods = null;
       }
       var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
       var theFireObject = new FireObject(theClass, this.ref, this);

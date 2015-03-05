@@ -30,14 +30,12 @@ angular.module('objective-fire')
    * @return New instance of the class
    */
   FireObject.prototype.new = function() {
+    console.log("creating new", this.objectClass.name);
     // create a new location in the Firebase
     var ref = this.rootRef.child(this.objectClass.name).push();
+    console.log("at firebase rec", ref.toString());
     var obj = new this.Factory(ref); // create an object at that location
     // private properties of the object
-    obj._loaded = false; // private property that states if the object has been loaded
-    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
-      obj._loaded = true;
-    });
     obj._isLoaded = {}; // list of properties that are loaded
     obj._doLoad = {}; // list of properties that should be loaded
     // call constructor if it exists
@@ -70,6 +68,7 @@ angular.module('objective-fire')
         obj._doLoad[name] = true;
       }
     }
+    obj._loaded = true; // new objects are always loaded
     obj.$save(); // save the new constructed object
     return obj;
   };

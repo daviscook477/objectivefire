@@ -42,3 +42,5 @@ grunt build
 ```
 
 By default grunt will run 'build'
+
+NOTE IN ORDER TO RUN PROTRACTOR E2E TESTS THE WEBDRIVER SERVER MUST MANUALLY BE STARTED
