@@ -34,19 +34,22 @@ angular.module('objective-fire')
     /**
      * Registers a class from an object that follows a specific format.
      * The object must provided in this format.
-     * {
-     *   name: name, // see ObjectClass documentation
-     *   objectConstructor: objectConstructor, // see ObjectClass documentation
-     *   objectMethods: { // see ObjectClass documentation
-     *     a_method: function() {},
-     *     another_method: function() {}
-     *   },
-     *   properties: { // see ObjectClass documentation
-     *     a_primitive_property: {type: "primitive", name: "a_name"}, // these must match exactly
-     *     an_object_property: {type: "object", name: "a_name", objectClassName: "a_class_name"},
-     *     an_object_array_property: {type: "objectArray", name: "a_name", objectClassName: "a_class_name"}
-     *   }
-     * }
+     ```
+     *     // TODO: fix the broken formatting in the documentation
+     *     {
+     *       name: name, // see ObjectClass documentation
+     *       objectConstructor: objectConstructor, // see ObjectClass documentation
+     *       objectMethods: { // see ObjectClass documentation
+     *         a_method: function() {},
+     *         another_method: function() {}
+     *       },
+     *       properties: { // see ObjectClass documentation
+     *         a_primitive_property: {type: "primitive", name: "a_name"}, // these must match exactly
+     *         an_object_property: {type: "object", name: "a_name", objectClassName: "a_class_name"},
+     *         an_object_array_property: {type: "objectArray", name: "a_name", objectClassName: "a_class_name"}
+     *       }
+     *     }
+     ```
      * @method registerFromObject
      * @param object The object from which to create the class.
      * @return The registered class.

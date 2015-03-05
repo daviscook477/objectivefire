@@ -2,16 +2,18 @@
 angular.module('objective-fire')
 .factory('ObjectClass', function() {
   /**
-   * Class of objects in the database
+   * "Class" of objects. Similar to a class in other programming languages like java.
+   * It defines the constructor, methods, and properties of any object of the class.
    * @class ObjectClass
-   * @constructor The constructor must be called with all parameters defined.
+   * @constructor
    * @param name {String} The name by which this class will be referenced.
    * throughout ObjectiveFire.
    * @param objectConstructor {Function} The constructor that will be used to
    * create instances of this class. May be null.
    * @param objectMethods {Object with Function} The methods that will be
    * available on objects of this class. May be null.
-   * @param properties {Properties} The properties that objects of this class will have. May not be null.
+   * @param properties {Properties} The properties that objects of this class
+   * will have. May not be null.
    */
   function ObjectClass(name, objectConstructor, objectMethods, properties) {
     if (arguments.length !== 4) {

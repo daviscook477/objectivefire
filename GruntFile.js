@@ -81,7 +81,20 @@ module.exports = function(grunt) {
           message: 'Tests Finished'
         }
       }
+    },
+    yuidoc: {
+    compile: {
+      name: '<%= pkg.name %>',
+      description: '<%= pkg.description %>',
+      version: '<%= pkg.version %>',
+      url: '<%= pkg.homepage %>',
+      options: {
+        paths: '<%=conf.src%>',
+        themedir: '',
+        outdir: '<%=conf.docs%>'
+      }
     }
+  }
   });
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -91,6 +104,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-protractor-runner'); // TODO: make protractor work
   grunt.registerTask('test', ['test:unit', 'test:e2e']);
   grunt.registerTask('test:e2e', ['concat', 'connect:testserver', 'protractor:singlerun']);
@@ -98,5 +112,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test:watch:unit', ['karma:watch']);
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('build', ['jshint', 'ngAnnotate', 'concat', 'uglify']);
+  grunt.registerTask('doc', 'yuidoc');
   grunt.registerTask('default', ['build']);
 };

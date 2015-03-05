@@ -2,13 +2,15 @@
 angular.module('objective-fire')
 .factory('FireObject', ["Factories", function(Factories) {
   /**
-  Object created from class that has methods for creating instances of that class
-  @class FireObject
-  @constructor This class should not be created directly
-  @param objectClass {ObjectClass} The class that this FireObject makes
-  @param rootRef {Firebase} Firebase object that is the root of the Firebase
-  @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject
-  */
+   * Internally used "class" of objects - it has methods for initiating new or
+   * existing objects of that class in the Firebase
+   *  This class should not be created directly! (Unless you know what you are doing)
+   * @class FireObject
+   * @constructor
+   * @param objectClass {ObjectClass} The class that this FireObject makes.
+   * @param rootRef {Firebase} Firebase object that is the root of the Firebase.
+   * @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject.
+   */
   function FireObject(objectClass, rootRef, objFire) {
     this.objectClass = objectClass;
     this.rootRef = rootRef;
@@ -72,9 +74,9 @@ angular.module('objective-fire')
    * Creates an instance of the class from data existing in the Firebase.
    * Any parameters passed after id will be interpreted as properties to load.
    * Ex: myObject.instance("some_firebase_id", "some_property", "some_other_property");
-   * This would cuase myObject to automatically $load() "some_property" and "some_other_property"
+   * This would cause myObject to automatically $load() "some_property" and "some_other_property"
    * @method instance
-   * @param id {String} The id of this object in the Firebase (it's key)
+   * @param id {String} The id of this object in the Firebase. (it's key)
    * @return Existing instance of the class
    */
   FireObject.prototype.instance = function(id) {

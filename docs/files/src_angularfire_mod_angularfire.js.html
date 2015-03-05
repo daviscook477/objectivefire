@@ -1,18 +1,93 @@
-/*!
- * ObjectiveFire is a utility library that makes interactions with firebase easy by representing data as objects
- *
- * ObjectiveFire 0.0.0
- * https://github.com/daviscook477/objectivefire/
- * Date: 03/05/2015
- * License: MIT
- */
-// this is here such that the module definition may be included first
-// in any concatenation of the objectivefire files (otherwise it brakes angular)
-angular.module('objective-fire', ['firebase']);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/angularfire_mod/angularfire.js - objectivefire</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
 
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="objectivefire" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/FireObject.html">FireObject</a></li>
+                                <li><a href="../classes/ObjectArrayProperty.html">ObjectArrayProperty</a></li>
+                                <li><a href="../classes/ObjectClass.html">ObjectClass</a></li>
+                                <li><a href="../classes/ObjectiveFire.html">ObjectiveFire</a></li>
+                                <li><a href="../classes/ObjectProperty.html">ObjectProperty</a></li>
+                                <li><a href="../classes/PrimitiveProperty.html">PrimitiveProperty</a></li>
+                                <li><a href="../classes/Properties.html">Properties</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/angularfire_mod/angularfire.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
 /*!
  * AngularFire is the officially supported AngularJS binding for Firebase. Firebase
- * is a full backend so you don't need servers to build your Angular app. AngularFire
+ * is a full backend so you don&#x27;t need servers to build your Angular app. AngularFire
  * provides you with the $firebase service which allows you to easily keep your $scope
  * variables in sync with your Firebase backend.
  *
@@ -22,26 +97,26 @@ angular.module('objective-fire', ['firebase']);
  * License: MIT
  */
 (function(exports) {
-  "use strict";
+  &quot;use strict&quot;;
 
-// Define the `firebase` module under which all AngularFire
+// Define the &#x60;firebase&#x60; module under which all AngularFire
 // services will live.
-  angular.module("firebase", [])
+  angular.module(&quot;firebase&quot;, [])
     //todo use $window
-    .value("Firebase", exports.Firebase)
+    .value(&quot;Firebase&quot;, exports.Firebase)
 
     // used in conjunction with firebaseUtils.debounce function, this is the
     // amount of time we will wait for additional records before triggering
-    // Angular's digest scope to dirty check and re-render DOM elements. A
+    // Angular&#x27;s digest scope to dirty check and re-render DOM elements. A
     // larger number here significantly improves performance when working with
     // big data sets that are frequently changing in the DOM, but delays the
     // speed at which each record is rendered in real-time. A number less than
     // 100ms will usually be optimal.
-    .value('firebaseBatchDelay', 50 /* milliseconds */);
+    .value(&#x27;firebaseBatchDelay&#x27;, 50 /* milliseconds */);
 
 })(window);
 (function() {
-  'use strict';
+  &#x27;use strict&#x27;;
   /**
    * Creates and maintains a synchronized list of data. This is a pseudo-read-only array. One should
    * not call splice(), push(), pop(), et al directly on this array, but should instead use the
@@ -64,16 +139,16 @@ angular.module('objective-fire', ['firebase']);
    *
    * Additionally, these methods may be of interest to devs extending this class:
    *    $$notify - triggers notifications to any $watch listeners, called by $$process
-   *    $$getKey - determines how to look up a record's key (returns $id by default)
+   *    $$getKey - determines how to look up a record&#x27;s key (returns $id by default)
    *
    * Instead of directly modifying this class, one should generally use the $extend
    * method to add or change how methods behave. $extend modifies the prototype of
    * the array class by returning a clone of $firebaseArray.
    *
-   * <pre><code>
+   * &lt;pre&gt;&lt;code&gt;
    * var ExtendedArray = $firebaseArray.$extend({
    *    // add a new method to the prototype
-   *    foo: function() { return 'bar'; },
+   *    foo: function() { return &#x27;bar&#x27;; },
    *
    *    // change how records are created
    *    $$added: function(snap, prevChild) {
@@ -87,13 +162,13 @@ angular.module('objective-fire', ['firebase']);
    * });
    *
    * var list = new ExtendedArray(ref);
-   * </code></pre>
+   * &lt;/code&gt;&lt;/pre&gt;
    */
-  angular.module('firebase').factory('$firebaseArray', ["$log", "$firebaseUtils",
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseArray&#x27;, [&quot;$log&quot;, &quot;$firebaseUtils&quot;,
     function($log, $firebaseUtils) {
       /**
        * This constructor should probably never be called manually. It is used internally by
-       * <code>$firebase.$asArray()</code>.
+       * &lt;code&gt;$firebase.$asArray()&lt;/code&gt;.
        *
        * @param {Firebase} ref
        * @returns {Array}
@@ -109,8 +184,8 @@ angular.module('objective-fire', ['firebase']);
         this._ref = ref;
         this._sync = new ArraySyncManager(this);
 
-        $firebaseUtils.assertValidRef(ref, 'Must pass a valid Firebase reference ' +
-        'to $firebaseArray (not a string or URL)');
+        $firebaseUtils.assertValidRef(ref, &#x27;Must pass a valid Firebase reference &#x27; +
+        &#x27;to $firebaseArray (not a string or URL)&#x27;);
 
         // indexCache is a weak hashmap (a lazy list) of keys to array indices,
         // items are not guaranteed to stay up to date in this list (since the data
@@ -121,7 +196,7 @@ angular.module('objective-fire', ['firebase']);
 
         // Array.isArray will not work on objects which extend the Array class.
         // So instead of extending the Array class, we just return an actual array.
-        // However, it's still possible to extend FirebaseArray and have the public methods
+        // However, it&#x27;s still possible to extend FirebaseArray and have the public methods
         // appear on the array object. We do this by iterating the prototype and binding
         // any method that is not prefixed with an underscore onto the final array.
         $firebaseUtils.getPublicMethods(self, function(fn, key) {
@@ -142,9 +217,9 @@ angular.module('objective-fire', ['firebase']);
          * By default it just copies all values from this object onto
          * the data that will go to Firebase
          * The JSON sent to the Firebase will always have any keys prefixed with
-         * '$' stripped from it.
+         * &#x27;$&#x27; stripped from it.
          *
-         * This method is always called with "this" as "this". Important: this
+         * This method is always called with &quot;this&quot; as &quot;this&quot;. Important: this
          * means that the individual record is not the this for $toJSON.
          * @param rec The object to covert to JSON - it will be an element of
          * this array
@@ -189,7 +264,7 @@ angular.module('objective-fire', ['firebase']);
          * @returns a promise resolved after data is added
          */
         $add: function(data) {
-          this._assertNotDestroyed('$add');
+          this._assertNotDestroyed(&#x27;$add&#x27;);
           var def = $firebaseUtils.defer();
           var ref = this.$ref().ref().push();
           ref.set($firebaseUtils.toJSON(data, this.$toJSON, this), $firebaseUtils.makeNodeResolver(def));
@@ -213,7 +288,7 @@ angular.module('objective-fire', ['firebase']);
          * @returns a promise resolved after data is saved
          */
         $save: function(indexOrItem) {
-          this._assertNotDestroyed('$save');
+          this._assertNotDestroyed(&#x27;$save&#x27;);
           var self = this;
           var item = self._resolveItem(indexOrItem);
           var key = self.$keyAt(item);
@@ -221,12 +296,12 @@ angular.module('objective-fire', ['firebase']);
             var ref = self.$ref().ref().child(key);
             var data = $firebaseUtils.toJSON(item, self.$toJSON, self);
             return $firebaseUtils.doSet(ref, data).then(function() {
-              self.$$notify('child_changed', key);
+              self.$$notify(&#x27;child_changed&#x27;, key);
               return ref;
             });
           }
           else {
-            return $firebaseUtils.reject('Invalid record; could determine key for '+indexOrItem);
+            return $firebaseUtils.reject(&#x27;Invalid record; could determine key for &#x27;+indexOrItem);
           }
         },
 
@@ -245,7 +320,7 @@ angular.module('objective-fire', ['firebase']);
          * @returns a promise which resolves after data is removed
          */
         $remove: function(indexOrItem) {
-          this._assertNotDestroyed('$remove');
+          this._assertNotDestroyed(&#x27;$remove&#x27;);
           var key = this.$keyAt(indexOrItem);
           if( key !== null ) {
             var ref = this.$ref().ref().child(key);
@@ -254,7 +329,7 @@ angular.module('objective-fire', ['firebase']);
             });
           }
           else {
-            return $firebaseUtils.reject('Invalid record; could not determine key for '+indexOrItem);
+            return $firebaseUtils.reject(&#x27;Invalid record; could not determine key for &#x27;+indexOrItem);
           }
         },
 
@@ -323,7 +398,7 @@ angular.module('objective-fire', ['firebase']);
         /**
          * Listeners passed into this method are notified whenever a new change (add, updated,
          * move, remove) is received from the server. Each invocation is sent an object
-         * containing <code>{ type: 'added|updated|moved|removed', key: 'key_of_item_affected'}</code>
+         * containing &lt;code&gt;{ type: &#x27;added|updated|moved|removed&#x27;, key: &#x27;key_of_item_affected&#x27;}&lt;/code&gt;
          *
          * Additionally, added and moved events receive a prevChild parameter, containing the
          * key of the item before this one in the array.
@@ -340,9 +415,9 @@ angular.module('objective-fire', ['firebase']);
           // an off function for cancelling the listener
           return function() {
             var i = list.findIndex(function(parts) {
-              return parts[0] === cb && parts[1] === context;
+              return parts[0] === cb &amp;&amp; parts[1] === context;
             });
-            if( i > -1 ) {
+            if( i &gt; -1 ) {
               list.splice(i, 1);
             }
           };
@@ -350,14 +425,14 @@ angular.module('objective-fire', ['firebase']);
 
         /**
          * Informs $firebase to stop sending events and clears memory being used
-         * by this array (delete's its local content).
+         * by this array (delete&#x27;s its local content).
          */
         $destroy: function(err) {
           if( !this._isDestroyed ) {
             this._isDestroyed = true;
             this._sync.destroy(err);
             this.$list.length = 0;
-            $log.debug('destroy called for FirebaseArray: '+this.$ref().ref().toString());
+            $log.debug(&#x27;destroy called for FirebaseArray: &#x27;+this.$ref().ref().toString());
           }
         },
 
@@ -370,7 +445,7 @@ angular.module('objective-fire', ['firebase']);
          */
         $getRecord: function(key) {
           var i = this.$indexFor(key);
-          return i > -1? this.$list[i] : null;
+          return i &gt; -1? this.$list[i] : null;
         },
 
         /**
@@ -385,7 +460,7 @@ angular.module('objective-fire', ['firebase']);
          * @protected
          */
         $$added: function(snap/*, prevChild*/) {
-console.log("recivieng it now");
+console.log(&quot;recivieng it now&quot;);
           // check to make sure record does not exist
           var i = this.$indexFor($firebaseUtils.getKey(snap));
           if( i === -1 ) {
@@ -414,7 +489,7 @@ console.log("recivieng it now");
          * @protected
          */
         $$removed: function(snap) {
-          return this.$indexFor($firebaseUtils.getKey(snap)) > -1;
+          return this.$indexFor($firebaseUtils.getKey(snap)) &gt; -1;
         },
 
         /**
@@ -468,7 +543,7 @@ console.log("recivieng it now");
          * Called whenever a security error or other problem causes the listeners to become
          * invalid. This is generally an unrecoverable error.
          *
-         * @param {Object} err which will have a `code` property and possibly a `message`
+         * @param {Object} err which will have a &#x60;code&#x60; property and possibly a &#x60;message&#x60;
          * @protected
          */
         $$error: function(err) {
@@ -501,22 +576,22 @@ console.log("recivieng it now");
           var changed = false;
           var curPos;
           switch(event) {
-            case 'child_added':
+            case &#x27;child_added&#x27;:
               curPos = this.$indexFor(key);
               break;
-            case 'child_moved':
+            case &#x27;child_moved&#x27;:
               curPos = this.$indexFor(key);
               this._spliceOut(key);
               break;
-            case 'child_removed':
+            case &#x27;child_removed&#x27;:
               // remove record from the array
               changed = this._spliceOut(key) !== null;
               break;
-            case 'child_changed':
+            case &#x27;child_changed&#x27;:
               changed = true;
               break;
             default:
-              throw new Error('Invalid event type: ' + event);
+              throw new Error(&#x27;Invalid event type: &#x27; + event);
           }
           if( angular.isDefined(curPos) ) {
             // add it to the array
@@ -581,7 +656,7 @@ console.log("recivieng it now");
          */
         _spliceOut: function(key) {
           var i = this.$indexFor(key);
-          if( i > -1 ) {
+          if( i &gt; -1 ) {
             delete this._indexCache[key];
             return this.$list.splice(i, 1)[0];
           }
@@ -598,11 +673,11 @@ console.log("recivieng it now");
          */
         _resolveItem: function(indexOrItem) {
           var list = this.$list;
-          if( angular.isNumber(indexOrItem) && indexOrItem >= 0 && list.length >= indexOrItem ) {
+          if( angular.isNumber(indexOrItem) &amp;&amp; indexOrItem &gt;= 0 &amp;&amp; list.length &gt;= indexOrItem ) {
             return list[indexOrItem];
           }
           else if( angular.isObject(indexOrItem) ) {
-            // it must be an item in this array; it's not sufficient for it just to have
+            // it must be an item in this array; it&#x27;s not sufficient for it just to have
             // a $id or even a $id that is in the array, it must be an actual record
             // the fastest way to determine this is to use $getRecord (to avoid iterating all recs)
             // and compare the two
@@ -621,22 +696,22 @@ console.log("recivieng it now");
          */
         _assertNotDestroyed: function(method) {
           if( this._isDestroyed ) {
-            throw new Error('Cannot call ' + method + ' method on a destroyed $firebaseArray object');
+            throw new Error(&#x27;Cannot call &#x27; + method + &#x27; method on a destroyed $firebaseArray object&#x27;);
           }
         }
       };
 
       /**
        * This method allows FirebaseArray to be inherited by child classes. Methods passed into this
-       * function will be added onto the array's prototype. They can override existing methods as
+       * function will be added onto the array&#x27;s prototype. They can override existing methods as
        * well.
        *
        * In addition to passing additional methods, it is also possible to pass in a class function.
        * The prototype on that class function will be preserved, and it will inherit from
-       * FirebaseArray. It's also possible to do both, passing a class to inherit and additional
+       * FirebaseArray. It&#x27;s also possible to do both, passing a class to inherit and additional
        * methods to add onto the prototype.
        *
-       *  <pre><code>
+       *  &lt;pre&gt;&lt;code&gt;
        * var ExtendedArray = $firebaseArray.$extend({
        *    // add a method onto the prototype that sums all items in the array
        *    getSum: function() {
@@ -648,7 +723,7 @@ console.log("recivieng it now");
        *
        * // use our new factory in place of $firebaseArray
        * var list = new ExtendedArray(ref);
-       * </code></pre>
+       * &lt;/code&gt;&lt;/pre&gt;
        *
        * @param {Function} [ChildClass] a child class which should inherit FirebaseArray
        * @param {Object} [methods] a list of functions to add onto the prototype
@@ -656,7 +731,7 @@ console.log("recivieng it now");
        * @static
        */
       FirebaseArray.$extend = function(ChildClass, methods) {
-        if( arguments.length === 1 && angular.isObject(ChildClass) ) {
+        if( arguments.length === 1 &amp;&amp; angular.isObject(ChildClass) ) {
           methods = ChildClass;
           ChildClass = function() { return FirebaseArray.apply(this, arguments); };
         }
@@ -668,12 +743,12 @@ console.log("recivieng it now");
           if( !sync.isDestroyed ) {
             sync.isDestroyed = true;
             var ref = firebaseArray.$ref();
-            ref.off('child_added', created);
-            ref.off('child_moved', moved);
-            ref.off('child_changed', updated);
-            ref.off('child_removed', removed);
+            ref.off(&#x27;child_added&#x27;, created);
+            ref.off(&#x27;child_moved&#x27;, moved);
+            ref.off(&#x27;child_changed&#x27;, updated);
+            ref.off(&#x27;child_removed&#x27;, removed);
             firebaseArray = null;
-            initComplete(err||'destroyed');
+            initComplete(err||&#x27;destroyed&#x27;);
           }
         }
 
@@ -681,15 +756,15 @@ console.log("recivieng it now");
           var ref = firebaseArray.$ref();
 
           // listen for changes at the Firebase instance
-          ref.on('child_added', created, error);
-          ref.on('child_moved', moved, error);
-          ref.on('child_changed', updated, error);
-          ref.on('child_removed', removed, error);
+          ref.on(&#x27;child_added&#x27;, created, error);
+          ref.on(&#x27;child_moved&#x27;, moved, error);
+          ref.on(&#x27;child_changed&#x27;, updated, error);
+          ref.on(&#x27;child_removed&#x27;, removed, error);
 
           // determine when initial load is completed
-          ref.once('value', function(snap) {
+          ref.once(&#x27;value&#x27;, function(snap) {
             if (angular.isArray(snap.val())) {
-              $log.warn('Storing data using array indices in Firebase can result in unexpected behavior. See https://www.firebase.com/docs/web/guide/understanding-data.html#section-arrays-in-firebase for more information.');
+              $log.warn(&#x27;Storing data using array indices in Firebase can result in unexpected behavior. See https://www.firebase.com/docs/web/guide/understanding-data.html#section-arrays-in-firebase for more information.&#x27;);
             }
 
             initComplete(null, $list);
@@ -710,7 +785,7 @@ console.log("recivieng it now");
         var created = batch(function(snap, prevChild) {
           var rec = firebaseArray.$$added(snap, prevChild);
           if( rec ) {
-            firebaseArray.$$process('child_added', rec, prevChild);
+            firebaseArray.$$process(&#x27;child_added&#x27;, rec, prevChild);
           }
         });
         var updated = batch(function(snap) {
@@ -718,7 +793,7 @@ console.log("recivieng it now");
           if( rec ) {
             var changed = firebaseArray.$$updated(snap);
             if( changed ) {
-              firebaseArray.$$process('child_changed', rec);
+              firebaseArray.$$process(&#x27;child_changed&#x27;, rec);
             }
           }
         });
@@ -727,7 +802,7 @@ console.log("recivieng it now");
           if( rec ) {
             var confirmed = firebaseArray.$$moved(snap, prevChild);
             if( confirmed ) {
-              firebaseArray.$$process('child_moved', rec, prevChild);
+              firebaseArray.$$process(&#x27;child_moved&#x27;, rec, prevChild);
             }
           }
         });
@@ -736,7 +811,7 @@ console.log("recivieng it now");
           if( rec ) {
             var confirmed = firebaseArray.$$removed(snap);
             if( confirmed ) {
-              firebaseArray.$$process('child_removed', rec);
+              firebaseArray.$$process(&#x27;child_removed&#x27;, rec);
             }
           }
         });
@@ -763,10 +838,10 @@ console.log("recivieng it now");
   ]);
 
   /** @deprecated */
-  angular.module('firebase').factory('$FirebaseArray', ['$log', '$firebaseArray',
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$FirebaseArray&#x27;, [&#x27;$log&#x27;, &#x27;$firebaseArray&#x27;,
     function($log, $firebaseArray) {
       return function() {
-        $log.warn('$FirebaseArray has been renamed. Use $firebaseArray instead.');
+        $log.warn(&#x27;$FirebaseArray has been renamed. Use $firebaseArray instead.&#x27;);
         return $firebaseArray.apply(null, arguments);
       };
     }
@@ -774,14 +849,14 @@ console.log("recivieng it now");
 })();
 
 (function() {
-  'use strict';
+  &#x27;use strict&#x27;;
   var FirebaseAuth;
 
   // Define a service which provides user authentication and management.
-  angular.module('firebase').factory('$firebaseAuth', [
-    '$q', '$firebaseUtils', '$log', function($q, $firebaseUtils, $log) {
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseAuth&#x27;, [
+    &#x27;$q&#x27;, &#x27;$firebaseUtils&#x27;, &#x27;$log&#x27;, function($q, $firebaseUtils, $log) {
       /**
-       * This factory returns an object allowing you to manage the client's authentication state.
+       * This factory returns an object allowing you to manage the client&#x27;s authentication state.
        *
        * @param {Firebase} ref A Firebase reference to authenticate.
        * @return {object} An object containing methods for authenticating clients, retrieving
@@ -799,8 +874,8 @@ console.log("recivieng it now");
     this._utils = $firebaseUtils;
     this._log = $log;
 
-    if (typeof ref === 'string') {
-      throw new Error('Please provide a Firebase reference instead of a URL when creating a `$firebaseAuth` object.');
+    if (typeof ref === &#x27;string&#x27;) {
+      throw new Error(&#x27;Please provide a Firebase reference instead of a URL when creating a &#x60;$firebaseAuth&#x60; object.&#x27;);
     }
     this._ref = ref;
   };
@@ -847,7 +922,7 @@ console.log("recivieng it now");
      * access to the entire Firebase.
      * @param {Object} [options] An object containing optional client arguments, such as configuring
      * session persistence.
-     * @return {Promise<Object>} A promise fulfilled with an object containing authentication data.
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with an object containing authentication data.
      */
     authWithCustomToken: function(authToken, options) {
       var deferred = this._q.defer();
@@ -866,7 +941,7 @@ console.log("recivieng it now");
      *
      * @param {Object} [options] An object containing optional client arguments, such as configuring
      * session persistence.
-     * @return {Promise<Object>} A promise fulfilled with an object containing authentication data.
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with an object containing authentication data.
      */
     authAnonymously: function(options) {
       var deferred = this._q.defer();
@@ -887,7 +962,7 @@ console.log("recivieng it now");
      * to the user account.
      * @param {Object} [options] An object containing optional client arguments, such as configuring
      * session persistence.
-     * @return {Promise<Object>} A promise fulfilled with an object containing authentication data.
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with an object containing authentication data.
      */
     authWithPassword: function(credentials, options) {
       var deferred = this._q.defer();
@@ -908,7 +983,7 @@ console.log("recivieng it now");
      * with, e.g. google.
      * @param {Object} [options] An object containing optional client arguments, such as configuring
      * session persistence.
-     * @return {Promise<Object>} A promise fulfilled with an object containing authentication data.
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with an object containing authentication data.
      */
     authWithOAuthPopup: function(provider, options) {
       var deferred = this._q.defer();
@@ -929,7 +1004,7 @@ console.log("recivieng it now");
      * with, e.g. google.
      * @param {Object} [options] An object containing optional client arguments, such as configuring
      * session persistence.
-     * @return {Promise<Object>} A promise fulfilled with an object containing authentication data.
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with an object containing authentication data.
      */
     authWithOAuthRedirect: function(provider, options) {
       var deferred = this._q.defer();
@@ -952,7 +1027,7 @@ console.log("recivieng it now");
      * Object of key / value pairs, such as a set of OAuth 1.0a credentials.
      * @param {Object} [options] An object containing optional client arguments, such as configuring
      * session persistence.
-     * @return {Promise<Object>} A promise fulfilled with an object containing authentication data.
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with an object containing authentication data.
      */
     authWithOAuthToken: function(provider, credentials, options) {
       var deferred = this._q.defer();
@@ -984,7 +1059,7 @@ console.log("recivieng it now");
      * the authentication data changes. It also fires as soon as the authentication data is
      * retrieved from the server.
      *
-     * @param {function} callback A callback that fires when the client's authenticate state
+     * @param {function} callback A callback that fires when the client&#x27;s authenticate state
      * changes. If authenticated, the callback will be passed an object containing authentication
      * data according to the provider used to authenticate. Otherwise, it will be passed null.
      * @param {string} [context] If provided, this object will be used as this when calling your
@@ -997,7 +1072,7 @@ console.log("recivieng it now");
       var fn = this._utils.debounce(callback, context, 0);
       this._ref.onAuth(fn);
 
-      // Return a method to detach the `onAuth()` callback.
+      // Return a method to detach the &#x60;onAuth()&#x60; callback.
       return function() {
         self._ref.offAuth(fn);
       };
@@ -1006,7 +1081,7 @@ console.log("recivieng it now");
     /**
      * Synchronously retrieves the current authentication data.
      *
-     * @return {Object} The client's authentication data.
+     * @return {Object} The client&#x27;s authentication data.
      */
     getAuth: function() {
       return this._ref.getAuth();
@@ -1017,7 +1092,7 @@ console.log("recivieng it now");
      *
      * @param {boolean} rejectIfAuthDataIsNull Determines if the returned promise should be
      * resolved or rejected upon an unauthenticated client.
-     * @return {Promise<Object>} A promise fulfilled with the client's authentication state or
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with the client&#x27;s authentication state or
      * rejected if the client is unauthenticated and rejectIfAuthDataIsNull is true.
      */
     _routerMethodOnAuthPromise: function(rejectIfAuthDataIsNull) {
@@ -1033,7 +1108,7 @@ console.log("recivieng it now");
             return;
           }
           else if (rejectIfAuthDataIsNull) {
-            reject("AUTH_REQUIRED");
+            reject(&quot;AUTH_REQUIRED&quot;);
             return;
           }
           else {
@@ -1047,10 +1122,10 @@ console.log("recivieng it now");
     },
 
     /**
-     * Utility method which can be used in a route's resolve() method to require that a route has
+     * Utility method which can be used in a route&#x27;s resolve() method to require that a route has
      * a logged in client.
      *
-     * @returns {Promise<Object>} A promise fulfilled with the client's current authentication
+     * @returns {Promise&lt;Object&gt;} A promise fulfilled with the client&#x27;s current authentication
      * state or rejected if the client is not authenticated.
      */
     requireAuth: function() {
@@ -1058,10 +1133,10 @@ console.log("recivieng it now");
     },
 
     /**
-     * Utility method which can be used in a route's resolve() method to grab the current
+     * Utility method which can be used in a route&#x27;s resolve() method to grab the current
      * authentication data.
      *
-     * @returns {Promise<Object|null>} A promise fulfilled with the client's current authentication
+     * @returns {Promise&lt;Object|null&gt;} A promise fulfilled with the client&#x27;s current authentication
      * state, which will be null if the client is not authenticated.
      */
     waitForAuth: function() {
@@ -1078,15 +1153,15 @@ console.log("recivieng it now");
      * this method has been resolved.
      *
      * @param {Object} credentials An object containing the email and password of the user to create.
-     * @return {Promise<Object>} A promise fulfilled with the user object, which contains the
+     * @return {Promise&lt;Object&gt;} A promise fulfilled with the user object, which contains the
      * uid of the created user.
      */
     createUser: function(credentials) {
       var deferred = this._q.defer();
 
       // Throw an error if they are trying to pass in separate string arguments
-      if (typeof credentials === "string") {
-        throw new Error("$createUser() expects an object containing 'email' and 'password', but got a string.");
+      if (typeof credentials === &quot;string&quot;) {
+        throw new Error(&quot;$createUser() expects an object containing &#x27;email&#x27; and &#x27;password&#x27;, but got a string.&quot;);
       }
 
       try {
@@ -1103,14 +1178,14 @@ console.log("recivieng it now");
      *
      * @param {Object} credentials An object containing the email, old password, and new password of
      * the user whose password is to change.
-     * @return {Promise<>} An empty promise fulfilled once the password change is complete.
+     * @return {Promise&lt;&gt;} An empty promise fulfilled once the password change is complete.
      */
     changePassword: function(credentials) {
       var deferred = this._q.defer();
 
       // Throw an error if they are trying to pass in separate string arguments
-      if (typeof credentials === "string") {
-        throw new Error("$changePassword() expects an object containing 'email', 'oldPassword', and 'newPassword', but got a string.");
+      if (typeof credentials === &quot;string&quot;) {
+        throw new Error(&quot;$changePassword() expects an object containing &#x27;email&#x27;, &#x27;oldPassword&#x27;, and &#x27;newPassword&#x27;, but got a string.&quot;);
       }
 
       try {
@@ -1127,11 +1202,11 @@ console.log("recivieng it now");
      *
      * @param {Object} credentials An object containing the old email, new email, and password of
      * the user whose email is to change.
-     * @return {Promise<>} An empty promise fulfilled once the email change is complete.
+     * @return {Promise&lt;&gt;} An empty promise fulfilled once the email change is complete.
      */
     changeEmail: function(credentials) {
-      if (typeof this._ref.changeEmail !== 'function') {
-        throw new Error("$changeEmail() expects an object containing 'oldEmail', 'newEmail', and 'password', but got a string.");
+      if (typeof this._ref.changeEmail !== &#x27;function&#x27;) {
+        throw new Error(&quot;$changeEmail() expects an object containing &#x27;oldEmail&#x27;, &#x27;newEmail&#x27;, and &#x27;password&#x27;, but got a string.&quot;);
       }
 
       var deferred = this._q.defer();
@@ -1149,14 +1224,14 @@ console.log("recivieng it now");
      * Removes an email/password user.
      *
      * @param {Object} credentials An object containing the email and password of the user to remove.
-     * @return {Promise<>} An empty promise fulfilled once the user is removed.
+     * @return {Promise&lt;&gt;} An empty promise fulfilled once the user is removed.
      */
     removeUser: function(credentials) {
       var deferred = this._q.defer();
 
       // Throw an error if they are trying to pass in separate string arguments
-      if (typeof credentials === "string") {
-        throw new Error("$removeUser() expects an object containing 'email' and 'password', but got a string.");
+      if (typeof credentials === &quot;string&quot;) {
+        throw new Error(&quot;$removeUser() expects an object containing &#x27;email&#x27; and &#x27;password&#x27;, but got a string.&quot;);
       }
 
       try {
@@ -1174,14 +1249,14 @@ console.log("recivieng it now");
      *
      * @param {Object} credentials An object containing the email of the user to send a reset
      * password email to.
-     * @return {Promise<>} An empty promise fulfilled once the reset password email is sent.
+     * @return {Promise&lt;&gt;} An empty promise fulfilled once the reset password email is sent.
      */
     resetPassword: function(credentials) {
       var deferred = this._q.defer();
 
       // Throw an error if they are trying to pass in a string argument
-      if (typeof credentials === "string") {
-        throw new Error("$resetPassword() expects an object containing 'email', but got a string.");
+      if (typeof credentials === &quot;string&quot;) {
+        throw new Error(&quot;$resetPassword() expects an object containing &#x27;email&#x27;, but got a string.&quot;);
       }
 
       try {
@@ -1196,7 +1271,7 @@ console.log("recivieng it now");
 })();
 
 (function() {
-  'use strict';
+  &#x27;use strict&#x27;;
   /**
    * Creates and maintains a synchronized object, with 2-way bindings between Angular and Firebase.
    *
@@ -1214,17 +1289,17 @@ console.log("recivieng it now");
    * Instead of directly modifying this class, one should generally use the $extend
    * method to add or change how methods behave:
    *
-   * <pre><code>
+   * &lt;pre&gt;&lt;code&gt;
    * var ExtendedObject = $firebaseObject.$extend({
    *    // add a new method to the prototype
-   *    foo: function() { return 'bar'; },
+   *    foo: function() { return &#x27;bar&#x27;; },
    * });
    *
    * var obj = new ExtendedObject(ref);
-   * </code></pre>
+   * &lt;/code&gt;&lt;/pre&gt;
    */
-  angular.module('firebase').factory('$firebaseObject', [
-    '$parse', '$firebaseUtils', '$log',
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseObject&#x27;, [
+    &#x27;$parse&#x27;, &#x27;$firebaseUtils&#x27;, &#x27;$log&#x27;,
     function($parse, $firebaseUtils, $log) {
 
       /**
@@ -1254,7 +1329,7 @@ console.log("recivieng it now");
         // this bit of magic makes $$conf non-enumerable and non-configurable
         // and non-writable (its properties are still writable but the ref cannot be replaced)
         // we redundantly assign it above so the IDE can relax
-        Object.defineProperty(this, '$$conf', {
+        Object.defineProperty(this, &#x27;$$conf&#x27;, {
           value: this.$$conf
         });
 
@@ -1276,9 +1351,9 @@ console.log("recivieng it now");
          * By default it just copies all values from this object onto
          * the data that will go to Firebase
          * The JSON sent to the Firebase will always have any keys prefixed with
-         * '$' stripped from it.
+         * &#x27;$&#x27; stripped from it.
          *
-         * This method is always called with "this" as "this"
+         * This method is always called with &quot;this&quot; as &quot;this&quot;
          * @param rec The object to covert to JSON - it should be this object
          * @return This object in JSON
          */
@@ -1371,7 +1446,7 @@ console.log("recivieng it now");
          * pushed to Firebase, and vice versa.
          *
          * If scope emits a $destroy event, the binding is automatically severed. Otherwise,
-         * it is possible to unbind the scope variable by using the `unbind` function
+         * it is possible to unbind the scope variable by using the &#x60;unbind&#x60; function
          * passed into the resolve method.
          *
          * Can only be bound to one scope variable at a time. If a second is attempted,
@@ -1391,7 +1466,7 @@ console.log("recivieng it now");
         /**
          * Listeners passed into this method are notified whenever a new change is received
          * from the server. Each invocation is sent an object containing
-         * <code>{ type: 'updated', key: 'my_firebase_id' }</code>
+         * &lt;code&gt;{ type: &#x27;updated&#x27;, key: &#x27;my_firebase_id&#x27; }&lt;/code&gt;
          *
          * This method returns an unbind function that can be used to detach the listener.
          *
@@ -1405,9 +1480,9 @@ console.log("recivieng it now");
           // an off function for cancelling the listener
           return function () {
             var i = list.findIndex(function (parts) {
-              return parts[0] === cb && parts[1] === context;
+              return parts[0] === cb &amp;&amp; parts[1] === context;
             });
-            if (i > -1) {
+            if (i &gt; -1) {
               list.splice(i, 1);
             }
           };
@@ -1415,7 +1490,7 @@ console.log("recivieng it now");
 
         /**
          * Informs $firebase to stop sending events and clears memory being used
-         * by this object (delete's its local content).
+         * by this object (delete&#x27;s its local content).
          */
         $destroy: function(err) {
           var self = this;
@@ -1433,7 +1508,7 @@ console.log("recivieng it now");
          * Called by $firebase whenever an item is changed at the server.
          * This method must exist on any objectFactory passed into $firebase.
          *
-         * It should return true if any changes were made, otherwise `$$notify` will
+         * It should return true if any changes were made, otherwise &#x60;$$notify&#x60; will
          * not be invoked.
          *
          * @param {object} snap a Firebase snapshot
@@ -1451,10 +1526,10 @@ console.log("recivieng it now");
         /**
          * Called whenever a security error or other problem causes the listeners to become
          * invalid. This is generally an unrecoverable error.
-         * @param {Object} err which will have a `code` property and possibly a `message`
+         * @param {Object} err which will have a &#x60;code&#x60; property and possibly a &#x60;message&#x60;
          */
         $$error: function (err) {
-          // prints an error to the console (via Angular's logger)
+          // prints an error to the console (via Angular&#x27;s logger)
           $log.error(err);
           // frees memory and cancels any remaining listeners
           this.$destroy(err);
@@ -1481,7 +1556,7 @@ console.log("recivieng it now");
           var self = this, list = this.$$conf.listeners.slice();
           // be sure to do this after setting up data and init state
           angular.forEach(list, function (parts) {
-            parts[0].call(parts[1], {event: 'value', key: self.$id});
+            parts[0].call(parts[1], {event: &#x27;value&#x27;, key: self.$id});
           });
         },
 
@@ -1497,35 +1572,35 @@ console.log("recivieng it now");
 
       /**
        * This method allows FirebaseObject to be copied into a new factory. Methods passed into this
-       * function will be added onto the object's prototype. They can override existing methods as
+       * function will be added onto the object&#x27;s prototype. They can override existing methods as
        * well.
        *
        * In addition to passing additional methods, it is also possible to pass in a class function.
        * The prototype on that class function will be preserved, and it will inherit from
-       * FirebaseObject. It's also possible to do both, passing a class to inherit and additional
+       * FirebaseObject. It&#x27;s also possible to do both, passing a class to inherit and additional
        * methods to add onto the prototype.
        *
        * Once a factory is obtained by this method, it can be passed into $firebase as the
-       * `objectFactory` parameter:
+       * &#x60;objectFactory&#x60; parameter:
        *
-       * <pre><code>
+       * &lt;pre&gt;&lt;code&gt;
        * var MyFactory = $firebaseObject.$extend({
        *    // add a method onto the prototype that prints a greeting
        *    getGreeting: function() {
-       *       return 'Hello ' + this.first_name + ' ' + this.last_name + '!';
+       *       return &#x27;Hello &#x27; + this.first_name + &#x27; &#x27; + this.last_name + &#x27;!&#x27;;
        *    }
        * });
        *
        * // use our new factory in place of $firebaseObject
        * var obj = $firebase(ref, {objectFactory: MyFactory}).$asObject();
-       * </code></pre>
+       * &lt;/code&gt;&lt;/pre&gt;
        *
        * @param {Function} [ChildClass] a child class which should inherit FirebaseObject
        * @param {Object} [methods] a list of functions to add onto the prototype
        * @returns {Function} a new factory suitable for use with $firebase
        */
       FirebaseObject.$extend = function(ChildClass, methods) {
-        if( arguments.length === 1 && angular.isObject(ChildClass) ) {
+        if( arguments.length === 1 &amp;&amp; angular.isObject(ChildClass) ) {
           methods = ChildClass;
           ChildClass = function() { FirebaseObject.apply(this, arguments); };
         }
@@ -1549,9 +1624,9 @@ console.log("recivieng it now");
       ThreeWayBinding.prototype = {
         assertNotBound: function(varName) {
           if( this.scope ) {
-            var msg = 'Cannot bind to ' + varName + ' because this instance is already bound to ' +
-              this.key + '; one binding per instance ' +
-              '(call unbind method or create another FirebaseObject instance)';
+            var msg = &#x27;Cannot bind to &#x27; + varName + &#x27; because this instance is already bound to &#x27; +
+              this.key + &#x27;; one binding per instance &#x27; +
+              &#x27;(call unbind method or create another FirebaseObject instance)&#x27;;
             $log.error(msg);
             return $firebaseUtils.reject(msg);
           }
@@ -1566,8 +1641,8 @@ console.log("recivieng it now");
             self.varName = varName;
 
             function equals(scopeValue) {
-              return angular.equals(scopeValue, rec) &&
-                scopeValue.$priority === rec.$priority &&
+              return angular.equals(scopeValue, rec) &amp;&amp;
+                scopeValue.$priority === rec.$priority &amp;&amp;
                 scopeValue.$value === rec.$value;
             }
 
@@ -1578,9 +1653,9 @@ console.log("recivieng it now");
             var send = $firebaseUtils.debounce(function(val) {
               var scopeData = $firebaseUtils.scopeData(val);
               rec.$$scopeUpdated(scopeData)
-                ['finally'](function() {
+                [&#x27;finally&#x27;](function() {
                   sending = false;
-                  if(!scopeData.hasOwnProperty('$value')){
+                  if(!scopeData.hasOwnProperty(&#x27;$value&#x27;)){
                     delete rec.$value;
                     delete parsed(scope).$value;
                   }
@@ -1597,7 +1672,7 @@ console.log("recivieng it now");
             };
 
             var recUpdated = function() {
-              if( !sending && !equals(parsed(scope)) ) {
+              if( !sending &amp;&amp; !equals(parsed(scope)) ) {
                 setScope(rec);
               }
             };
@@ -1610,7 +1685,7 @@ console.log("recivieng it now");
             }
 
             setScope(rec);
-            self.subs.push(scope.$on('$destroy', self.unbind.bind(self)));
+            self.subs.push(scope.$on(&#x27;$destroy&#x27;, self.unbind.bind(self)));
 
             // monitor scope for any changes
             self.subs.push(scope.$watch(watchExp, scopeUpdated, true));
@@ -1645,17 +1720,17 @@ console.log("recivieng it now");
         function destroy(err) {
           if( !sync.isDestroyed ) {
             sync.isDestroyed = true;
-            ref.off('value', applyUpdate);
+            ref.off(&#x27;value&#x27;, applyUpdate);
             firebaseObject = null;
-            initComplete(err||'destroyed');
+            initComplete(err||&#x27;destroyed&#x27;);
           }
         }
 
         function init() {
-          ref.on('value', applyUpdate, error);
-          ref.once('value', function(snap) {
+          ref.on(&#x27;value&#x27;, applyUpdate, error);
+          ref.once(&#x27;value&#x27;, function(snap) {
             if (angular.isArray(snap.val())) {
-              $log.warn('Storing data using array indices in Firebase can result in unexpected behavior. See https://www.firebase.com/docs/web/guide/understanding-data.html#section-arrays-in-firebase for more information. Also note that you probably wanted $firebaseArray and not $firebaseObject.');
+              $log.warn(&#x27;Storing data using array indices in Firebase can result in unexpected behavior. See https://www.firebase.com/docs/web/guide/understanding-data.html#section-arrays-in-firebase for more information. Also note that you probably wanted $firebaseArray and not $firebaseObject.&#x27;);
             }
 
             initComplete(null);
@@ -1699,10 +1774,10 @@ console.log("recivieng it now");
   ]);
 
   /** @deprecated */
-  angular.module('firebase').factory('$FirebaseObject', ['$log', '$firebaseObject',
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$FirebaseObject&#x27;, [&#x27;$log&#x27;, &#x27;$firebaseObject&#x27;,
     function($log, $firebaseObject) {
       return function() {
-        $log.warn('$FirebaseObject has been renamed. Use $firebaseObject instead.');
+        $log.warn(&#x27;$FirebaseObject has been renamed. Use $firebaseObject instead.&#x27;);
         return $firebaseObject.apply(null, arguments);
       };
     }
@@ -1710,32 +1785,32 @@ console.log("recivieng it now");
 })();
 
 (function() {
-  'use strict';
+  &#x27;use strict&#x27;;
 
-  angular.module("firebase")
+  angular.module(&quot;firebase&quot;)
 
     /** @deprecated */
-    .factory("$firebase", function() {
+    .factory(&quot;$firebase&quot;, function() {
       return function() {
-        throw new Error('$firebase has been removed. You may instantiate $firebaseArray and $firebaseObject ' +
-        'directly now. For simple write operations, just use the Firebase ref directly. ' +
-        'See the AngularFire 1.0.0 changelog for details: https://www.firebase.com/docs/web/libraries/angular/changelog.html');
+        throw new Error(&#x27;$firebase has been removed. You may instantiate $firebaseArray and $firebaseObject &#x27; +
+        &#x27;directly now. For simple write operations, just use the Firebase ref directly. &#x27; +
+        &#x27;See the AngularFire 1.0.0 changelog for details: https://www.firebase.com/docs/web/libraries/angular/changelog.html&#x27;);
       };
     });
 
 })();
 
-'use strict';
+&#x27;use strict&#x27;;
 
 // Shim Array.indexOf for IE compatibility.
 if (!Array.prototype.indexOf) {
   Array.prototype.indexOf = function (searchElement, fromIndex) {
     if (this === undefined || this === null) {
-      throw new TypeError("'this' is null or not defined");
+      throw new TypeError(&quot;&#x27;this&#x27; is null or not defined&quot;);
     }
     // Hack to convert object.length to a UInt32
     // jshint -W016
-    var length = this.length >>> 0;
+    var length = this.length &gt;&gt;&gt; 0;
     fromIndex = +fromIndex || 0;
     // jshint +W016
 
@@ -1743,14 +1818,14 @@ if (!Array.prototype.indexOf) {
       fromIndex = 0;
     }
 
-    if (fromIndex < 0) {
+    if (fromIndex &lt; 0) {
       fromIndex += length;
-      if (fromIndex < 0) {
+      if (fromIndex &lt; 0) {
         fromIndex = 0;
       }
     }
 
-    for (;fromIndex < length; fromIndex++) {
+    for (;fromIndex &lt; length; fromIndex++) {
       if (this[fromIndex] === searchElement) {
         return fromIndex;
       }
@@ -1763,17 +1838,17 @@ if (!Array.prototype.indexOf) {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 if (!Function.prototype.bind) {
   Function.prototype.bind = function (oThis) {
-    if (typeof this !== "function") {
+    if (typeof this !== &quot;function&quot;) {
       // closest thing possible to the ECMAScript 5
       // internal IsCallable function
-      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+      throw new TypeError(&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;);
     }
 
     var aArgs = Array.prototype.slice.call(arguments, 1),
       fToBind = this,
       fNOP = function () {},
       fBound = function () {
-        return fToBind.apply(this instanceof fNOP && oThis
+        return fToBind.apply(this instanceof fNOP &amp;&amp; oThis
             ? this
             : oThis,
           aArgs.concat(Array.prototype.slice.call(arguments)));
@@ -1788,23 +1863,23 @@ if (!Function.prototype.bind) {
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
 if (!Array.prototype.findIndex) {
-  Object.defineProperty(Array.prototype, 'findIndex', {
+  Object.defineProperty(Array.prototype, &#x27;findIndex&#x27;, {
     enumerable: false,
     configurable: true,
     writable: true,
     value: function(predicate) {
       if (this == null) {
-        throw new TypeError('Array.prototype.find called on null or undefined');
+        throw new TypeError(&#x27;Array.prototype.find called on null or undefined&#x27;);
       }
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
+      if (typeof predicate !== &#x27;function&#x27;) {
+        throw new TypeError(&#x27;predicate must be a function&#x27;);
       }
       var list = Object(this);
-      var length = list.length >>> 0;
+      var length = list.length &gt;&gt;&gt; 0;
       var thisArg = arguments[1];
       var value;
 
-      for (var i = 0; i < length; i++) {
+      for (var i = 0; i &lt; length; i++) {
         if (i in list) {
           value = list[i];
           if (predicate.call(thisArg, value, i, list)) {
@@ -1818,18 +1893,18 @@ if (!Array.prototype.findIndex) {
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
-if (typeof Object.create != 'function') {
+if (typeof Object.create != &#x27;function&#x27;) {
   (function () {
     var F = function () {};
     Object.create = function (o) {
-      if (arguments.length > 1) {
-        throw new Error('Second argument not supported');
+      if (arguments.length &gt; 1) {
+        throw new Error(&#x27;Second argument not supported&#x27;);
       }
       if (o === null) {
-        throw new Error('Cannot set a null [[Prototype]]');
+        throw new Error(&#x27;Cannot set a null [[Prototype]]&#x27;);
       }
-      if (typeof o != 'object') {
-        throw new TypeError('Argument must be an object');
+      if (typeof o != &#x27;object&#x27;) {
+        throw new TypeError(&#x27;Argument must be an object&#x27;);
       }
       F.prototype = o;
       return new F();
@@ -1840,23 +1915,23 @@ if (typeof Object.create != 'function') {
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 if (!Object.keys) {
   Object.keys = (function () {
-    'use strict';
+    &#x27;use strict&#x27;;
     var hasOwnProperty = Object.prototype.hasOwnProperty,
-      hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+      hasDontEnumBug = !({toString: null}).propertyIsEnumerable(&#x27;toString&#x27;),
       dontEnums = [
-        'toString',
-        'toLocaleString',
-        'valueOf',
-        'hasOwnProperty',
-        'isPrototypeOf',
-        'propertyIsEnumerable',
-        'constructor'
+        &#x27;toString&#x27;,
+        &#x27;toLocaleString&#x27;,
+        &#x27;valueOf&#x27;,
+        &#x27;hasOwnProperty&#x27;,
+        &#x27;isPrototypeOf&#x27;,
+        &#x27;propertyIsEnumerable&#x27;,
+        &#x27;constructor&#x27;
       ],
       dontEnumsLength = dontEnums.length;
 
     return function (obj) {
-      if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
-        throw new TypeError('Object.keys called on non-object');
+      if (typeof obj !== &#x27;object&#x27; &amp;&amp; (typeof obj !== &#x27;function&#x27; || obj === null)) {
+        throw new TypeError(&#x27;Object.keys called on non-object&#x27;);
       }
 
       var result = [], prop, i;
@@ -1868,7 +1943,7 @@ if (!Object.keys) {
       }
 
       if (hasDontEnumBug) {
-        for (i = 0; i < dontEnumsLength; i++) {
+        for (i = 0; i &lt; dontEnumsLength; i++) {
           if (hasOwnProperty.call(obj, dontEnums[i])) {
             result.push(dontEnums[i]);
           }
@@ -1880,8 +1955,8 @@ if (!Object.keys) {
 }
 
 // http://ejohn.org/blog/objectgetprototypeof/
-if ( typeof Object.getPrototypeOf !== "function" ) {
-  if ( typeof "test".__proto__ === "object" ) {
+if ( typeof Object.getPrototypeOf !== &quot;function&quot; ) {
+  if ( typeof &quot;test&quot;.__proto__ === &quot;object&quot; ) {
     Object.getPrototypeOf = function(object){
       return object.__proto__;
     };
@@ -1894,19 +1969,19 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 }
 
 (function() {
-  'use strict';
+  &#x27;use strict&#x27;;
 
-  angular.module('firebase')
-    .factory('$firebaseConfig', ["$firebaseArray", "$firebaseObject", "$injector",
+  angular.module(&#x27;firebase&#x27;)
+    .factory(&#x27;$firebaseConfig&#x27;, [&quot;$firebaseArray&quot;, &quot;$firebaseObject&quot;, &quot;$injector&quot;,
       function($firebaseArray, $firebaseObject, $injector) {
         return function(configOpts) {
           // make a copy we can modify
           var opts = angular.extend({}, configOpts);
           // look up factories if passed as string names
-          if( typeof opts.objectFactory === 'string' ) {
+          if( typeof opts.objectFactory === &#x27;string&#x27; ) {
             opts.objectFactory = $injector.get(opts.objectFactory);
           }
-          if( typeof opts.arrayFactory === 'string' ) {
+          if( typeof opts.arrayFactory === &#x27;string&#x27; ) {
             opts.arrayFactory = $injector.get(opts.arrayFactory);
           }
           // extend defaults and return
@@ -1918,14 +1993,14 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
       }
     ])
 
-    .factory('$firebaseUtils', ["$q", "$timeout", "firebaseBatchDelay",
+    .factory(&#x27;$firebaseUtils&#x27;, [&quot;$q&quot;, &quot;$timeout&quot;, &quot;firebaseBatchDelay&quot;,
       function($q, $timeout, firebaseBatchDelay) {
 
         // ES6 style promises polyfill for angular 1.2.x
         // Copied from angular 1.3.x implementation: https://github.com/angular/angular.js/blob/v1.3.5/src/ng/q.js#L539
         function Q(resolver) {
           if (!angular.isFunction(resolver)) {
-            throw new Error('missing resolver function');
+            throw new Error(&#x27;missing resolver function&#x27;);
           }
 
           var deferred = $q.defer();
@@ -1945,9 +2020,9 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 
         var utils = {
           /**
-           * Returns a function which, each time it is invoked, will pause for `wait`
-           * milliseconds before invoking the original `fn` instance. If another
-           * request is received in that time, it resets `wait` up until `maxWait` is
+           * Returns a function which, each time it is invoked, will pause for &#x60;wait&#x60;
+           * milliseconds before invoking the original &#x60;fn&#x60; instance. If another
+           * request is received in that time, it resets &#x60;wait&#x60; up until &#x60;maxWait&#x60; is
            * reached.
            *
            * Unlike a debounce function, once wait is received, all items that have been
@@ -1957,7 +2032,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
            * The batch function actually returns a wrap function that should be called on each
            * method that is to be batched.
            *
-           * <pre><code>
+           * &lt;pre&gt;&lt;code&gt;
            *   var total = 0;
            *   var batchWrapper = batch(10, 100);
            *   var fn1 = batchWrapper(function(x) { return total += x; });
@@ -1967,26 +2042,26 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
            *   fn1(10);
            *   fn2();
            *   console.log(total); // 0 (nothing invoked yet)
-           *   // after 10ms will log "10" and then "20"
-           * </code></pre>
+           *   // after 10ms will log &quot;10&quot; and then &quot;20&quot;
+           * &lt;/code&gt;&lt;/pre&gt;
            *
            * @param {int} wait number of milliseconds to pause before sending out after each invocation
            * @param {int} maxWait max milliseconds to wait before sending out, defaults to wait * 10 or 100
            * @returns {Function}
            */
           batch: function(wait, maxWait) {
-            wait = typeof('wait') === 'number'? wait : firebaseBatchDelay;
+            wait = typeof(&#x27;wait&#x27;) === &#x27;number&#x27;? wait : firebaseBatchDelay;
             if( !maxWait ) { maxWait = wait*10 || 100; }
             var queue = [];
             var start;
             var cancelTimer;
             var runScheduledForNextTick;
 
-            // returns `fn` wrapped in a function that queues up each call event to be
+            // returns &#x60;fn&#x60; wrapped in a function that queues up each call event to be
             // invoked later inside fo runNow()
             function createBatchFn(fn, context) {
-               if( typeof(fn) !== 'function' ) {
-                 throw new Error('Must provide a function to be batched. Got '+fn);
+               if( typeof(fn) !== &#x27;function&#x27; ) {
+                 throw new Error(&#x27;Must provide a function to be batched. Got &#x27;+fn);
                }
                return function() {
                  var args = Array.prototype.slice.call(arguments, 0);
@@ -2002,7 +2077,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
                 cancelTimer();
                 cancelTimer = null;
               }
-              if( start && Date.now() - start > maxWait ) {
+              if( start &amp;&amp; Date.now() - start &gt; maxWait ) {
                 if(!runScheduledForNextTick){
                   runScheduledForNextTick = true;
                   utils.compile(runNow);
@@ -2032,23 +2107,23 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           /**
            * A rudimentary debounce method
            * @param {function} fn the function to debounce
-           * @param {object} [ctx] the `this` context to set in fn
+           * @param {object} [ctx] the &#x60;this&#x60; context to set in fn
            * @param {int} wait number of milliseconds to pause before sending out after each invocation
            * @param {int} [maxWait] max milliseconds to wait before sending out, defaults to wait * 10 or 100
            */
           debounce: function(fn, ctx, wait, maxWait) {
             var start, cancelTimer, args, runScheduledForNextTick;
-            if( typeof(ctx) === 'number' ) {
+            if( typeof(ctx) === &#x27;number&#x27; ) {
               maxWait = wait;
               wait = ctx;
               ctx = null;
             }
 
-            if( typeof wait !== 'number' ) {
-              throw new Error('Must provide a valid integer for wait. Try 0 for a default');
+            if( typeof wait !== &#x27;number&#x27; ) {
+              throw new Error(&#x27;Must provide a valid integer for wait. Try 0 for a default&#x27;);
             }
-            if( typeof(fn) !== 'function' ) {
-              throw new Error('Must provide a valid function to debounce');
+            if( typeof(fn) !== &#x27;function&#x27; ) {
+              throw new Error(&#x27;Must provide a valid function to debounce&#x27;);
             }
             if( !maxWait ) { maxWait = wait*10 || 100; }
 
@@ -2059,7 +2134,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
                 cancelTimer();
                 cancelTimer = null;
               }
-              if( start && Date.now() - start > maxWait ) {
+              if( start &amp;&amp; Date.now() - start &gt; maxWait ) {
                 if(!runScheduledForNextTick){
                   runScheduledForNextTick = true;
                   utils.compile(runNow);
@@ -2084,7 +2159,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
               resetTimer();
             }
             debounced.running = function() {
-              return start > 0;
+              return start &gt; 0;
             };
 
             return debounced;
@@ -2092,9 +2167,9 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 
           assertValidRef: function(ref, msg) {
             if( !angular.isObject(ref) ||
-              typeof(ref.ref) !== 'function' ||
-              typeof(ref.ref().transaction) !== 'function' ) {
-              throw new Error(msg || 'Invalid Firebase reference');
+              typeof(ref.ref) !== &#x27;function&#x27; ||
+              typeof(ref.ref().transaction) !== &#x27;function&#x27; ) {
+              throw new Error(msg || &#x27;Invalid Firebase reference&#x27;);
             }
           },
 
@@ -2116,12 +2191,12 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           getPrototypeMethods: function(inst, iterator, context) {
             var methods = {};
             var objProto = Object.getPrototypeOf({});
-            var proto = angular.isFunction(inst) && angular.isObject(inst.prototype)?
+            var proto = angular.isFunction(inst) &amp;&amp; angular.isObject(inst.prototype)?
               inst.prototype : Object.getPrototypeOf(inst);
-            while(proto && proto !== objProto) {
+            while(proto &amp;&amp; proto !== objProto) {
               for (var key in proto) {
-                // we only invoke each key once; if a super is overridden it's skipped here
-                if (proto.hasOwnProperty(key) && !methods.hasOwnProperty(key)) {
+                // we only invoke each key once; if a super is overridden it&#x27;s skipped here
+                if (proto.hasOwnProperty(key) &amp;&amp; !methods.hasOwnProperty(key)) {
                   methods[key] = true;
                   iterator.call(context, proto[key], key, proto);
                 }
@@ -2132,7 +2207,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 
           getPublicMethods: function(inst, iterator, context) {
             utils.getPrototypeMethods(inst, function(m, k) {
-              if( typeof(m) === 'function' && k.charAt(0) !== '_' ) {
+              if( typeof(m) === &#x27;function&#x27; &amp;&amp; k.charAt(0) !== &#x27;_&#x27; ) {
                 iterator.call(context, m, k);
               }
             });
@@ -2150,7 +2225,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           makeNodeResolver:function(deferred){
             return function(err,result){
               if(err === null){
-                if(arguments.length > 2){
+                if(arguments.length &gt; 2){
                   result = Array.prototype.slice.call(arguments,1);
                 }
                 deferred.resolve(result);
@@ -2206,7 +2281,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
               hasPublicProp = true;
               data[k] = utils.deepCopy(v);
             });
-            if(!hasPublicProp && dataOrRec.hasOwnProperty('$value')){
+            if(!hasPublicProp &amp;&amp; dataOrRec.hasOwnProperty(&#x27;$value&#x27;)){
               data.$value = dataOrRec.$value;
             }
             return data;
@@ -2259,14 +2334,14 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
               for (var k in obj) {
                 if (obj.hasOwnProperty(k)) {
                   var c = k.charAt(0);
-                  if( c !== '_' && c !== '$' && c !== '.' ) {
+                  if( c !== &#x27;_&#x27; &amp;&amp; c !== &#x27;$&#x27; &amp;&amp; c !== &#x27;.&#x27; ) {
                     iterator.call(context, obj[k], k, obj);
                   }
                 }
               }
             }
             else if(angular.isArray(obj)) {
-              for(var i = 0, len = obj.length; i < len; i++) {
+              for(var i = 0, len = obj.length; i &lt; len; i++) {
                 iterator.call(context, obj[i], i, obj);
               }
             }
@@ -2274,13 +2349,13 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           },
 
           /**
-           * A utility for retrieving a Firebase reference or DataSnapshot's
-           * key name. This is backwards-compatible with `name()` from Firebase
-           * 1.x.x and `key()` from Firebase 2.0.0+. Once support for Firebase
+           * A utility for retrieving a Firebase reference or DataSnapshot&#x27;s
+           * key name. This is backwards-compatible with &#x60;name()&#x60; from Firebase
+           * 1.x.x and &#x60;key()&#x60; from Firebase 2.0.0+. Once support for Firebase
            * 1.x.x is dropped in AngularFire, this helper can be removed.
            */
           getKey: function(refOrSnapshot) {
-            return (typeof refOrSnapshot.key === 'function') ? refOrSnapshot.key() : refOrSnapshot.name();
+            return (typeof refOrSnapshot.key === &#x27;function&#x27;) ? refOrSnapshot.key() : refOrSnapshot.name();
           },
 
           /**
@@ -2298,25 +2373,25 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
            * @param context {Object} the context from which $toJSON will be called
            * @returns {*} the object converted to JSON for the Firebase.
            */
-           toJSON: function(rec, $toJSON, context) { // this method doesn't work right
+           toJSON: function(rec, $toJSON, context) { // this method doesn&#x27;t work right
              var dat = $toJSON.apply(context, [rec]);
 	     if( !angular.isObject(dat) ) {
                rec = {$value: dat};
                dat = {};
              }
-             if( angular.isDefined(rec.$value) && Object.keys(dat).length === 0 && rec.$value !== null ) {
-               dat['.value'] = rec.$value;
+             if( angular.isDefined(rec.$value) &amp;&amp; Object.keys(dat).length === 0 &amp;&amp; rec.$value !== null ) {
+               dat[&#x27;.value&#x27;] = rec.$value;
              }
-             if( angular.isDefined(rec.$priority) && Object.keys(dat).length > 0 && rec.$priority !== null ) {
-               dat['.priority'] = rec.$priority;
+             if( angular.isDefined(rec.$priority) &amp;&amp; Object.keys(dat).length &gt; 0 &amp;&amp; rec.$priority !== null ) {
+               dat[&#x27;.priority&#x27;] = rec.$priority;
              }
              angular.forEach(dat, function(v,k) {
-               if (k.match(/[.$\[\]#\/]/) && k !== '.value' && k !== '.priority' ) {
-                 throw new Error('Invalid key ' + k + ' (cannot contain .$[]#)');
+               if (k.match(/[.$\[\]#\/]/) &amp;&amp; k !== &#x27;.value&#x27; &amp;&amp; k !== &#x27;.priority&#x27; ) {
+                 throw new Error(&#x27;Invalid key &#x27; + k + &#x27; (cannot contain .$[]#)&#x27;);
                }
                else if( angular.isUndefined(v) ) {
 console.log(dat); console.log(rec);console.log($toJSON);
-                 throw new Error('Key '+k+' was undefined. Cannot pass undefined in JSON. Use null instead.');
+                 throw new Error(&#x27;Key &#x27;+k+&#x27; was undefined. Cannot pass undefined in JSON. Use null instead.&#x27;);
                }
              });
              return dat;
@@ -2333,7 +2408,7 @@ console.log(dat); console.log(rec);console.log($toJSON);
               // this is a query, so we will replace all the elements
               // of this query with the value provided, but not blow away
               // the entire Firebase path
-              ref.once('value', function(snap) {
+              ref.once(&#x27;value&#x27;, function(snap) {
                 snap.forEach(function(ss) {
                   if( !dataCopy.hasOwnProperty(utils.getKey(ss)) ) {
                     dataCopy[utils.getKey(ss)] = null;
@@ -2354,9 +2429,9 @@ console.log(dat); console.log(rec);console.log($toJSON);
               ref.remove(utils.makeNodeResolver(def));
             }
             else {
-              // ref is a query so let's only remove the
+              // ref is a query so let&#x27;s only remove the
               // items in the query and not the entire path
-              ref.once('value', function(snap) {
+              ref.once(&#x27;value&#x27;, function(snap) {
                 var promises = [];
                 snap.forEach(function(ss) {
                   var d = utils.defer();
@@ -2381,7 +2456,7 @@ console.log(dat); console.log(rec);console.log($toJSON);
           /**
            * AngularFire version number.
            */
-          VERSION: '0.0.0',
+          VERSION: &#x27;0.0.0&#x27;,
 
           batchDelay: firebaseBatchDelay,
           allPromises: $q.all.bind($q)
@@ -2395,7 +2470,7 @@ console.log(dat); console.log(rec);console.log($toJSON);
       if( !angular.isObject(data) ) { return data; }
       var out = angular.isArray(data)? [] : {};
       angular.forEach(data, function(v,k) {
-        if(typeof k !== 'string' || k.charAt(0) !== '$') {
+        if(typeof k !== &#x27;string&#x27; || k.charAt(0) !== &#x27;$&#x27;) {
           out[k] = stripDollarPrefixedKeys(v);
         }
       });
@@ -2403,590 +2478,21 @@ console.log(dat); console.log(rec);console.log($toJSON);
     }
 })();
 
-"use strict";
-angular.module('objective-fire')
-.factory('Factories', ["$firebaseObject", "$firebaseArray", "$q", function($firebaseObject, $firebaseArray, $q) {
-  var factories = {
-    objectFactory: function(objectClass, rootRef, objFire) {
-      var obj = {};
-      obj._objectClass = objectClass;
-      obj._rootRef = rootRef;
-      obj._objFire = objFire;
-      var methods = objectClass.objectMethods;
-      for (var param in methods) { // apply methods to prototype
-        if (methods.hasOwnProperty(param)) {
-          obj[param] = methods[param];
-        }
-      }
-      // add objectivefire methods
-      obj.$load = function(name) {
-        var properties = this._objectClass.properties;
-        var ops = properties.objectP;
-        var oaps = properties.arrayP;
-        var deffered = $q.defer();
-        if (typeof name !== "string") {
-          throw "name must be of type string";
-        }
-        if (!this._doLoad[name]) { // if property is already loaded don't do anything
-          // find the actual property definition
-          var property, i;
-          var kind = "";
-          for (i = 0; i < ops.length; i++) {
-            if (ops[i].name === name) {
-              property = ops[i];
-              kind = "op";
-              break;
-            }
-          }
-          for (i = 0; i < oaps.length; i++) {
-            if (oaps[i].name === name) {
-              property = oaps[i];
-              kind = "oap";
-              break;
-            }
-          }
-          this._doLoad[name] = true; // require that the property is loaded
-          var objectClassName, objectClass;
-          if (this._loaded) { // if already loaded then manually load the property
-            if (kind === "op") {
-              objectClassName = property.objectClassName;
-              objectClass = objFire.getByName(objectClassName);
-              var obj = objectClass.instance(this[name]); // create the object
-              this[name] = obj;
-              this._isLoaded[name] = true;
-              deffered.resolve(this[name]);
-            } else if (kind === "oap") {
-              objectClassName = property.objectClassName;
-              objectClass = objFire.getByName(objectClassName);
-              var Factory = factories.arrayFactory(objectClass);
-              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
-              this[name] = arr;
-              this._isLoaded[name] = true;
-              deffered.resolve(this[name]);
-            }
-          } else { // if we haven't loaded, it will be loaded when the object is loaded
-            // this means that simply changing this._doLoad[name] will load it
-            // make sure it is actually loaded in the object loading (could not due to synchronization issues (I think))
-            this.$loaded().then(function(self) {
-              if (!self._isLoaded[name]) { // if for some reason not loaded manually load the property
-                if (kind === "op") {
-                  objectClassName = property.objectClassName;
-                  objectClass = objFire.getByName(objectClassName);
-                  var obj = objectClass.instance(self[name]); // create the object
-                  self[name] = obj;
-                } else if (kind === "oap") {
-                  objectClassName = property.objectClassName;
-                  objectClass = objFire.getByName(objectClassName);
-                  var Factory = factories.arrayFactory(objectClass);
-                  var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
-                  self[name] = arr;
-                }
-              }
-              self._isLoaded[name] = true;
-              deffered.resolve(self[name]);
-            });
-          }
-        } else {
-          deffered.resolve(this[name]);
-        }
-        return deffered.promise;
-      };
-      obj.$toJSON = function(rec) {
-        var properties = this._objectClass.properties;
-        var pps = properties.primitive;
-        var ops = properties.objectP;
-        var oaps = properties.arrayP;
-        var data = {}, i, name;
-        for (i = 0; i < pps.length; i++) { // save primitives
-          name = pps[i].name;
-          data[name] = rec[name];
-        }
-        for (i = 0; i < ops.length; i++) { // save object references
-          name = ops[i].name;
-          if (typeof rec[name] === "object") {
-            data[name] = rec[name].$id; // save just the id of the object
-          } else {
-            data[name] = rec[name];
-          }
-        }
-        for (i = 0; i < oaps.length; i++) { // save object array references
-          name = oaps[i].name;
-          if (typeof rec[name] === "object") {
-            data[name] = [];
-            for (var j = 0; j < rec[name].length; j++) {
-              data[name][j] = rec[name][j].$id; // save just the id of each element in the array
-            }
-          } else {
-            data[name]= rec[name]; // if it is not object it is just the reference so save the reference back
-          }
-        }
-        for (var param in data) { // sanatize firebase input
-          if (data[param] === undefined) {
-            data[param] = null;
-          }
-        }
-        return data; // return the data that we made
-      };
-      obj.$fromJSON = function(snap) {
-        var properties = this._objectClass.properties;
-        var pps = properties.primitive;
-        var ops = properties.objectP;
-        var oaps = properties.arrayP;
-        var data = snap.val();
-        if (data === null) {
-          data = {};
-        }
-        var newRec = {}, i, name;
-        for (i = 0; i < pps.length; i++) { // replace all primitive properties
-          name = pps[i].name;
-          newRec[name] = data[name]; // simply replace primitives
-        }
-        var objectClassName, objectClass;
-        for (i = 0; i < ops.length; i++) { // replace all object properties
-          name = ops[i].name;
-          if (this._doLoad[name]) { // only load property if it should be
-            // only create a new object if the object has changed
-            if (!this[name] || this[name].$id !== data[name]) { // in the firebase only the object reference is stored so if the reference isn't the same as the id of the existing object they must be different
-              objectClassName = ops[i].objectClassName;
-              objectClass = this._objFire.getByName(objectClassName);
-              var obj = objectClass.instance(data[name]);
-              this._isLoaded[name] = true;
-              newRec[name] = obj;
-            } else {
-              newRec[name] = this[name];
-            }
-          } else {
-            newRec[name] = data[name]; // just save the reference if not supposed to load it
-          }
-        }
-        for (i = 0; i < oaps.length; i++) { // replace all object array properties
-          name = oaps[i].name;
-          if (this._doLoad[name]) {
-            if (!this._isLoaded[name]) { // arrays actually must only be loaded once
-              objectClassName = oaps[i].objectClassName;
-              objectClass = this._objFire.getByName(objectClassName);
-              var Factory = factories.arrayFactory(objectClass);
-              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name)); // we are obtaining a constructor by a function with parameters then calling that function
-              this._isLoaded[name] = true;
-              newRec[name] = arr;
-            } else {
-              newRec[name] = this[name]; // pull the object of the current object if it exists
-            }
-          } else {
-            newRec[name] = data[name]; // just save the reference if not supposed to load it
-          }
-        }
-        return newRec;
-      };
-      return $firebaseObject.$extend(obj);
-    },
-    arrayFactory: function(fireObject) {
-      return $firebaseArray.$extend({
-        // things that must be accessible
-        _fireObject: fireObject,
-        // methods to override
-        $toJSON: function(rec) {
-          if (rec.$id) {
-            return rec.$id;
-          } else {
-            return null;
-          } // a record should be saved by its reference
-        },
-        $fromJSON: function(snap) {
-          var ob = this._fireObject.instance(snap.val());
-          return ob; // create an object from the snapshot
-        }
-      });
-    }
-  };
-  return factories;
-}]);
-
-"use strict";
-angular.module('objective-fire')
-.factory('FireObject', ["Factories", function(Factories) {
-  /**
-   * Internally used "class" of objects - it has methods for initiating new or
-   * existing objects of that class in the Firebase
-   *  This class should not be created directly! (Unless you know what you are doing)
-   * @class FireObject
-   * @constructor
-   * @param objectClass {ObjectClass} The class that this FireObject makes.
-   * @param rootRef {Firebase} Firebase object that is the root of the Firebase.
-   * @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject.
-   */
-  function FireObject(objectClass, rootRef, objFire) {
-    this.objectClass = objectClass;
-    this.rootRef = rootRef;
-    this.objFire = objFire;
-    // the extended angularfire object factory
-    this.Factory = Factories.objectFactory(objectClass, rootRef, objFire);
-  }
-  /**
-   * Creates a new instance of the class. It invokes the classes' constructor
-   * with the arguments provided to this method. If no constructor is provided
-   * an empty object will be created.
-   * Any properties created by the constructor will be $save (d) to the Firebase.
-   * @method new
-   * @return New instance of the class
-   */
-  FireObject.prototype.new = function() {
-    // create a new location in the Firebase
-    var ref = this.rootRef.child(this.objectClass.name).push();
-    var obj = new this.Factory(ref); // create an object at that location
-    // private properties of the object
-    obj._loaded = false; // private property that states if the object has been loaded
-    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
-      obj._loaded = true;
-    });
-    obj._isLoaded = {}; // list of properties that are loaded
-    obj._doLoad = {}; // list of properties that should be loaded
-    // call constructor if it exists
-    if (this.objectClass.objectConstructor !== null && typeof this.objectClass.objectConstructor === "function") {
-      // call the object constructor with the correct "this" and pass the arguments
-      this.objectClass.objectConstructor.apply(obj, arguments);
-    } else {
-      throw "new may only be called for classes that have constructors";
-    }
-    // tell the object that all changed properties have been loaded
-
-    // this information should not be visible to users of objectivefire
-    var properties = this.objectClass.properties;
-    var ops = properties.objectP;
-    var oaps = properties.arrayP;
-    var i, name;
-    // check any object properties and set them to be loaded
-    for (i = 0; i < ops.length; i++) {
-      name = ops[i].name;
-      if (name in obj) {
-        obj._isLoaded[name] = true;
-        obj._doLoad[name] = true;
-      }
-    }
-    // check any object array properties and set them to be loaded
-    for (i = 0; i < oaps.length; i++) {
-      name = oaps[i].name;
-      if (name in obj) {
-        obj._isLoaded[name] = true;
-        obj._doLoad[name] = true;
-      }
-    }
-    obj.$save(); // save the new constructed object
-    return obj;
-  };
-  /**
-   * Creates an instance of the class from data existing in the Firebase.
-   * Any parameters passed after id will be interpreted as properties to load.
-   * Ex: myObject.instance("some_firebase_id", "some_property", "some_other_property");
-   * This would cause myObject to automatically $load() "some_property" and "some_other_property"
-   * @method instance
-   * @param id {String} The id of this object in the Firebase. (it's key)
-   * @return Existing instance of the class
-   */
-  FireObject.prototype.instance = function(id) {
-    // get reference at this object location
-    var ref = this.rootRef.child(this.objectClass.name).child(id);
-    var toLoad = Array.prototype.slice.call(arguments, [1]); // pull all arguments except id
-    var obj = new this.Factory(ref); // create the object
-    // private properties again
-    obj._loaded = false; // private property that states if the object has been loaded
-    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
-      obj._loaded = true;
-    });
-    obj._isLoaded = {};
-    obj._doLoad = {};
-    for (var i = 0; i < toLoad.length; i++) {
-      if (typeof toLoad[i] !== "string") {
-        throw "typeof properties to load must be string";
-      } else {
-        obj._doLoad[toLoad[i]] = true; // set the property to be loaded
-      }
-    }
-    return obj;
-  };
-  return FireObject;
-}])
-;
-
-"use strict";
-angular.module('objective-fire')
-.factory('ObjectClass', function() {
-  /**
-   * "Class" of objects. Similar to a class in other programming languages like java.
-   * It defines the constructor, methods, and properties of any object of the class.
-   * @class ObjectClass
-   * @constructor
-   * @param name {String} The name by which this class will be referenced.
-   * throughout ObjectiveFire.
-   * @param objectConstructor {Function} The constructor that will be used to
-   * create instances of this class. May be null.
-   * @param objectMethods {Object with Function} The methods that will be
-   * available on objects of this class. May be null.
-   * @param properties {Properties} The properties that objects of this class
-   * will have. May not be null.
-   */
-  function ObjectClass(name, objectConstructor, objectMethods, properties) {
-    if (arguments.length !== 4) {
-      throw "ObjectClass constructor may only be invoked with all parameters defined";
-    }
-    if (!this instanceof ObjectClass) { // failsafe for accidental function call instead of constructor call
-      return new ObjectClass(name, objectConstructor, objectMethods, properties);
-    }
-    if(typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    if (typeof objectConstructor !== "function" && objectConstructor !== null) {
-      throw "objectConstructor must be of type function or null";
-    }
-    if (typeof objectMethods !== "object" && objectMethods !== null) {
-      throw "objectMethods must be of type object or null";
-    }
-    if (typeof properties !== "object" || properties === null) {
-      throw "properties must be of type object or null";
-    }
-    this.name = name;
-    this.objectConstructor = objectConstructor;
-    this.objectMethods = objectMethods;
-    this.properties = properties;
-  }
-  return ObjectClass;
-});
-
-"use strict";
-angular.module('objective-fire')
-.factory('ObjectiveFire', ["FireObject", function(FireObject, Properties, ObjectClass) {
-  /**
-   * All classes should be registered in an instance of ObjectiveFire created at
-   * your Firebase.
-   * @class ObjectiveFire
-   * @constructor Creates instance of ObjectiveFire at the Firebase reference.
-   * @param ref {Firebase} Firebase object at the URL that is your Firebase.
-   * Provide a Firebase object - NOT a URL. This Firebase object may be a
-   * location in the Firebase - it doesn't have to be at the root. Doing
-   * as such will cause all objectivefire operations to be done from only within
-   * that location in the Firebase.
-   */
-  function ObjectiveFire(ref) {
-    if (!this instanceof ObjectiveFire) {
-      return new ObjectiveFire(ref);
-    }
-    this.ref = ref;
-    // registry of objects
-    this.objects = {};
-  }
-  ObjectiveFire.prototype = {
-    /**
-     * Registers a class from an ObjectClass object.
-     * @method registerFromObjectClass
-     * @param objectClass {ObjectClass} The ObjectClass from which to create the class.
-     * @return The registered class.
-     */
-    registerFromObjectClass: function(objectClass) {
-      this.objects[objectClass.name] = new FireObject(objectClass, this.ref, this);
-      return this;
-    },
-    /**
-     * Registers a class from an object that follows a specific format.
-     * The object must provided in this format.
-     ```
-     *     // TODO: fix the broken formatting in the documentation
-     *     {
-     *       name: name, // see ObjectClass documentation
-     *       objectConstructor: objectConstructor, // see ObjectClass documentation
-     *       objectMethods: { // see ObjectClass documentation
-     *         a_method: function() {},
-     *         another_method: function() {}
-     *       },
-     *       properties: { // see ObjectClass documentation
-     *         a_primitive_property: {type: "primitive", name: "a_name"}, // these must match exactly
-     *         an_object_property: {type: "object", name: "a_name", objectClassName: "a_class_name"},
-     *         an_object_array_property: {type: "objectArray", name: "a_name", objectClassName: "a_class_name"}
-     *       }
-     *     }
-     ```
-     * @method registerFromObject
-     * @param object The object from which to create the class.
-     * @return The registered class.
-     */
-    registerFromObject: function(object) {
-      var properties = new Properties(); // find proeprties
-      for (var param in object.properties) {
-        if (object.properties.hasOwnProperty(param)) {
-          var cur = object.properties[param];
-          var type = cur.type;
-          if (type === "primitive") {
-            properties.addPrimitiveProperty(cur.name);
-          } else if (type === "object") {
-            properties.addObjectProperty(cur.name, cur.objectClassName);
-          } else if (type === "objectArray") {
-            properties.addObjectArrayProperty(cur.name, cur.objectClassName);
-          }
-        }
-      }
-      var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
-      this.objects[object.name] = theClass;
-      return theClass;
-    },
-    /**
-     * Gets registered class by name.
-     * @method getByName
-     * @param name {String} The name of the class.
-     * @return The class for the specified name.
-     */
-    getByName: function(name) {
-      return this.objects[name];
-    }
-  };
-  return ObjectiveFire;
-}]);
-
-"use strict";
-angular.module('objective-fire')
-.factory("ObjectProperty", function() {
-  /**
-   * Property that is an object.
-   * @class ObjectProperty
-   * @constructor
-   * @param name {String} The name of this property.
-   * @param objectClassName {String} The name of the class of object this property is.
-   */
-  function ObjectProperty(name, objectClassName) {
-    if (!this instanceof ObjectProperty) {
-      return new ObjectProperty(name, objectClassName);
-    }
-    if (typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    /**
-     * The name of this property.
-     * @property name
-     * @type {String}
-     */
-    this.name = name;
-    /**
-     * The name of the class of object this property is.
-     * @property objectClassName
-     * @type {String}
-     */
-    this.objectClassName = objectClassName;
-  }
-  return ObjectProperty;
-})
-.factory("ObjectArrayProperty", function() {
-  /**
-   * Property that is an array of objects.
-   * @class ObjectArrayProperty
-   * @constructor
-   * @param name {String} The name of this property.
-   * @param objectClassName {String} The name of the class of object this property is.
-   */
-  function ObjectArrayProperty(name, objectClassName) {
-    if (!this instanceof ObjectArrayProperty) {
-      return new ObjectArrayProperty(name, objectClassName);
-    }
-    if (typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    /**
-     * The name of this property.
-     * @property name
-     * @type {String}
-     */
-    this.name = name;
-    /**
-     * The name of the class of object this property is.
-     * @property objectClassName
-     * @type {String}
-     */
-    this.objectClassName = objectClassName;
-  }
-  return ObjectArrayProperty;
-})
-.factory("PrimitiveProperty", function() {
-  /**
-   * Property that is raw data.
-   * @class PrimitiveProperty
-   * @constructor
-   * @param name {String} The name of this property.
-   */
-  function PrimitiveProperty(name) {
-    if (!this instanceof PrimitiveProperty) {
-      return new PrimitiveProperty(name);
-    }
-    if (typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    /**
-     * The name of this property.
-     * @property name
-     * @type String
-     */
-    this.name = name;
-  }
-  return PrimitiveProperty;
-})
-.factory("Properties", ["PrimitiveProperty", "ObjectProperty", "ObjectArrayProperty", function(PrimitiveProperty, ObjectProperty, ObjectArrayProperty) {
-  /**
-   * Group of properties.
-   * @class Properties
-   * @constructor
-   */
-  function Properties() {
-    if (!this instanceof Properties) {
-      return new Properties();
-    }
-    /**
-     * Array of all the PrimtiveProperty.
-     * @property primitive
-     * @type Array of PrimitiveProperty
-     */
-    this.primitive = [];
-    /**
-     * Array of all the ObjectProperty.
-     * @property objectP
-     * @type Array of ObjectProperty
-     */
-    this.objectP = [];
-    /**
-     * Array of all the ObjectArrayProperty.
-     * @property arrayP
-     * @type Array of ObjectArrayProperty
-     */
-    this.arrayP = [];
-  }
-  Properties.prototype = {
-    /**
-     * Adds a property to this group of properties.
-     * @method addProperty
-     * @param property {PrimitiveProperty || ObjectProperty || ObjectArrayProperty} The property to be added.
-     * @return this
-     * @chainable
-     */
-    addProperty: function(property) {
-      if (property instanceof PrimitiveProperty) {
-        this.primitive.push(property);
-      } else if (property instanceof ObjectProperty) {
-        this.objectP.push(property);
-      } else if (property instanceof ObjectArrayProperty) {
-        this.arrayP.push(property);
-      } else {
-        throw "property must be of type PrimitiveProperty || ObjectProperty || ObjectArrayProperty";
-      }
-      return this;
-    },
-    // TODO: doc these and test them
-    addPrimitiveProperty: function(name) {
-      this.primitive.push(new PrimitiveProperty(name));
-      return this;
-    },
-    addObjectProperty: function(name, objectClassName) {
-      this.objectP.push(new ObjectProperty(name, objectClassName));
-      return this;
-    },
-    addObjectArrayProperty: function(name, objectClassName) {
-      this.arrayP.push(new ObjectArrayProperty(name, objectClassName));
-      return this;
-    }
-  };
-  return Properties;
-}]);
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

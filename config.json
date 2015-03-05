@@ -1,5 +1,6 @@
 {
   "src": "src/",
   "dist": "dist/",
-  "tests": "tests/"
+  "tests": "tests/",
+  "docs": "docs/"
 }
