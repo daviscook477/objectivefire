@@ -31,7 +31,7 @@ angular.module('objective-fire')
     if (typeof objectMethods !== "object" && objectMethods !== null) {
       throw "objectMethods must be of type object or null";
     }
-    if (typeof properties !== "object" || properties === null) {
+    if (typeof properties !== "object" && properties !== null) {
       throw "properties must be of type object or null";
     }
     if (properties === null) {
