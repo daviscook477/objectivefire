@@ -43,14 +43,14 @@ describe('test', function() {
   var userClass = new ObjectClass("user", userConstructor, userMethods, userProperties);
 
   objFire = new ObjectiveFire(new Firebase("https://objective-fire.firebaseio.com"));
-  objFire.registerObjectClass(userClass);
-  objFire.registerObjectClass(dogClass);
+  objFire.registerFromObjectClass(userClass);
+  objFire.registerFromObjectClass(dogClass);
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
   });
 
   it("will obtain data from the firebase", function(done) {
 console.log("iran");
-    var user = objFire.getObjectClass("user");
+    var user = objFire.getByName("user");
     var myUser = user.instance("user:1");
     function setTimeout1() {
       setTimeout(function() {
@@ -71,7 +71,7 @@ try{
   });
 
   it("will do stuff", function(done) {
-    var user = objFire.getObjectClass("user");
+    var user = objFire.getByName("user");
     var myUser = user.new("A", "B");
     var ref = new Firebase("https://objective-fire.firebaseio.com");
     var ref2 = ref.child("user").child(myUser.$id);
@@ -84,8 +84,8 @@ try{
   });
 
   it("will do stuff #2", function(done) {
-    var user = objFire.getObjectClass("user");
-    var dog = objFire.getObjectClass("dog");
+    var user = objFire.getByName("user");
+    var dog = objFire.getByName("dog");
     var myUser = user.new("A", "B");
     myUser.$load("dogs");
     myUser.$loaded().then(function() {

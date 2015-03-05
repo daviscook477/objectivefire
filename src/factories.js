@@ -16,7 +16,6 @@ angular.module('objective-fire')
         var pps = properties.primitive;
         var ops = properties.objectP;
         var oaps = properties.arrayP;
-        //TODO/WARNING THIS METHOD DOESN'T WORK! IT SIMPLY COPIES OLD CODE FOR REFERENCE
         var deffered = $q.defer();
         if (typeof name !== "string") {
           throw "name must be of type string";
@@ -43,14 +42,14 @@ angular.module('objective-fire')
           if (this._loaded) { // if already loaded then manually load the property
             if (kind === "op") {
               var objectClassName = property.objectClassName;
-              var objectClass = objFire.getObjectClass(objectClassName);
+              var objectClass = objFire.getByName(objectClassName);
               var obj = objectClass.instance(this[name]); // create the object
               this[name] = obj;
               this._isLoaded[name] = true;
               deffered.resolve(this[name]);
             } else if (kind === "oap") {
               var objectClassName = property.objectClassName;
-              var objectClass = objFire.getObjectClass(objectClassName);
+              var objectClass = objFire.getByName(objectClassName);
               var Factory = factories.arrayFactory(objectClass);
               var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
               this[name] = arr;
@@ -65,12 +64,12 @@ angular.module('objective-fire')
               if (!self._isLoaded[name]) { // if for some reason not loaded manually load the property
                 if (kind === "op") {
                   var objectClassName = property.objectClassName;
-                  var objectClass = objFire.getObjectClass(objectClassName);
+                  var objectClass = objFire.getByName(objectClassName);
                   var obj = objectClass.instance(self[name]); // create the object
                   self[name] = obj;
                 } else if (kind === "oap") {
                   var objectClassName = property.objectClassName;
-                  var objectClass = objFire.getObjectClass(objectClassName);
+                  var objectClass = objFire.getByName(objectClassName);
                   var Factory = factories.arrayFactory(objectClass);
                   var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
                   self[name] = arr;
@@ -141,7 +140,7 @@ angular.module('objective-fire')
             // only create a new object if the object has changed
             if (!this[name] || this[name].$id !== data[name]) { // in the firebase only the object reference is stored so if the reference isn't the same as the id of the existing object they must be different
               var objectClassName = ops[i].objectClassName;
-              var objectClass = this._objFire.getObjectClass(objectClassName);
+              var objectClass = this._objFire.getByName(objectClassName);
               var obj = objectClass.instance(data[name]);
               this._isLoaded[name] = true;
               newRec[name] = obj;
@@ -157,7 +156,7 @@ angular.module('objective-fire')
           if (this._doLoad[name]) {
             if (!this._isLoaded[name]) { // arrays actually must only be loaded once
               var objectClassName = oaps[i].objectClassName;
-              var objectClass = this._objFire.getObjectClass(objectClassName);
+              var objectClass = this._objFire.getByName(objectClassName);
               var Factory = factories.arrayFactory(objectClass);
               var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name)); // we are obtaining a constructor by a function with parameters then calling that function
               this._isLoaded[name] = true;

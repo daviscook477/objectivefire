@@ -3,59 +3,51 @@ angular.module('objective-fire')
   /**
   Object created from class that has methods for creating instances of that class
   @class FireObject
-  @constructor
+  @constructor This class should not be created directly
   @param objectClass {ObjectClass} The class that this FireObject makes
   @param rootRef {Firebase} Firebase object that is the root of the Firebase
   @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject
   */
   function FireObject(objectClass, rootRef, objFire) {
-    /**
-    The class that this FireObject makes
-    @property objectClass
-    @type ObjectClass
-    */
     this.objectClass = objectClass;
-    /**
-    Firebase object that is the root of the Firebase
-    @property rootRef
-    @type Firebase
-    */
     this.rootRef = rootRef;
-    /**
-    Firebase object that is the root of the Firebase
-    @property objFire
-    @type ObjectiveFire
-    */
     this.objFire = objFire;
-    // not documented because it is private
+    // the extended angularfire object factory
     this.Factory = Factories.objectFactory(objectClass, rootRef, objFire);
   }
   /**
-  Creates a new instance of the class.
-  Important: The parameters passed to this method should be those for the class's constructor
-  @method new
-  @return New instance of the class
-  */
+   * Creates a new instance of the class. It invokes the classes' constructor
+   * with the arguments provided to this method. If no constructor is provided
+   * an empty object will be created.
+   * Any properties created by the constructor will be $save (d) to the Firebase.
+   * @method new
+   * @return New instance of the class
+   */
   FireObject.prototype.new = function() {
-    // obtain the angularfire object
-    var ref = this.rootRef.child(this.objectClass.name).push(); // create a new location for the object we are making
-    var obj = new this.Factory(ref);
-    // construct the new instance
+    // create a new location in the Firebase
+    var ref = this.rootRef.child(this.objectClass.name).push();
+    var obj = new this.Factory(ref); // create an object at that location
+    // private properties of the object
     obj._loaded = false; // private property that states if the object has been loaded
     obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
       obj._loaded = true;
     });
-    obj._isLoaded = {};
-    obj._doLoad = {}; // this is private property that determines if an object property should be loaded
+    obj._isLoaded = {}; // list of properties that are loaded
+    obj._doLoad = {}; // list of properties that should be loaded
+    // call constructor if it exists
     if (this.objectClass.objectConstructor !== null && typeof this.objectClass.objectConstructor === "function") {
-      this.objectClass.objectConstructor.apply(obj, arguments); // call the constructor for new objects
+      // call the object constructor with the correct "this" and pass the arguments
+      this.objectClass.objectConstructor.apply(obj, arguments);
     } else {
       throw "new may only be called for classes that have constructors";
     }
     // tell the object that all changed properties have been loaded
+
+    // this information should not be visible to users of objectivefire
     var properties = this.objectClass.properties;
     var ops = properties.objectP;
     var oaps = properties.arrayP;
+    // check any object properties and set them to be loaded
     for (var i = 0; i < ops.length; i++) {
       var name = ops[i].name;
       if (name in obj) {
@@ -63,6 +55,7 @@ angular.module('objective-fire')
         obj._doLoad[name] = true;
       }
     }
+    // check any object array properties and set them to be loaded
     for (var i = 0; i < oaps.length; i++) {
       var name = oaps[i].name;
       if (name in obj) {
@@ -74,22 +67,33 @@ angular.module('objective-fire')
     return obj;
   };
   /**
-  Creates an instance of the class from data existing in the Firebase
-  @method instance
-  @param id {String} The id of this object in the Firebase (it's key)
-  @return Existing instance of the class
-  */
+   * Creates an instance of the class from data existing in the Firebase.
+   * Any parameters passed after id will be interpreted as properties to load.
+   * Ex: myObject.instance("some_firebase_id", "some_property", "some_other_property");
+   * This would cuase myObject to automatically $load() "some_property" and "some_other_property"
+   * @method instance
+   * @param id {String} The id of this object in the Firebase (it's key)
+   * @return Existing instance of the class
+   */
   FireObject.prototype.instance = function(id) {
-    // obtain the angularfire object
+    // get reference at this object location
     var ref = this.rootRef.child(this.objectClass.name).child(id);
-    var obj = new this.Factory(ref);
-    // construct the existing instance
+    var toLoad = Array.prototype.slice.call(arguments, [1]); // pull all arguments except id
+    var obj = new this.Factory(ref); // create the object
+    // private properties again
     obj._loaded = false; // private property that states if the object has been loaded
     obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
       obj._loaded = true;
     });
     obj._isLoaded = {};
-    obj._doLoad = {}; // this is private property that determines if an object property should be loaded
+    obj._doLoad = {};
+    for (var i = 0; i < toLoad.length; i++) {
+      if (typeof toLoad[i] !== "string") {
+        throw "typeof properties to load must be string";
+      } else {
+        obj._doLoad[toLoad[i]] = true; // set the property to be loaded
+      }
+    }
     return obj;
   };
   return FireObject;
