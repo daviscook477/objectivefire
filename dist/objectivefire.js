@@ -2624,14 +2624,12 @@ angular.module('objective-fire')
    * @return New instance of the class
    */
   FireObject.prototype.new = function() {
+    console.log("creating new", this.objectClass.name);
     // create a new location in the Firebase
     var ref = this.rootRef.child(this.objectClass.name).push();
+    console.log("at firebase rec", ref.toString());
     var obj = new this.Factory(ref); // create an object at that location
     // private properties of the object
-    obj._loaded = false; // private property that states if the object has been loaded
-    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
-      obj._loaded = true;
-    });
     obj._isLoaded = {}; // list of properties that are loaded
     obj._doLoad = {}; // list of properties that should be loaded
     // call constructor if it exists
@@ -2664,6 +2662,7 @@ angular.module('objective-fire')
         obj._doLoad[name] = true;
       }
     }
+    obj._loaded = true; // new objects are always loaded
     obj.$save(); // save the new constructed object
     return obj;
   };
@@ -2755,7 +2754,7 @@ angular.module('objective-fire')
 
 "use strict";
 angular.module('objective-fire')
-.factory('ObjectiveFire', ["FireObject", "Properties", "ObjectClass", function(FireObject, Properties, ObjectClass) {
+.factory('ObjectiveFire', ["FireObject", "Properties", "ObjectClass", "Factories", function(FireObject, Properties, ObjectClass, Factories) {
   /**
    * All classes should be registered in an instance of ObjectiveFire created at
    * your Firebase.
@@ -2777,6 +2776,7 @@ angular.module('objective-fire')
     this.ref = ref;
     // registry of objects
     this.objects = {};
+    this.arrayFactories = {};
   }
   ObjectiveFire.prototype = {
     /**
@@ -2788,6 +2788,7 @@ angular.module('objective-fire')
     registerFromObjectClass: function(objectClass) {
       var theFireObject = new FireObject(objectClass, this.ref, this);
       this.objects[objectClass.name] = theFireObject;
+      this.arrayFactories[objectClass.name] = Factories.arrayFactory(theFireObject);
       return theFireObject;
     },
     /**
@@ -2834,9 +2835,16 @@ angular.module('objective-fire')
           properties.addObjectArrayProperty(prop.name, prop.objectClassName);
         }
       }
+      if (!object.objectConstructor) {
+        object.objectConstructor = null;
+      }
+      if (!object.objectMethods) {
+        object.objectMethods = null;
+      }
       var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
       var theFireObject = new FireObject(theClass, this.ref, this);
       this.objects[object.name] = theFireObject;
+      this.arrayFactories[object.name] = Factories.arrayFactory(theFireObject);
       return theFireObject;
     },
     /**
@@ -2847,6 +2855,17 @@ angular.module('objective-fire')
      */
     getByName: function(name) {
       return this.objects[name];
+    },
+    /**
+     * Gets an array factory for the class specified by name/
+     * @method getArrayFactory
+     * @param name {String} The name of the class.
+     * @return {$firebaseArray} An extended $firebaseArray factory for the specified class.
+     * The constructor is returned so in order to create an instance it should
+     * be invoked with new.
+     */
+    getArrayFactory: function(name) {
+      return this.arrayFactories[name];
     }
   };
   return ObjectiveFire;

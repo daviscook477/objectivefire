@@ -1,6 +1,6 @@
 "use strict";
 angular.module('objective-fire')
-.factory('ObjectiveFire', ["FireObject", "Properties", "ObjectClass", function(FireObject, Properties, ObjectClass) {
+.factory('ObjectiveFire', ["FireObject", "Properties", "ObjectClass", "Factories", function(FireObject, Properties, ObjectClass, Factories) {
   /**
    * All classes should be registered in an instance of ObjectiveFire created at
    * your Firebase.
@@ -22,6 +22,7 @@ angular.module('objective-fire')
     this.ref = ref;
     // registry of objects
     this.objects = {};
+    this.arrayFactories = {};
   }
   ObjectiveFire.prototype = {
     /**
@@ -33,6 +34,7 @@ angular.module('objective-fire')
     registerFromObjectClass: function(objectClass) {
       var theFireObject = new FireObject(objectClass, this.ref, this);
       this.objects[objectClass.name] = theFireObject;
+      this.arrayFactories[objectClass.name] = Factories.arrayFactory(theFireObject);
       return theFireObject;
     },
     /**
@@ -88,6 +90,7 @@ angular.module('objective-fire')
       var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
       var theFireObject = new FireObject(theClass, this.ref, this);
       this.objects[object.name] = theFireObject;
+      this.arrayFactories[object.name] = Factories.arrayFactory(theFireObject);
       return theFireObject;
     },
     /**
@@ -98,6 +101,17 @@ angular.module('objective-fire')
      */
     getByName: function(name) {
       return this.objects[name];
+    },
+    /**
+     * Gets an array factory for the class specified by name/
+     * @method getArrayFactory
+     * @param name {String} The name of the class.
+     * @return {$firebaseArray} An extended $firebaseArray factory for the specified class.
+     * The constructor is returned so in order to create an instance it should
+     * be invoked with new.
+     */
+    getArrayFactory: function(name) {
+      return this.arrayFactories[name];
     }
   };
   return ObjectiveFire;

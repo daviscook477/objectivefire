@@ -2,26 +2,24 @@ describe('Objects created by Factories', function() {
 
   // ALL OF THESE TESTS REQUIRE FIREBASE TO RUN - THEY ARE BASICALLY INTEGRATION TESTS
 
-  var FireObject, ObjectiveFire, ObjectClass, myObjFire, $timeout, Properties;
-  inject(function(_$timeout_) {
-    $timeout = _$timeout_;
-  });
+  var FireObject, ObjectiveFire, ObjectClass, myObjFire, Properties, $timeout;
   var timer = function() {
     setInterval(function() {
       try {$timeout.flush();}catch(err){}
 
       timer();
-    }, 100);
+    }, 50);
   };
   timer();
 
   beforeEach(function() {
     module('objective-fire');
-    inject(function (_FireObject_, _ObjectiveFire_, _ObjectClass_, _Properties_) {
+    inject(function (_FireObject_, _ObjectiveFire_, _ObjectClass_, _Properties_, _$timeout_) {
       FireObject = _FireObject_;
       ObjectiveFire = _ObjectiveFire_;
       ObjectClass = _ObjectClass_;
       Properties = _Properties_;
+      $timeout = _$timeout_;
     });
     myObjFire = new ObjectiveFire(new Firebase("https://objective-fire.firebaseio.com/"));
     myObjFire.registerFromObject({
@@ -50,7 +48,7 @@ describe('Objects created by Factories', function() {
         this.name=name;
       }, {
         addMessage: function(msg) {
-          this.messages.$add(msg);
+          return this.messages.$add(msg);
         }
       }, new Properties().addPrimitiveProperty("name").addObjectArrayProperty("messages", "message")));
     /*myObjFire.registerFromObject({ // ISSUE!!! registerFromObject doesn't store stuff in the firebase!!!
@@ -81,21 +79,23 @@ describe('Objects created by Factories', function() {
     });*/
   });
 
-  // IDEA!! There should be an array factory created for each object type and they can be obtained from the ObjectiveFire
-
   it('should work', function(done) {
     var user = myObjFire.getByName("user");
     var me = user.new("Davis");
     var msg = myObjFire.getByName("message");
     var myMSG = msg.new("test msg", me);
     me.$load("messages");
-    me.addMessage(myMSG);
-    console.log(me);
+    me.addMessage(myMSG).then(function() {
+      me.$save().then(function() {
+        done();
+      });
+    });
   });
 
   it('does stuff', function(done) {
     var user = myObjFire.getByName("user");
     var me = user.new("Davis");
+    done();
   });
 
 });
