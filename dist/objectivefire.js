@@ -2815,21 +2815,21 @@ angular.module('objective-fire')
     registerFromObject: function(object) {
       var properties = new Properties(); // find properties
       var i, prop;
-      if (properties.primitive) {
-        for (i = 0; i < properties.primitive.length; i++) {
-          prop = properties.primitive[i];
+      if (object.properties.primitive) {
+        for (i = 0; i < object.properties.primitive.length; i++) {
+          prop = object.properties.primitive[i];
           properties.addPrimitiveProperty(prop.name);
         }
       }
-      if (properties.objectP) {
-        for (i = 0; i < properties.objectP.length; i++) {
-          prop = properties.objectP[i];
+      if (object.properties.objectP) {
+        for (i = 0; i < object.properties.objectP.length; i++) {
+          prop = object.properties.objectP[i];
           properties.addObjectProperty(prop.name, prop.objectClassName);
         }
       }
-      if (properties.arrayP) {
-        for (i = 0; i < properties.arrayP.length; i++) {
-          prop = properties.arrayP[i];
+      if (object.properties.arrayP) {
+        for (i = 0; i < object.properties.arrayP.length; i++) {
+          prop = object.properties.arrayP[i];
           properties.addObjectArrayProperty(prop.name, prop.objectClassName);
         }
       }

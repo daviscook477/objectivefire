@@ -100,7 +100,7 @@ angular.module(&#x27;objective-fire&#x27;)
    */
   function FireObject(objectClass, rootRef, objFire) {
     if (typeof objectClass !== &quot;object&quot;) {
-      throw &quot;objectClass must be of type ObjectClass&quot;;
+      throw new Error(&quot;objectClass must be of type ObjectClass&quot;);
     }
     this.objectClass = objectClass;
     this.rootRef = rootRef;
@@ -121,10 +121,6 @@ angular.module(&#x27;objective-fire&#x27;)
     var ref = this.rootRef.child(this.objectClass.name).push();
     var obj = new this.Factory(ref); // create an object at that location
     // private properties of the object
-    obj._loaded = false; // private property that states if the object has been loaded
-    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
-      obj._loaded = true;
-    });
     obj._isLoaded = {}; // list of properties that are loaded
     obj._doLoad = {}; // list of properties that should be loaded
     // call constructor if it exists
@@ -132,7 +128,7 @@ angular.module(&#x27;objective-fire&#x27;)
       // call the object constructor with the correct &quot;this&quot; and pass the arguments
       this.objectClass.objectConstructor.apply(obj, arguments);
     } else {
-      throw &quot;new may only be called for classes that have constructors&quot;;
+      throw new Error(&quot;new may only be called for classes that have constructors&quot;);
     }
     // tell the object that all changed properties have been loaded
 
@@ -157,6 +153,7 @@ angular.module(&#x27;objective-fire&#x27;)
         obj._doLoad[name] = true;
       }
     }
+    obj._loaded = true; // new objects are always loaded
     obj.$save(); // save the new constructed object
     return obj;
   };
@@ -183,7 +180,7 @@ angular.module(&#x27;objective-fire&#x27;)
     obj._doLoad = {};
     for (var i = 0; i &lt; toLoad.length; i++) {
       if (typeof toLoad[i] !== &quot;string&quot;) {
-        throw &quot;typeof properties to load must be string&quot;;
+        throw new Error(&quot;typeof properties to load must be string&quot;);
       } else {
         obj._doLoad[toLoad[i]] = true; // set the property to be loaded
       }

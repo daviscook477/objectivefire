@@ -164,8 +164,7 @@
    * var list = new ExtendedArray(ref);
    * &lt;/code&gt;&lt;/pre&gt;
    */
-  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseArray&#x27;, [&quot;$log&quot;, &quot;$firebaseUtils&quot;,
-    function($log, $firebaseUtils) {
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseArray&#x27;, [&quot;$log&quot;, &quot;$firebaseUtils&quot;, function($log, $firebaseUtils) {
       /**
        * This constructor should probably never be called manually. It is used internally by
        * &lt;code&gt;$firebase.$asArray()&lt;/code&gt;.
@@ -460,7 +459,6 @@
          * @protected
          */
         $$added: function(snap/*, prevChild*/) {
-console.log(&quot;recivieng it now&quot;);
           // check to make sure record does not exist
           var i = this.$indexFor($firebaseUtils.getKey(snap));
           if( i === -1 ) {
@@ -838,8 +836,7 @@ console.log(&quot;recivieng it now&quot;);
   ]);
 
   /** @deprecated */
-  angular.module(&#x27;firebase&#x27;).factory(&#x27;$FirebaseArray&#x27;, [&#x27;$log&#x27;, &#x27;$firebaseArray&#x27;,
-    function($log, $firebaseArray) {
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$FirebaseArray&#x27;, [&quot;$log&quot;, &quot;$firebaseArray&quot;, function($log, $firebaseArray) {
       return function() {
         $log.warn(&#x27;$FirebaseArray has been renamed. Use $firebaseArray instead.&#x27;);
         return $firebaseArray.apply(null, arguments);
@@ -853,8 +850,7 @@ console.log(&quot;recivieng it now&quot;);
   var FirebaseAuth;
 
   // Define a service which provides user authentication and management.
-  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseAuth&#x27;, [
-    &#x27;$q&#x27;, &#x27;$firebaseUtils&#x27;, &#x27;$log&#x27;, function($q, $firebaseUtils, $log) {
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseAuth&#x27;, [&quot;$q&quot;, &quot;$firebaseUtils&quot;, &quot;$log&quot;, function($q, $firebaseUtils, $log) {
       /**
        * This factory returns an object allowing you to manage the client&#x27;s authentication state.
        *
@@ -1298,9 +1294,7 @@ console.log(&quot;recivieng it now&quot;);
    * var obj = new ExtendedObject(ref);
    * &lt;/code&gt;&lt;/pre&gt;
    */
-  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseObject&#x27;, [
-    &#x27;$parse&#x27;, &#x27;$firebaseUtils&#x27;, &#x27;$log&#x27;,
-    function($parse, $firebaseUtils, $log) {
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$firebaseObject&#x27;, [&quot;$parse&quot;, &quot;$firebaseUtils&quot;, &quot;$log&quot;, function($parse, $firebaseUtils, $log) {
 
       /**
        * Creates a synchronized object with 2-way bindings between Angular and Firebase.
@@ -1774,8 +1768,7 @@ console.log(&quot;recivieng it now&quot;);
   ]);
 
   /** @deprecated */
-  angular.module(&#x27;firebase&#x27;).factory(&#x27;$FirebaseObject&#x27;, [&#x27;$log&#x27;, &#x27;$firebaseObject&#x27;,
-    function($log, $firebaseObject) {
+  angular.module(&#x27;firebase&#x27;).factory(&#x27;$FirebaseObject&#x27;, [&quot;$log&quot;, &quot;$firebaseObject&quot;, function($log, $firebaseObject) {
       return function() {
         $log.warn(&#x27;$FirebaseObject has been renamed. Use $firebaseObject instead.&#x27;);
         return $firebaseObject.apply(null, arguments);
@@ -1972,8 +1965,7 @@ if ( typeof Object.getPrototypeOf !== &quot;function&quot; ) {
   &#x27;use strict&#x27;;
 
   angular.module(&#x27;firebase&#x27;)
-    .factory(&#x27;$firebaseConfig&#x27;, [&quot;$firebaseArray&quot;, &quot;$firebaseObject&quot;, &quot;$injector&quot;,
-      function($firebaseArray, $firebaseObject, $injector) {
+    .factory(&#x27;$firebaseConfig&#x27;, [&quot;$firebaseArray&quot;, &quot;$firebaseObject&quot;, &quot;$injector&quot;, function($firebaseArray, $firebaseObject, $injector) {
         return function(configOpts) {
           // make a copy we can modify
           var opts = angular.extend({}, configOpts);
@@ -1993,8 +1985,7 @@ if ( typeof Object.getPrototypeOf !== &quot;function&quot; ) {
       }
     ])
 
-    .factory(&#x27;$firebaseUtils&#x27;, [&quot;$q&quot;, &quot;$timeout&quot;, &quot;firebaseBatchDelay&quot;,
-      function($q, $timeout, firebaseBatchDelay) {
+    .factory(&#x27;$firebaseUtils&#x27;, [&quot;$q&quot;, &quot;$timeout&quot;, &quot;firebaseBatchDelay&quot;, function($q, $timeout, firebaseBatchDelay) {
 
         // ES6 style promises polyfill for angular 1.2.x
         // Copied from angular 1.3.x implementation: https://github.com/angular/angular.js/blob/v1.3.5/src/ng/q.js#L539
@@ -2390,7 +2381,6 @@ if ( typeof Object.getPrototypeOf !== &quot;function&quot; ) {
                  throw new Error(&#x27;Invalid key &#x27; + k + &#x27; (cannot contain .$[]#)&#x27;);
                }
                else if( angular.isUndefined(v) ) {
-console.log(dat); console.log(rec);console.log($toJSON);
                  throw new Error(&#x27;Key &#x27;+k+&#x27; was undefined. Cannot pass undefined in JSON. Use null instead.&#x27;);
                }
              });

@@ -87,7 +87,7 @@
     <pre class="code prettyprint linenums">
 &quot;use strict&quot;;
 angular.module(&#x27;objective-fire&#x27;)
-.factory(&#x27;ObjectiveFire&#x27;, [&quot;FireObject&quot;, function(FireObject, Properties, ObjectClass) {
+.factory(&#x27;ObjectiveFire&#x27;, [&quot;FireObject&quot;, &quot;Properties&quot;, &quot;ObjectClass&quot;, &quot;Factories&quot;, function(FireObject, Properties, ObjectClass, Factories) {
   /**
    * All classes should be registered in an instance of ObjectiveFire created at
    * your Firebase.
@@ -100,23 +100,29 @@ angular.module(&#x27;objective-fire&#x27;)
    * that location in the Firebase.
    */
   function ObjectiveFire(ref) {
-    if (!this instanceof ObjectiveFire) {
+    if (!(ref instanceof Firebase)) {
+      throw new Error(&quot;must pass a Firebase reference to ObjectiveFire constructor&quot;);
+    }
+    if (!(this instanceof ObjectiveFire)) {
       return new ObjectiveFire(ref);
     }
     this.ref = ref;
     // registry of objects
     this.objects = {};
+    this.arrayFactories = {};
   }
   ObjectiveFire.prototype = {
     /**
      * Registers a class from an ObjectClass object.
      * @method registerFromObjectClass
      * @param objectClass {ObjectClass} The ObjectClass from which to create the class.
-     * @return The registered class.
+     * @return {FireObject} The registered class.
      */
     registerFromObjectClass: function(objectClass) {
-      this.objects[objectClass.name] = new FireObject(objectClass, this.ref, this);
-      return this;
+      var theFireObject = new FireObject(objectClass, this.ref, this);
+      this.objects[objectClass.name] = theFireObject;
+      this.arrayFactories[objectClass.name] = Factories.arrayFactory(theFireObject);
+      return theFireObject;
     },
     /**
      * Registers a class from an object that follows a specific format.
@@ -131,43 +137,68 @@ angular.module(&#x27;objective-fire&#x27;)
      *         another_method: function() {}
      *       },
      *       properties: { // see ObjectClass documentation
-     *         a_primitive_property: {type: &quot;primitive&quot;, name: &quot;a_name&quot;}, // these must match exactly
-     *         an_object_property: {type: &quot;object&quot;, name: &quot;a_name&quot;, objectClassName: &quot;a_class_name&quot;},
-     *         an_object_array_property: {type: &quot;objectArray&quot;, name: &quot;a_name&quot;, objectClassName: &quot;a_class_name&quot;}
+     *         primitive: [{name: &quot;a_name&quot;},{name: &quot;another_name&quot;}], // Primitive Properties
+     *         objectP: [{name: &quot;a_name&quot;, objectClassName: &quot;a_class_name&quot;}], // Object Properties
+     *         arrayP: [{name: &quot;a_name&quot;, objectClassName: &quot;a_class_name&quot;}], // Object Array Properties
      *       }
      *     }
      &#x60;&#x60;&#x60;
      * @method registerFromObject
      * @param object The object from which to create the class.
-     * @return The registered class.
+     * @return {FireObject} The registered class.
      */
     registerFromObject: function(object) {
-      var properties = new Properties(); // find proeprties
-      for (var param in object.properties) {
-        if (object.properties.hasOwnProperty(param)) {
-          var cur = object.properties[param];
-          var type = cur.type;
-          if (type === &quot;primitive&quot;) {
-            properties.addPrimitiveProperty(cur.name);
-          } else if (type === &quot;object&quot;) {
-            properties.addObjectProperty(cur.name, cur.objectClassName);
-          } else if (type === &quot;objectArray&quot;) {
-            properties.addObjectArrayProperty(cur.name, cur.objectClassName);
-          }
+      var properties = new Properties(); // find properties
+      var i, prop;
+      if (object.properties.primitive) {
+        for (i = 0; i &lt; object.properties.primitive.length; i++) {
+          prop = object.properties.primitive[i];
+          properties.addPrimitiveProperty(prop.name);
         }
       }
+      if (object.properties.objectP) {
+        for (i = 0; i &lt; object.properties.objectP.length; i++) {
+          prop = object.properties.objectP[i];
+          properties.addObjectProperty(prop.name, prop.objectClassName);
+        }
+      }
+      if (object.properties.arrayP) {
+        for (i = 0; i &lt; object.properties.arrayP.length; i++) {
+          prop = object.properties.arrayP[i];
+          properties.addObjectArrayProperty(prop.name, prop.objectClassName);
+        }
+      }
+      if (!object.objectConstructor) {
+        object.objectConstructor = null;
+      }
+      if (!object.objectMethods) {
+        object.objectMethods = null;
+      }
       var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
-      this.objects[object.name] = theClass;
-      return theClass;
+      var theFireObject = new FireObject(theClass, this.ref, this);
+      this.objects[object.name] = theFireObject;
+      this.arrayFactories[object.name] = Factories.arrayFactory(theFireObject);
+      return theFireObject;
     },
     /**
      * Gets registered class by name.
      * @method getByName
      * @param name {String} The name of the class.
-     * @return The class for the specified name.
+     * @return {FireObject} The class for the specified name.
      */
     getByName: function(name) {
       return this.objects[name];
+    },
+    /**
+     * Gets an array factory for the class specified by name/
+     * @method getArrayFactory
+     * @param name {String} The name of the class.
+     * @return {$firebaseArray} An extended $firebaseArray factory for the specified class.
+     * The constructor is returned so in order to create an instance it should
+     * be invoked with new.
+     */
+    getArrayFactory: function(name) {
+      return this.arrayFactories[name];
     }
   };
   return ObjectiveFire;

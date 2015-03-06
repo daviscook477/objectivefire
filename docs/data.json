@@ -233,7 +233,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 82,
+            "line": 81,
             "description": "This constructor should probably never be called manually. It is used internally by\n<code>$firebase.$asArray()</code>.",
             "params": [
                 {
@@ -251,7 +251,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 126,
+            "line": 125,
             "description": "Converts an element of the array into JSON.\nBy that we mean not a string but rather just the object\nthat will be sent to Firebase.\nBy default it just copies all values from this object onto\nthe data that will go to Firebase\nThe JSON sent to the Firebase will always have any keys prefixed with\n'$' stripped from it.\n\nThis method is always called with \"this\" as \"this\". Important: this\nmeans that the individual record is not the this for $toJSON.",
             "params": [
                 {
@@ -266,7 +266,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 153,
+            "line": 152,
             "description": "Converts a snapshot into the data that will make up this object\nBy Default it just provides the value of the snapshot",
             "params": [
                 {
@@ -281,7 +281,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 164,
+            "line": 163,
             "description": "Create a new record with a unique ID and add it to the end of the array.\nThis should be used instead of Array.prototype.push, since those changes will not be\nsynchronized with the server.\n\nAny value, including a primitive, can be added in this way. Note that when the record\nis created, the primitive value would be stored in $value (records are always objects\nby default).\n\nReturns a future which is resolved when the data has successfully saved to the server.\nThe resolve callback will be passed a Firebase ref representing the new data element.",
             "params": [
                 {
@@ -296,7 +296,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 189,
+            "line": 188,
             "description": "Pass either an item in the array or the index of an item and it will be saved back\nto Firebase. While the array is read-only and its structure should not be changed,\nit is okay to modify properties on the objects it contains and then save those back\nindividually.\n\nReturns a future which is resolved when the data has successfully saved to the server.\nThe resolve callback will be passed a Firebase ref representing the saved element.\nIf passed an invalid index or an object which is not a record in this array,\nthe promise will be rejected.",
             "params": [
                 {
@@ -312,7 +312,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 221,
+            "line": 220,
             "description": "Pass either an existing item in this array or the index of that item and it will\nbe removed both locally and in Firebase. This should be used in place of\nArray.prototype.splice for removing items out of the array, as calling splice\nwill not update the value on the server.\n\nReturns a future which is resolved when the data has successfully removed from the\nserver. The resolve callback will be passed a Firebase ref representing the deleted\nelement. If passed an invalid index or an object which is not a record in this array,\nthe promise will be rejected.",
             "params": [
                 {
@@ -328,7 +328,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 249,
+            "line": 248,
             "description": "Given an item in this array or the index of an item in the array, this returns the\nFirebase key (record.$id) for that record. If passed an invalid key or an item which\ndoes not exist in this array, it will return null.",
             "params": [
                 {
@@ -345,7 +345,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 262,
+            "line": 261,
             "description": "The inverse of $keyAt, this method takes a Firebase key (record.$id) and returns the\nindex in the array where that record is stored. If the record is not in the array,\nthis method returns -1.",
             "params": [
                 {
@@ -362,7 +362,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 284,
+            "line": 283,
             "description": "The loaded method is invoked after the initial batch of data arrives from the server.\nWhen this resolves, all data which existed prior to calling $asArray() is now cached\nlocally in the array.\n\nAs a shortcut is also possible to pass resolve/reject methods directly into this\nmethod just as they would be passed to .then()",
             "params": [
                 {
@@ -385,7 +385,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 306,
+            "line": 305,
             "return": {
                 "description": "the original Firebase ref used to create this object.",
                 "type": "Firebase"
@@ -394,7 +394,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 311,
+            "line": 310,
             "description": "Listeners passed into this method are notified whenever a new change (add, updated,\nmove, remove) is received from the server. Each invocation is sent an object\ncontaining <code>{ type: 'added|updated|moved|removed', key: 'key_of_item_affected'}</code>\n\nAdditionally, added and moved events receive a prevChild parameter, containing the\nkey of the item before this one in the array.\n\nThis method returns a function which can be invoked to stop observing events.",
             "params": [
                 {
@@ -417,13 +417,13 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 339,
+            "line": 338,
             "description": "Informs $firebase to stop sending events and clears memory being used\nby this array (delete's its local content).",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 352,
+            "line": 351,
             "description": "Returns the record for a given Firebase key (record.$id). If the record is not found\nthen returns null.",
             "params": [
                 {
@@ -440,7 +440,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 364,
+            "line": 363,
             "description": "Called to inform the array when a new item has been added at the server.\nThis method should return the record (an object) that will be passed into $$process\nalong with the add event. Alternately, the record will be skipped if this method returns\na falsey value.",
             "params": [
                 {
@@ -464,7 +464,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 394,
+            "line": 392,
             "description": "Called whenever an item is removed at the server.\nThis method does not physically remove the objects, but instead\nreturns a boolean indicating whether it should be removed (and\ntaking any other desired actions before the remove completes).",
             "params": [
                 {
@@ -483,7 +483,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 408,
+            "line": 406,
             "description": "Called whenever an item is changed at the server.\nThis method should apply the changes, including changes to data\nand to $priority, and then return true if any changes were made.\n\nIf this method returns false, then $$process will not be invoked,\nwhich means that $$notify will not take place and no $watch events\nwill be triggered.",
             "params": [
                 {
@@ -502,7 +502,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 432,
+            "line": 430,
             "description": "Called whenever an item changes order (moves) on the server.\nThis method should set $priority to the updated value and return true if\nthe record should actually be moved. It should not actually apply the move\noperation.\n\nIf this method returns false, then the record will not be moved in the array\nand no $watch listeners will be notified. (When true, $$process is invoked\nwhich invokes $$notify)",
             "params": [
                 {
@@ -522,7 +522,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 455,
+            "line": 453,
             "description": "Called whenever a security error or other problem causes the listeners to become\ninvalid. This is generally an unrecoverable error.",
             "params": [
                 {
@@ -537,7 +537,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 467,
+            "line": 465,
             "description": "Returns ID for a given record",
             "params": [
                 {
@@ -556,7 +556,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 477,
+            "line": 475,
             "description": "Handles placement of recs in the array, sending notifications,\nand other internals. Called by the synchronization process\nafter $$added, $$updated, $$moved, and $$removed return a truthy value.",
             "params": [
                 {
@@ -582,7 +582,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 520,
+            "line": 518,
             "description": "Used to trigger notifications for listeners registered using $watch. This method is\ntypically invoked internally by the $$process method.",
             "params": [
                 {
@@ -608,7 +608,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 539,
+            "line": 537,
             "description": "Used to insert a new record into the array at a specific position. If prevChild is\nnull, is inserted first, if prevChild is not found, it is inserted last, otherwise,\nit goes immediately after prevChild.",
             "params": [
                 {
@@ -628,7 +628,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 562,
+            "line": 560,
             "description": "Removes a record from the array by calling splice. If the item is found\nthis method returns it. Otherwise, this method returns null.",
             "params": [
                 {
@@ -647,7 +647,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 579,
+            "line": 577,
             "description": "Resolves a variable which may contain an integer or an item that exists in this array.\nReturns the item or null if it does not exist.",
             "params": [
                 {
@@ -665,7 +665,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 604,
+            "line": 602,
             "description": "Throws an error if $destroy has been called. Should be used for any function\nwhich tries to write data back to $firebase.",
             "params": [
                 {
@@ -680,7 +680,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 617,
+            "line": 615,
             "description": "This method allows FirebaseArray to be inherited by child classes. Methods passed into this\nfunction will be added onto the array's prototype. They can override existing methods as\nwell.\n\nIn addition to passing additional methods, it is also possible to pass in a class function.\nThe prototype on that class function will be preserved, and it will inherit from\nFirebaseArray. It's also possible to do both, passing a class to inherit and additional\nmethods to add onto the prototype.\n\n <pre><code>\nvar ExtendedArray = $firebaseArray.$extend({\n   // add a method onto the prototype that sums all items in the array\n   getSum: function() {\n      var ct = 0;\n      angular.forEach(this.$list, function(rec) { ct += rec.x; });\n     return ct;\n   }\n});\n\n// use our new factory in place of $firebaseArray\nvar list = new ExtendedArray(ref);\n</code></pre>",
             "params": [
                 {
@@ -705,12 +705,12 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 753,
+            "line": 751,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 771,
+            "line": 767,
             "description": "This factory returns an object allowing you to manage the client's authentication state.",
             "params": [
                 {
@@ -727,17 +727,17 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
+            "line": 822,
+            "class": "FireObject"
+        },
+        {
+            "file": "src/angularfire_mod/angularfire.js",
+            "line": 824,
+            "class": "FireObject"
+        },
+        {
+            "file": "src/angularfire_mod/angularfire.js",
             "line": 826,
-            "class": "FireObject"
-        },
-        {
-            "file": "src/angularfire_mod/angularfire.js",
-            "line": 828,
-            "class": "FireObject"
-        },
-        {
-            "file": "src/angularfire_mod/angularfire.js",
-            "line": 830,
             "description": "Authenticates the Firebase reference with a custom authentication token.",
             "params": [
                 {
@@ -760,7 +760,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 852,
+            "line": 848,
             "description": "Authenticates the Firebase reference anonymously.",
             "params": [
                 {
@@ -778,7 +778,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 871,
+            "line": 867,
             "description": "Authenticates the Firebase reference with an email/password user.",
             "params": [
                 {
@@ -801,7 +801,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 892,
+            "line": 888,
             "description": "Authenticates the Firebase reference with the OAuth popup flow.",
             "params": [
                 {
@@ -824,7 +824,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 913,
+            "line": 909,
             "description": "Authenticates the Firebase reference with the OAuth redirect flow.",
             "params": [
                 {
@@ -847,7 +847,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 934,
+            "line": 930,
             "description": "Authenticates the Firebase reference with an OAuth token.",
             "params": [
                 {
@@ -875,23 +875,23 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 957,
+            "line": 953,
             "description": "Unauthenticates the Firebase reference.",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 967,
+            "line": 963,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 969,
+            "line": 965,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 970,
+            "line": 966,
             "description": "Asynchronously fires the provided callback with the current authentication data every time\nthe authentication data changes. It also fires as soon as the authentication data is\nretrieved from the server.",
             "params": [
                 {
@@ -914,7 +914,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 994,
+            "line": 990,
             "description": "Synchronously retrieves the current authentication data.",
             "return": {
                 "description": "The client's authentication data.",
@@ -924,7 +924,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1003,
+            "line": 999,
             "description": "Helper onAuth() callback method for the two router-related methods.",
             "params": [
                 {
@@ -941,7 +941,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1037,
+            "line": 1033,
             "description": "Utility method which can be used in a route's resolve() method to require that a route has\na logged in client.",
             "return": {
                 "description": "A promise fulfilled with the client's current authentication\nstate or rejected if the client is not authenticated.",
@@ -951,7 +951,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1048,
+            "line": 1044,
             "description": "Utility method which can be used in a route's resolve() method to grab the current\nauthentication data.",
             "return": {
                 "description": "A promise fulfilled with the client's current authentication\nstate, which will be null if the client is not authenticated.",
@@ -961,17 +961,17 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1060,
+            "line": 1056,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1062,
+            "line": 1058,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1063,
+            "line": 1059,
             "description": "Creates a new email/password user. Note that this function only creates the user, if you\nwish to log in as the newly created user, call $authWithPassword() after the promise for\nthis method has been resolved.",
             "params": [
                 {
@@ -988,7 +988,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1089,
+            "line": 1085,
             "description": "Changes the password for an email/password user.",
             "params": [
                 {
@@ -1005,7 +1005,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1113,
+            "line": 1109,
             "description": "Changes the email for an email/password user.",
             "params": [
                 {
@@ -1022,7 +1022,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1136,
+            "line": 1132,
             "description": "Removes an email/password user.",
             "params": [
                 {
@@ -1039,7 +1039,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1160,
+            "line": 1156,
             "description": "Sends a password reset email to an email/password user.",
             "params": [
                 {
@@ -1056,13 +1056,13 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1188,
+            "line": 1184,
             "description": "Creates and maintains a synchronized object, with 2-way bindings between Angular and Firebase.\n\nImplementations of this class are contracted to provide the following internal methods,\nwhich are used by the synchronization process and 3-way bindings:\n   $$updated - called whenever a change occurs (a value event from Firebase)\n   $$error - called when listeners are canceled due to a security error\n   $$notify - called to update $watch listeners and trigger updates to 3-way bindings\n   $ref - called to obtain the underlying Firebase reference\n\nMethods that may be desireable to provide changes to are\n   $toJSON - called to make the object into the JSON that will be sent to firebase\n   $fromJSON - called to make the object from the JSON sent to the firebase\n\nInstead of directly modifying this class, one should generally use the $extend\nmethod to add or change how methods behave:\n\n<pre><code>\nvar ExtendedObject = $firebaseObject.$extend({\n   // add a new method to the prototype\n   foo: function() { return 'bar'; },\n});\n\nvar obj = new ExtendedObject(ref);\n</code></pre>",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1218,
+            "line": 1212,
             "description": "Creates a synchronized object with 2-way bindings between Angular and Firebase.",
             "params": [
                 {
@@ -1080,7 +1080,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1260,
+            "line": 1254,
             "description": "Converts an object into JSON.\nBy that we mean not a string but rather just the object\nthat will be sent to Firebase.\nBy default it just copies all values from this object onto\nthe data that will go to Firebase\nThe JSON sent to the Firebase will always have any keys prefixed with\n'$' stripped from it.\n\nThis method is always called with \"this\" as \"this\"",
             "params": [
                 {
@@ -1095,7 +1095,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1285,
+            "line": 1279,
             "description": "Converts a snapshot into the data that will make up this object\nBy Default it just provides the value of the snapshot",
             "params": [
                 {
@@ -1110,7 +1110,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1297,
+            "line": 1291,
             "description": "Saves all data on the FirebaseObject back to Firebase.",
             "return": {
                 "description": "a promise which will resolve after the save is completed."
@@ -1119,7 +1119,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1311,
+            "line": 1305,
             "description": "Removes all keys from the FirebaseObject and also removes\nthe remote data from the server.",
             "return": {
                 "description": "a promise which will resolve after the op completes"
@@ -1128,7 +1128,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1327,
+            "line": 1321,
             "description": "The loaded method is invoked after the initial batch of data arrives from the server.\nWhen this resolves, all data which existed prior to calling $asObject() is now cached\nlocally in the object.\n\nAs a shortcut is also possible to pass resolve/reject methods directly into this\nmethod just as they would be passed to .then()",
             "params": [
                 {
@@ -1149,7 +1149,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1349,
+            "line": 1343,
             "return": {
                 "description": "the original Firebase instance used to create this object.",
                 "type": "Firebase"
@@ -1158,7 +1158,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1356,
+            "line": 1350,
             "description": "Creates a 3-way data sync between this object, the Firebase server, and a\nscope variable. This means that any changes made to the scope variable are\npushed to Firebase, and vice versa.\n\nIf scope emits a $destroy event, the binding is automatically severed. Otherwise,\nit is possible to unbind the scope variable by using the `unbind` function\npassed into the resolve method.\n\nCan only be bound to one scope variable at a time. If a second is attempted,\nthe promise will be rejected with an error.",
             "params": [
                 {
@@ -1179,7 +1179,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1379,
+            "line": 1373,
             "description": "Listeners passed into this method are notified whenever a new change is received\nfrom the server. Each invocation is sent an object containing\n<code>{ type: 'updated', key: 'my_firebase_id' }</code>\n\nThis method returns an unbind function that can be used to detach the listener.",
             "params": [
                 {
@@ -1202,13 +1202,13 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1404,
+            "line": 1398,
             "description": "Informs $firebase to stop sending events and clears memory being used\nby this object (delete's its local content).",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1420,
+            "line": 1414,
             "description": "Called by $firebase whenever an item is changed at the server.\nThis method must exist on any objectFactory passed into $firebase.\n\nIt should return true if any changes were made, otherwise `$$notify` will\nnot be invoked.",
             "params": [
                 {
@@ -1225,7 +1225,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1439,
+            "line": 1433,
             "description": "Called whenever a security error or other problem causes the listeners to become\ninvalid. This is generally an unrecoverable error.",
             "params": [
                 {
@@ -1238,25 +1238,25 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1451,
+            "line": 1445,
             "description": "Called internally by $bindTo when data is changed in $scope.\nShould apply updates to this record but should not call\nnotify().",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1464,
+            "line": 1458,
             "description": "Updates any bound scope variables and\nnotifies listeners registered with $watch",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1476,
+            "line": 1470,
             "description": "Overrides how Angular.forEach iterates records on this object so that only\nfields stored in Firebase are part of the iteration. To include meta fields like\n$id and $priority in the iteration, utilize for(key in obj) instead.",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1486,
+            "line": 1480,
             "description": "This method allows FirebaseObject to be copied into a new factory. Methods passed into this\nfunction will be added onto the object's prototype. They can override existing methods as\nwell.\n\nIn addition to passing additional methods, it is also possible to pass in a class function.\nThe prototype on that class function will be preserved, and it will inherit from\nFirebaseObject. It's also possible to do both, passing a class to inherit and additional\nmethods to add onto the prototype.\n\nOnce a factory is obtained by this method, it can be passed into $firebase as the\n`objectFactory` parameter:\n\n<pre><code>\nvar MyFactory = $firebaseObject.$extend({\n   // add a method onto the prototype that prints a greeting\n   getGreeting: function() {\n      return 'Hello ' + this.first_name + ' ' + this.last_name + '!';\n   }\n});\n\n// use our new factory in place of $firebaseObject\nvar obj = $firebase(ref, {objectFactory: MyFactory}).$asObject();\n</code></pre>",
             "params": [
                 {
@@ -1280,7 +1280,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1523,
+            "line": 1517,
             "description": "Creates a three-way data binding on a scope variable.",
             "params": [
                 {
@@ -1298,17 +1298,17 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1689,
+            "line": 1683,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1705,
+            "line": 1698,
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 1935,
+            "line": 1926,
             "description": "Returns a function which, each time it is invoked, will pause for `wait`\nmilliseconds before invoking the original `fn` instance. If another\nrequest is received in that time, it resets `wait` up until `maxWait` is\nreached.\n\nUnlike a debounce function, once wait is received, all items that have been\nqueued will be invoked (not just once per execution). It is acceptable to use 0,\nwhich means to batch all synchronously queued items.\n\nThe batch function actually returns a wrap function that should be called on each\nmethod that is to be batched.\n\n<pre><code>\n  var total = 0;\n  var batchWrapper = batch(10, 100);\n  var fn1 = batchWrapper(function(x) { return total += x; });\n  var fn2 = batchWrapper(function() { console.log(total); });\n  fn1(10);\n  fn2();\n  fn1(10);\n  fn2();\n  console.log(total); // 0 (nothing invoked yet)\n  // after 10ms will log \"10\" and then \"20\"\n</code></pre>",
             "params": [
                 {
@@ -1330,7 +1330,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 2020,
+            "line": 2011,
             "description": "A rudimentary debounce method",
             "params": [
                 {
@@ -1360,13 +1360,13 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 2264,
+            "line": 2255,
             "description": "A utility for retrieving a Firebase reference or DataSnapshot's\nkey name. This is backwards-compatible with `name()` from Firebase\n1.x.x and `key()` from Firebase 2.0.0+. Once support for Firebase\n1.x.x is dropped in AngularFire, this helper can be removed.",
             "class": "FireObject"
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 2274,
+            "line": 2265,
             "description": "A utility for converting records to JSON objects\nwhich we can save into Firebase. It asserts valid\nkeys and strips off any items prefixed with $.\n\nIf a $toJSON method is provided, it will be used\nin place of the custom functionality here.\nValid keys will still be asserted and correct\n.priority and .value will still be set",
             "params": [
                 {
@@ -1393,7 +1393,7 @@
         },
         {
             "file": "src/angularfire_mod/angularfire.js",
-            "line": 2369,
+            "line": 2359,
             "description": "AngularFire version number.",
             "class": "FireObject"
         },
@@ -1410,7 +1410,7 @@
         },
         {
             "file": "src/fireObject.js",
-            "line": 76,
+            "line": 73,
             "description": "Creates an instance of the class from data existing in the Firebase.\nAny parameters passed after id will be interpreted as properties to load.\nEx: myObject.instance(\"some_firebase_id\", \"some_property\", \"some_other_property\");\nThis would cause myObject to automatically $load() \"some_property\" and \"some_other_property\"",
             "itemtype": "method",
             "name": "instance",
@@ -1428,7 +1428,7 @@
         },
         {
             "file": "src/objectiveFire.js",
-            "line": 24,
+            "line": 28,
             "description": "Registers a class from an ObjectClass object.",
             "itemtype": "method",
             "name": "registerFromObjectClass",
@@ -1440,14 +1440,15 @@
                 }
             ],
             "return": {
-                "description": "The registered class."
+                "description": "The registered class.",
+                "type": "FireObject"
             },
             "class": "ObjectiveFire"
         },
         {
             "file": "src/objectiveFire.js",
-            "line": 34,
-            "description": "Registers a class from an object that follows a specific format.\nThe object must provided in this format.\n    ```\n    // TODO: fix the broken formatting in the documentation\n    {\n      name: name, // see ObjectClass documentation\n      objectConstructor: objectConstructor, // see ObjectClass documentation\n      objectMethods: { // see ObjectClass documentation\n        a_method: function() {},\n        another_method: function() {}\n      },\n      properties: { // see ObjectClass documentation\n        a_primitive_property: {type: \"primitive\", name: \"a_name\"}, // these must match exactly\n        an_object_property: {type: \"object\", name: \"a_name\", objectClassName: \"a_class_name\"},\n        an_object_array_property: {type: \"objectArray\", name: \"a_name\", objectClassName: \"a_class_name\"}\n      }\n    }\n    ```",
+            "line": 40,
+            "description": "Registers a class from an object that follows a specific format.\nThe object must provided in this format.\n    ```\n    // TODO: fix the broken formatting in the documentation\n    {\n      name: name, // see ObjectClass documentation\n      objectConstructor: objectConstructor, // see ObjectClass documentation\n      objectMethods: { // see ObjectClass documentation\n        a_method: function() {},\n        another_method: function() {}\n      },\n      properties: { // see ObjectClass documentation\n        primitive: [{name: \"a_name\"},{name: \"another_name\"}], // Primitive Properties\n        objectP: [{name: \"a_name\", objectClassName: \"a_class_name\"}], // Object Properties\n        arrayP: [{name: \"a_name\", objectClassName: \"a_class_name\"}], // Object Array Properties\n      }\n    }\n    ```",
             "itemtype": "method",
             "name": "registerFromObject",
             "params": [
@@ -1457,13 +1458,14 @@
                 }
             ],
             "return": {
-                "description": "The registered class."
+                "description": "The registered class.",
+                "type": "FireObject"
             },
             "class": "ObjectiveFire"
         },
         {
             "file": "src/objectiveFire.js",
-            "line": 76,
+            "line": 96,
             "description": "Gets registered class by name.",
             "itemtype": "method",
             "name": "getByName",
@@ -1475,7 +1477,27 @@
                 }
             ],
             "return": {
-                "description": "The class for the specified name."
+                "description": "The class for the specified name.",
+                "type": "FireObject"
+            },
+            "class": "ObjectiveFire"
+        },
+        {
+            "file": "src/objectiveFire.js",
+            "line": 105,
+            "description": "Gets an array factory for the class specified by name/",
+            "itemtype": "method",
+            "name": "getArrayFactory",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the class.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "An extended $firebaseArray factory for the specified class.\nThe constructor is returned so in order to create an instance it should\nbe invoked with new.",
+                "type": "$firebaseArray"
             },
             "class": "ObjectiveFire"
         },
@@ -1574,111 +1596,111 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:82"
+            "line": " src/angularfire_mod/angularfire.js:81"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:164"
+            "line": " src/angularfire_mod/angularfire.js:163"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:189"
+            "line": " src/angularfire_mod/angularfire.js:188"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:221"
+            "line": " src/angularfire_mod/angularfire.js:220"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:249"
+            "line": " src/angularfire_mod/angularfire.js:248"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:262"
+            "line": " src/angularfire_mod/angularfire.js:261"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:284"
+            "line": " src/angularfire_mod/angularfire.js:283"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:306"
+            "line": " src/angularfire_mod/angularfire.js:305"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:311"
+            "line": " src/angularfire_mod/angularfire.js:310"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:352"
+            "line": " src/angularfire_mod/angularfire.js:351"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:467"
+            "line": " src/angularfire_mod/angularfire.js:465"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:562"
+            "line": " src/angularfire_mod/angularfire.js:560"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:579"
+            "line": " src/angularfire_mod/angularfire.js:577"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:617"
+            "line": " src/angularfire_mod/angularfire.js:615"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1037"
+            "line": " src/angularfire_mod/angularfire.js:1033"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1048"
+            "line": " src/angularfire_mod/angularfire.js:1044"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1218"
+            "line": " src/angularfire_mod/angularfire.js:1212"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1297"
+            "line": " src/angularfire_mod/angularfire.js:1291"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1311"
+            "line": " src/angularfire_mod/angularfire.js:1305"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1327"
+            "line": " src/angularfire_mod/angularfire.js:1321"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1349"
+            "line": " src/angularfire_mod/angularfire.js:1343"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1356"
+            "line": " src/angularfire_mod/angularfire.js:1350"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1379"
+            "line": " src/angularfire_mod/angularfire.js:1373"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1486"
+            "line": " src/angularfire_mod/angularfire.js:1480"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1523"
+            "line": " src/angularfire_mod/angularfire.js:1517"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:1935"
+            "line": " src/angularfire_mod/angularfire.js:1926"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/angularfire_mod/angularfire.js:2274"
+            "line": " src/angularfire_mod/angularfire.js:2265"
         },
         {
             "message": "Missing item type\nCreates and maintains a synchronized list of data. This is a pseudo-read-only array. One should\nnot call splice(), push(), pop(), et al directly on this array, but should instead use the\n$remove and $add methods.\n\nIt is acceptable to .sort() this array, but it is important to use this in conjunction with\n$watch(), so that it will be re-sorted any time the server data changes. Examples of this are\nincluded in the $watch documentation.\n\nInternally, the $firebase object depends on this class to provide several $$ (i.e. protected)\nmethods, which it invokes to notify the array whenever a change has been made at the server:\n   $$added - called whenever a child_added event occurs\n   $$updated - called whenever a child_changed event occurs\n   $$moved - called whenever a child_moved event occurs\n   $$removed - called whenever a child_removed event occurs\n   $$error - called when listeners are canceled due to a security error\n   $$process - called immediately after $$added/$$updated/$$moved/$$removed\n               (assuming that these methods do not abort by returning false or null)\n               to splice/manipulate the array and invoke $$notify\n\nAdditionally, these methods may be of interest to devs extending this class:\n   $$notify - triggers notifications to any $watch listeners, called by $$process\n   $$getKey - determines how to look up a record's key (returns $id by default)\n\nInstead of directly modifying this class, one should generally use the $extend\nmethod to add or change how methods behave. $extend modifies the prototype of\nthe array class by returning a clone of $firebaseArray.\n\n<pre><code>\nvar ExtendedArray = $firebaseArray.$extend({\n   // add a new method to the prototype\n   foo: function() { return 'bar'; },\n\n   // change how records are created\n   $$added: function(snap, prevChild) {\n      return new Widget(snap, prevChild);\n   },\n\n   // change how records are updated\n   $$updated: function(snap) {\n     return this.$getRecord(snap.key()).update(snap);\n   }\n});\n\nvar list = new ExtendedArray(ref);\n</code></pre>",
@@ -1686,307 +1708,307 @@
         },
         {
             "message": "Missing item type\nThis constructor should probably never be called manually. It is used internally by\n<code>$firebase.$asArray()</code>.",
-            "line": " src/angularfire_mod/angularfire.js:82"
+            "line": " src/angularfire_mod/angularfire.js:81"
         },
         {
             "message": "Missing item type\nConverts an element of the array into JSON.\nBy that we mean not a string but rather just the object\nthat will be sent to Firebase.\nBy default it just copies all values from this object onto\nthe data that will go to Firebase\nThe JSON sent to the Firebase will always have any keys prefixed with\n'$' stripped from it.\n\nThis method is always called with \"this\" as \"this\". Important: this\nmeans that the individual record is not the this for $toJSON.",
-            "line": " src/angularfire_mod/angularfire.js:126"
+            "line": " src/angularfire_mod/angularfire.js:125"
         },
         {
             "message": "Missing item type\nConverts a snapshot into the data that will make up this object\nBy Default it just provides the value of the snapshot",
-            "line": " src/angularfire_mod/angularfire.js:153"
+            "line": " src/angularfire_mod/angularfire.js:152"
         },
         {
             "message": "Missing item type\nCreate a new record with a unique ID and add it to the end of the array.\nThis should be used instead of Array.prototype.push, since those changes will not be\nsynchronized with the server.\n\nAny value, including a primitive, can be added in this way. Note that when the record\nis created, the primitive value would be stored in $value (records are always objects\nby default).\n\nReturns a future which is resolved when the data has successfully saved to the server.\nThe resolve callback will be passed a Firebase ref representing the new data element.",
-            "line": " src/angularfire_mod/angularfire.js:164"
+            "line": " src/angularfire_mod/angularfire.js:163"
         },
         {
             "message": "Missing item type\nPass either an item in the array or the index of an item and it will be saved back\nto Firebase. While the array is read-only and its structure should not be changed,\nit is okay to modify properties on the objects it contains and then save those back\nindividually.\n\nReturns a future which is resolved when the data has successfully saved to the server.\nThe resolve callback will be passed a Firebase ref representing the saved element.\nIf passed an invalid index or an object which is not a record in this array,\nthe promise will be rejected.",
-            "line": " src/angularfire_mod/angularfire.js:189"
+            "line": " src/angularfire_mod/angularfire.js:188"
         },
         {
             "message": "Missing item type\nPass either an existing item in this array or the index of that item and it will\nbe removed both locally and in Firebase. This should be used in place of\nArray.prototype.splice for removing items out of the array, as calling splice\nwill not update the value on the server.\n\nReturns a future which is resolved when the data has successfully removed from the\nserver. The resolve callback will be passed a Firebase ref representing the deleted\nelement. If passed an invalid index or an object which is not a record in this array,\nthe promise will be rejected.",
-            "line": " src/angularfire_mod/angularfire.js:221"
+            "line": " src/angularfire_mod/angularfire.js:220"
         },
         {
             "message": "Missing item type\nGiven an item in this array or the index of an item in the array, this returns the\nFirebase key (record.$id) for that record. If passed an invalid key or an item which\ndoes not exist in this array, it will return null.",
-            "line": " src/angularfire_mod/angularfire.js:249"
+            "line": " src/angularfire_mod/angularfire.js:248"
         },
         {
             "message": "Missing item type\nThe inverse of $keyAt, this method takes a Firebase key (record.$id) and returns the\nindex in the array where that record is stored. If the record is not in the array,\nthis method returns -1.",
-            "line": " src/angularfire_mod/angularfire.js:262"
+            "line": " src/angularfire_mod/angularfire.js:261"
         },
         {
             "message": "Missing item type\nThe loaded method is invoked after the initial batch of data arrives from the server.\nWhen this resolves, all data which existed prior to calling $asArray() is now cached\nlocally in the array.\n\nAs a shortcut is also possible to pass resolve/reject methods directly into this\nmethod just as they would be passed to .then()",
-            "line": " src/angularfire_mod/angularfire.js:284"
+            "line": " src/angularfire_mod/angularfire.js:283"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:306"
+            "line": " src/angularfire_mod/angularfire.js:305"
         },
         {
             "message": "Missing item type\nListeners passed into this method are notified whenever a new change (add, updated,\nmove, remove) is received from the server. Each invocation is sent an object\ncontaining <code>{ type: 'added|updated|moved|removed', key: 'key_of_item_affected'}</code>\n\nAdditionally, added and moved events receive a prevChild parameter, containing the\nkey of the item before this one in the array.\n\nThis method returns a function which can be invoked to stop observing events.",
-            "line": " src/angularfire_mod/angularfire.js:311"
+            "line": " src/angularfire_mod/angularfire.js:310"
         },
         {
             "message": "Missing item type\nInforms $firebase to stop sending events and clears memory being used\nby this array (delete's its local content).",
-            "line": " src/angularfire_mod/angularfire.js:339"
+            "line": " src/angularfire_mod/angularfire.js:338"
         },
         {
             "message": "Missing item type\nReturns the record for a given Firebase key (record.$id). If the record is not found\nthen returns null.",
-            "line": " src/angularfire_mod/angularfire.js:352"
+            "line": " src/angularfire_mod/angularfire.js:351"
         },
         {
             "message": "Missing item type\nCalled to inform the array when a new item has been added at the server.\nThis method should return the record (an object) that will be passed into $$process\nalong with the add event. Alternately, the record will be skipped if this method returns\na falsey value.",
-            "line": " src/angularfire_mod/angularfire.js:364"
+            "line": " src/angularfire_mod/angularfire.js:363"
         },
         {
             "message": "Missing item type\nCalled whenever an item is removed at the server.\nThis method does not physically remove the objects, but instead\nreturns a boolean indicating whether it should be removed (and\ntaking any other desired actions before the remove completes).",
-            "line": " src/angularfire_mod/angularfire.js:394"
+            "line": " src/angularfire_mod/angularfire.js:392"
         },
         {
             "message": "Missing item type\nCalled whenever an item is changed at the server.\nThis method should apply the changes, including changes to data\nand to $priority, and then return true if any changes were made.\n\nIf this method returns false, then $$process will not be invoked,\nwhich means that $$notify will not take place and no $watch events\nwill be triggered.",
-            "line": " src/angularfire_mod/angularfire.js:408"
+            "line": " src/angularfire_mod/angularfire.js:406"
         },
         {
             "message": "Missing item type\nCalled whenever an item changes order (moves) on the server.\nThis method should set $priority to the updated value and return true if\nthe record should actually be moved. It should not actually apply the move\noperation.\n\nIf this method returns false, then the record will not be moved in the array\nand no $watch listeners will be notified. (When true, $$process is invoked\nwhich invokes $$notify)",
-            "line": " src/angularfire_mod/angularfire.js:432"
+            "line": " src/angularfire_mod/angularfire.js:430"
         },
         {
             "message": "Missing item type\nCalled whenever a security error or other problem causes the listeners to become\ninvalid. This is generally an unrecoverable error.",
-            "line": " src/angularfire_mod/angularfire.js:455"
+            "line": " src/angularfire_mod/angularfire.js:453"
         },
         {
             "message": "Missing item type\nReturns ID for a given record",
-            "line": " src/angularfire_mod/angularfire.js:467"
+            "line": " src/angularfire_mod/angularfire.js:465"
         },
         {
             "message": "Missing item type\nHandles placement of recs in the array, sending notifications,\nand other internals. Called by the synchronization process\nafter $$added, $$updated, $$moved, and $$removed return a truthy value.",
-            "line": " src/angularfire_mod/angularfire.js:477"
+            "line": " src/angularfire_mod/angularfire.js:475"
         },
         {
             "message": "Missing item type\nUsed to trigger notifications for listeners registered using $watch. This method is\ntypically invoked internally by the $$process method.",
-            "line": " src/angularfire_mod/angularfire.js:520"
+            "line": " src/angularfire_mod/angularfire.js:518"
         },
         {
             "message": "Missing item type\nUsed to insert a new record into the array at a specific position. If prevChild is\nnull, is inserted first, if prevChild is not found, it is inserted last, otherwise,\nit goes immediately after prevChild.",
-            "line": " src/angularfire_mod/angularfire.js:539"
+            "line": " src/angularfire_mod/angularfire.js:537"
         },
         {
             "message": "Missing item type\nRemoves a record from the array by calling splice. If the item is found\nthis method returns it. Otherwise, this method returns null.",
-            "line": " src/angularfire_mod/angularfire.js:562"
+            "line": " src/angularfire_mod/angularfire.js:560"
         },
         {
             "message": "Missing item type\nResolves a variable which may contain an integer or an item that exists in this array.\nReturns the item or null if it does not exist.",
-            "line": " src/angularfire_mod/angularfire.js:579"
+            "line": " src/angularfire_mod/angularfire.js:577"
         },
         {
             "message": "Missing item type\nThrows an error if $destroy has been called. Should be used for any function\nwhich tries to write data back to $firebase.",
-            "line": " src/angularfire_mod/angularfire.js:604"
+            "line": " src/angularfire_mod/angularfire.js:602"
         },
         {
             "message": "Missing item type\nThis method allows FirebaseArray to be inherited by child classes. Methods passed into this\nfunction will be added onto the array's prototype. They can override existing methods as\nwell.\n\nIn addition to passing additional methods, it is also possible to pass in a class function.\nThe prototype on that class function will be preserved, and it will inherit from\nFirebaseArray. It's also possible to do both, passing a class to inherit and additional\nmethods to add onto the prototype.\n\n <pre><code>\nvar ExtendedArray = $firebaseArray.$extend({\n   // add a method onto the prototype that sums all items in the array\n   getSum: function() {\n      var ct = 0;\n      angular.forEach(this.$list, function(rec) { ct += rec.x; });\n     return ct;\n   }\n});\n\n// use our new factory in place of $firebaseArray\nvar list = new ExtendedArray(ref);\n</code></pre>",
-            "line": " src/angularfire_mod/angularfire.js:617"
+            "line": " src/angularfire_mod/angularfire.js:615"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:753"
+            "line": " src/angularfire_mod/angularfire.js:751"
         },
         {
             "message": "Missing item type\nThis factory returns an object allowing you to manage the client's authentication state.",
-            "line": " src/angularfire_mod/angularfire.js:771"
+            "line": " src/angularfire_mod/angularfire.js:767"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:826"
+            "line": " src/angularfire_mod/angularfire.js:822"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:828"
+            "line": " src/angularfire_mod/angularfire.js:824"
         },
         {
             "message": "Missing item type\nAuthenticates the Firebase reference with a custom authentication token.",
-            "line": " src/angularfire_mod/angularfire.js:830"
+            "line": " src/angularfire_mod/angularfire.js:826"
         },
         {
             "message": "Missing item type\nAuthenticates the Firebase reference anonymously.",
-            "line": " src/angularfire_mod/angularfire.js:852"
+            "line": " src/angularfire_mod/angularfire.js:848"
         },
         {
             "message": "Missing item type\nAuthenticates the Firebase reference with an email/password user.",
-            "line": " src/angularfire_mod/angularfire.js:871"
+            "line": " src/angularfire_mod/angularfire.js:867"
         },
         {
             "message": "Missing item type\nAuthenticates the Firebase reference with the OAuth popup flow.",
-            "line": " src/angularfire_mod/angularfire.js:892"
+            "line": " src/angularfire_mod/angularfire.js:888"
         },
         {
             "message": "Missing item type\nAuthenticates the Firebase reference with the OAuth redirect flow.",
-            "line": " src/angularfire_mod/angularfire.js:913"
+            "line": " src/angularfire_mod/angularfire.js:909"
         },
         {
             "message": "Missing item type\nAuthenticates the Firebase reference with an OAuth token.",
-            "line": " src/angularfire_mod/angularfire.js:934"
+            "line": " src/angularfire_mod/angularfire.js:930"
         },
         {
             "message": "Missing item type\nUnauthenticates the Firebase reference.",
-            "line": " src/angularfire_mod/angularfire.js:957"
+            "line": " src/angularfire_mod/angularfire.js:953"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:967"
+            "line": " src/angularfire_mod/angularfire.js:963"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:969"
+            "line": " src/angularfire_mod/angularfire.js:965"
         },
         {
             "message": "Missing item type\nAsynchronously fires the provided callback with the current authentication data every time\nthe authentication data changes. It also fires as soon as the authentication data is\nretrieved from the server.",
-            "line": " src/angularfire_mod/angularfire.js:970"
+            "line": " src/angularfire_mod/angularfire.js:966"
         },
         {
             "message": "Missing item type\nSynchronously retrieves the current authentication data.",
-            "line": " src/angularfire_mod/angularfire.js:994"
+            "line": " src/angularfire_mod/angularfire.js:990"
         },
         {
             "message": "Missing item type\nHelper onAuth() callback method for the two router-related methods.",
-            "line": " src/angularfire_mod/angularfire.js:1003"
+            "line": " src/angularfire_mod/angularfire.js:999"
         },
         {
             "message": "Missing item type\nUtility method which can be used in a route's resolve() method to require that a route has\na logged in client.",
-            "line": " src/angularfire_mod/angularfire.js:1037"
+            "line": " src/angularfire_mod/angularfire.js:1033"
         },
         {
             "message": "Missing item type\nUtility method which can be used in a route's resolve() method to grab the current\nauthentication data.",
-            "line": " src/angularfire_mod/angularfire.js:1048"
+            "line": " src/angularfire_mod/angularfire.js:1044"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:1060"
+            "line": " src/angularfire_mod/angularfire.js:1056"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:1062"
+            "line": " src/angularfire_mod/angularfire.js:1058"
         },
         {
             "message": "Missing item type\nCreates a new email/password user. Note that this function only creates the user, if you\nwish to log in as the newly created user, call $authWithPassword() after the promise for\nthis method has been resolved.",
-            "line": " src/angularfire_mod/angularfire.js:1063"
+            "line": " src/angularfire_mod/angularfire.js:1059"
         },
         {
             "message": "Missing item type\nChanges the password for an email/password user.",
-            "line": " src/angularfire_mod/angularfire.js:1089"
+            "line": " src/angularfire_mod/angularfire.js:1085"
         },
         {
             "message": "Missing item type\nChanges the email for an email/password user.",
-            "line": " src/angularfire_mod/angularfire.js:1113"
+            "line": " src/angularfire_mod/angularfire.js:1109"
         },
         {
             "message": "Missing item type\nRemoves an email/password user.",
-            "line": " src/angularfire_mod/angularfire.js:1136"
+            "line": " src/angularfire_mod/angularfire.js:1132"
         },
         {
             "message": "Missing item type\nSends a password reset email to an email/password user.",
-            "line": " src/angularfire_mod/angularfire.js:1160"
+            "line": " src/angularfire_mod/angularfire.js:1156"
         },
         {
             "message": "Missing item type\nCreates and maintains a synchronized object, with 2-way bindings between Angular and Firebase.\n\nImplementations of this class are contracted to provide the following internal methods,\nwhich are used by the synchronization process and 3-way bindings:\n   $$updated - called whenever a change occurs (a value event from Firebase)\n   $$error - called when listeners are canceled due to a security error\n   $$notify - called to update $watch listeners and trigger updates to 3-way bindings\n   $ref - called to obtain the underlying Firebase reference\n\nMethods that may be desireable to provide changes to are\n   $toJSON - called to make the object into the JSON that will be sent to firebase\n   $fromJSON - called to make the object from the JSON sent to the firebase\n\nInstead of directly modifying this class, one should generally use the $extend\nmethod to add or change how methods behave:\n\n<pre><code>\nvar ExtendedObject = $firebaseObject.$extend({\n   // add a new method to the prototype\n   foo: function() { return 'bar'; },\n});\n\nvar obj = new ExtendedObject(ref);\n</code></pre>",
-            "line": " src/angularfire_mod/angularfire.js:1188"
+            "line": " src/angularfire_mod/angularfire.js:1184"
         },
         {
             "message": "Missing item type\nCreates a synchronized object with 2-way bindings between Angular and Firebase.",
-            "line": " src/angularfire_mod/angularfire.js:1218"
+            "line": " src/angularfire_mod/angularfire.js:1212"
         },
         {
             "message": "Missing item type\nConverts an object into JSON.\nBy that we mean not a string but rather just the object\nthat will be sent to Firebase.\nBy default it just copies all values from this object onto\nthe data that will go to Firebase\nThe JSON sent to the Firebase will always have any keys prefixed with\n'$' stripped from it.\n\nThis method is always called with \"this\" as \"this\"",
-            "line": " src/angularfire_mod/angularfire.js:1260"
+            "line": " src/angularfire_mod/angularfire.js:1254"
         },
         {
             "message": "Missing item type\nConverts a snapshot into the data that will make up this object\nBy Default it just provides the value of the snapshot",
-            "line": " src/angularfire_mod/angularfire.js:1285"
+            "line": " src/angularfire_mod/angularfire.js:1279"
         },
         {
             "message": "Missing item type\nSaves all data on the FirebaseObject back to Firebase.",
-            "line": " src/angularfire_mod/angularfire.js:1297"
+            "line": " src/angularfire_mod/angularfire.js:1291"
         },
         {
             "message": "Missing item type\nRemoves all keys from the FirebaseObject and also removes\nthe remote data from the server.",
-            "line": " src/angularfire_mod/angularfire.js:1311"
+            "line": " src/angularfire_mod/angularfire.js:1305"
         },
         {
             "message": "Missing item type\nThe loaded method is invoked after the initial batch of data arrives from the server.\nWhen this resolves, all data which existed prior to calling $asObject() is now cached\nlocally in the object.\n\nAs a shortcut is also possible to pass resolve/reject methods directly into this\nmethod just as they would be passed to .then()",
-            "line": " src/angularfire_mod/angularfire.js:1327"
+            "line": " src/angularfire_mod/angularfire.js:1321"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:1349"
+            "line": " src/angularfire_mod/angularfire.js:1343"
         },
         {
             "message": "Missing item type\nCreates a 3-way data sync between this object, the Firebase server, and a\nscope variable. This means that any changes made to the scope variable are\npushed to Firebase, and vice versa.\n\nIf scope emits a $destroy event, the binding is automatically severed. Otherwise,\nit is possible to unbind the scope variable by using the `unbind` function\npassed into the resolve method.\n\nCan only be bound to one scope variable at a time. If a second is attempted,\nthe promise will be rejected with an error.",
-            "line": " src/angularfire_mod/angularfire.js:1356"
+            "line": " src/angularfire_mod/angularfire.js:1350"
         },
         {
             "message": "Missing item type\nListeners passed into this method are notified whenever a new change is received\nfrom the server. Each invocation is sent an object containing\n<code>{ type: 'updated', key: 'my_firebase_id' }</code>\n\nThis method returns an unbind function that can be used to detach the listener.",
-            "line": " src/angularfire_mod/angularfire.js:1379"
+            "line": " src/angularfire_mod/angularfire.js:1373"
         },
         {
             "message": "Missing item type\nInforms $firebase to stop sending events and clears memory being used\nby this object (delete's its local content).",
-            "line": " src/angularfire_mod/angularfire.js:1404"
+            "line": " src/angularfire_mod/angularfire.js:1398"
         },
         {
             "message": "Missing item type\nCalled by $firebase whenever an item is changed at the server.\nThis method must exist on any objectFactory passed into $firebase.\n\nIt should return true if any changes were made, otherwise `$$notify` will\nnot be invoked.",
-            "line": " src/angularfire_mod/angularfire.js:1420"
+            "line": " src/angularfire_mod/angularfire.js:1414"
         },
         {
             "message": "Missing item type\nCalled whenever a security error or other problem causes the listeners to become\ninvalid. This is generally an unrecoverable error.",
-            "line": " src/angularfire_mod/angularfire.js:1439"
+            "line": " src/angularfire_mod/angularfire.js:1433"
         },
         {
             "message": "Missing item type\nCalled internally by $bindTo when data is changed in $scope.\nShould apply updates to this record but should not call\nnotify().",
-            "line": " src/angularfire_mod/angularfire.js:1451"
+            "line": " src/angularfire_mod/angularfire.js:1445"
         },
         {
             "message": "Missing item type\nUpdates any bound scope variables and\nnotifies listeners registered with $watch",
-            "line": " src/angularfire_mod/angularfire.js:1464"
+            "line": " src/angularfire_mod/angularfire.js:1458"
         },
         {
             "message": "Missing item type\nOverrides how Angular.forEach iterates records on this object so that only\nfields stored in Firebase are part of the iteration. To include meta fields like\n$id and $priority in the iteration, utilize for(key in obj) instead.",
-            "line": " src/angularfire_mod/angularfire.js:1476"
+            "line": " src/angularfire_mod/angularfire.js:1470"
         },
         {
             "message": "Missing item type\nThis method allows FirebaseObject to be copied into a new factory. Methods passed into this\nfunction will be added onto the object's prototype. They can override existing methods as\nwell.\n\nIn addition to passing additional methods, it is also possible to pass in a class function.\nThe prototype on that class function will be preserved, and it will inherit from\nFirebaseObject. It's also possible to do both, passing a class to inherit and additional\nmethods to add onto the prototype.\n\nOnce a factory is obtained by this method, it can be passed into $firebase as the\n`objectFactory` parameter:\n\n<pre><code>\nvar MyFactory = $firebaseObject.$extend({\n   // add a method onto the prototype that prints a greeting\n   getGreeting: function() {\n      return 'Hello ' + this.first_name + ' ' + this.last_name + '!';\n   }\n});\n\n// use our new factory in place of $firebaseObject\nvar obj = $firebase(ref, {objectFactory: MyFactory}).$asObject();\n</code></pre>",
-            "line": " src/angularfire_mod/angularfire.js:1486"
+            "line": " src/angularfire_mod/angularfire.js:1480"
         },
         {
             "message": "Missing item type\nCreates a three-way data binding on a scope variable.",
-            "line": " src/angularfire_mod/angularfire.js:1523"
+            "line": " src/angularfire_mod/angularfire.js:1517"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:1689"
+            "line": " src/angularfire_mod/angularfire.js:1683"
         },
         {
             "message": "Missing item type",
-            "line": " src/angularfire_mod/angularfire.js:1705"
+            "line": " src/angularfire_mod/angularfire.js:1698"
         },
         {
             "message": "Missing item type\nReturns a function which, each time it is invoked, will pause for `wait`\nmilliseconds before invoking the original `fn` instance. If another\nrequest is received in that time, it resets `wait` up until `maxWait` is\nreached.\n\nUnlike a debounce function, once wait is received, all items that have been\nqueued will be invoked (not just once per execution). It is acceptable to use 0,\nwhich means to batch all synchronously queued items.\n\nThe batch function actually returns a wrap function that should be called on each\nmethod that is to be batched.\n\n<pre><code>\n  var total = 0;\n  var batchWrapper = batch(10, 100);\n  var fn1 = batchWrapper(function(x) { return total += x; });\n  var fn2 = batchWrapper(function() { console.log(total); });\n  fn1(10);\n  fn2();\n  fn1(10);\n  fn2();\n  console.log(total); // 0 (nothing invoked yet)\n  // after 10ms will log \"10\" and then \"20\"\n</code></pre>",
-            "line": " src/angularfire_mod/angularfire.js:1935"
+            "line": " src/angularfire_mod/angularfire.js:1926"
         },
         {
             "message": "Missing item type\nA rudimentary debounce method",
-            "line": " src/angularfire_mod/angularfire.js:2020"
+            "line": " src/angularfire_mod/angularfire.js:2011"
         },
         {
             "message": "Missing item type\nA utility for retrieving a Firebase reference or DataSnapshot's\nkey name. This is backwards-compatible with `name()` from Firebase\n1.x.x and `key()` from Firebase 2.0.0+. Once support for Firebase\n1.x.x is dropped in AngularFire, this helper can be removed.",
-            "line": " src/angularfire_mod/angularfire.js:2264"
+            "line": " src/angularfire_mod/angularfire.js:2255"
         },
         {
             "message": "Missing item type\nA utility for converting records to JSON objects\nwhich we can save into Firebase. It asserts valid\nkeys and strips off any items prefixed with $.\n\nIf a $toJSON method is provided, it will be used\nin place of the custom functionality here.\nValid keys will still be asserted and correct\n.priority and .value will still be set",
-            "line": " src/angularfire_mod/angularfire.js:2274"
+            "line": " src/angularfire_mod/angularfire.js:2265"
         },
         {
             "message": "Missing item type\nAngularFire version number.",
-            "line": " src/angularfire_mod/angularfire.js:2369"
+            "line": " src/angularfire_mod/angularfire.js:2359"
         }
     ]
 }

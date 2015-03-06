@@ -104,22 +104,30 @@ angular.module(&#x27;objective-fire&#x27;)
    */
   function ObjectClass(name, objectConstructor, objectMethods, properties) {
     if (arguments.length !== 4) {
-      throw &quot;ObjectClass constructor may only be invoked with all parameters defined&quot;;
+      throw new Error(&quot;ObjectClass constructor may only be invoked with all parameters defined&quot;);
     }
-    if (!this instanceof ObjectClass) { // failsafe for accidental function call instead of constructor call
+    if (!(this instanceof ObjectClass)) { // failsafe for accidental function call instead of constructor call
       return new ObjectClass(name, objectConstructor, objectMethods, properties);
     }
     if(typeof name !== &quot;string&quot;) {
-      throw &quot;name must be of type string&quot;;
+      throw new Error(&quot;name must be of type string&quot;);
     }
     if (typeof objectConstructor !== &quot;function&quot; &amp;&amp; objectConstructor !== null) {
-      throw &quot;objectConstructor must be of type function or null&quot;;
+      throw new Error(&quot;objectConstructor must be of type function or null&quot;);
     }
     if (typeof objectMethods !== &quot;object&quot; &amp;&amp; objectMethods !== null) {
-      throw &quot;objectMethods must be of type object or null&quot;;
+      throw new Error(&quot;objectMethods must be of type object or null&quot;);
     }
-    if (typeof properties !== &quot;object&quot; || properties === null) {
-      throw &quot;properties must be of type object or null&quot;;
+    if (typeof properties !== &quot;object&quot; &amp;&amp; properties !== null) {
+      throw new Error(&quot;properties must be of type object or null&quot;);
+    }
+    if (properties === null) {
+      console.warn(&quot;did you mean to create an ObjectClass without properties?&quot;);
+      properties = {
+        primitive: [],
+        objectP: [],
+        arrayP: []
+      };
     }
     this.name = name;
     this.objectConstructor = objectConstructor;
