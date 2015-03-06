@@ -14,20 +14,20 @@
     </style>
 </head>
 <body>
-<div class="header medium">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">src/objectiveFire.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">77.5% <small>(31 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">95% <small>(38 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">64.29% <small>(9 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">78.57% <small>(11 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">83.33% <small>(5 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">77.5% <small>(31 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">95% <small>(38 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -187,10 +187,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15</span>
-<span class="cline-any cline-yes">15</span>
-<span class="cline-any cline-yes">15</span>
-<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,37 +216,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -336,29 +336,29 @@ angular.module('objective-fire')
     registerFromObject: function(object) {
       var properties = new Properties(); // find properties
       var i, prop;
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (properties.primitive) {
-        for (i = 0; i &lt; properties.primitive.length; i++) {
-<span class="cstat-no" title="statement not covered" >          prop = properties.primitive[i];</span>
-<span class="cstat-no" title="statement not covered" >          properties.addPrimitiveProperty(prop.name);</span>
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (object.properties.primitive) {
+        for (i = 0; i &lt; object.properties.primitive.length; i++) {
+          prop = object.properties.primitive[i];
+          properties.addPrimitiveProperty(prop.name);
         }
       }
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (properties.objectP) {
-        for (i = 0; i &lt; properties.objectP.length; i++) {
-<span class="cstat-no" title="statement not covered" >          prop = properties.objectP[i];</span>
-<span class="cstat-no" title="statement not covered" >          properties.addObjectProperty(prop.name, prop.objectClassName);</span>
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (object.properties.objectP) {
+        for (i = 0; i &lt; object.properties.objectP.length; i++) {
+          prop = object.properties.objectP[i];
+          properties.addObjectProperty(prop.name, prop.objectClassName);
         }
       }
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (properties.arrayP) {
-        for (i = 0; i &lt; properties.arrayP.length; i++) {
-<span class="cstat-no" title="statement not covered" >          prop = properties.arrayP[i];</span>
-<span class="cstat-no" title="statement not covered" >          properties.addObjectArrayProperty(prop.name, prop.objectClassName);</span>
+      if (object.properties.arrayP) {
+        for (i = 0; i &lt; object.properties.arrayP.length; i++) {
+          prop = object.properties.arrayP[i];
+          properties.addObjectArrayProperty(prop.name, prop.objectClassName);
         }
       }
       <span class="missing-if-branch" title="if path not taken" >I</span>if (!object.objectConstructor) {
 <span class="cstat-no" title="statement not covered" >        object.objectConstructor = null;</span>
       }
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!object.objectMethods) {
-<span class="cstat-no" title="statement not covered" >        object.objectMethods = null;</span>
+      if (!object.objectMethods) {
+        object.objectMethods = null;
       }
       var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
       var theFireObject = new FireObject(theClass, this.ref, this);
@@ -394,7 +394,7 @@ angular.module('objective-fire')
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 06 2015 10:33:55 GMT-0500 (EST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 06 2015 10:40:38 GMT-0500 (EST)</div>
 </div>
 
 <script src="../prettify.js"></script>

@@ -61,13 +61,13 @@ describe('Objects created by Factories', function() {
         primitive: [{name: "name"}]
       }
     });*/
-    myObjFire.registerFromObjectClass(new ObjectClass("message",
+    /*myObjFire.registerFromObjectClass(new ObjectClass("message",
       function(text, author) {
         this.text = text;
         this.author = author;
       }, null, new Properties().addPrimitiveProperty("text").addObjectProperty("author", "user")
-    ));
-    /*myObjFire.registerFromObject({
+    ));*/
+    myObjFire.registerFromObject({
       name: "message",
       objectConstructor: function(text, author) {
         this.text = text;
@@ -77,7 +77,7 @@ describe('Objects created by Factories', function() {
         primitive: [{name: "text"}],
         objectP: [{name: "author", objectClassName: "user"}]
       }
-    });*/
+    });
   });
 
   it('should store primitive data in the firebase', function(done) {
