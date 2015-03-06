@@ -14,7 +14,7 @@ angular.module('objective-fire')
         }
       }
       // add objectivefire methods
-      obj.$load = function(name) {
+      obj.$load = function(name) { // TODO: improve upon this method
         var properties = this._objectClass.properties;
         var ops = properties.objectP;
         var oaps = properties.arrayP;

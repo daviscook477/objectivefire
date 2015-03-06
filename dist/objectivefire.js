@@ -3,7 +3,7 @@
  *
  * ObjectiveFire 0.0.0
  * https://github.com/daviscook477/objectivefire/
- * Date: 03/05/2015
+ * Date: 03/06/2015
  * License: MIT
  */
 // this is here such that the module definition may be included first
@@ -2409,7 +2409,7 @@ angular.module('objective-fire')
         }
       }
       // add objectivefire methods
-      obj.$load = function(name) {
+      obj.$load = function(name) { // TODO: improve upon this method
         var properties = this._objectClass.properties;
         var ops = properties.objectP;
         var oaps = properties.arrayP;
@@ -2624,10 +2624,8 @@ angular.module('objective-fire')
    * @return New instance of the class
    */
   FireObject.prototype.new = function() {
-    console.log("creating new", this.objectClass.name);
     // create a new location in the Firebase
     var ref = this.rootRef.child(this.objectClass.name).push();
-    console.log("at firebase rec", ref.toString());
     var obj = new this.Factory(ref); // create an object at that location
     // private properties of the object
     obj._isLoaded = {}; // list of properties that are loaded

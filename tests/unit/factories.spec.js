@@ -2,7 +2,7 @@ describe('Objects created by Factories', function() {
 
   // ALL OF THESE TESTS REQUIRE FIREBASE TO RUN - THEY ARE BASICALLY INTEGRATION TESTS
 
-  var FireObject, ObjectiveFire, ObjectClass, myObjFire, Properties, $timeout;
+  var FireObject, ObjectiveFire, ObjectClass, myObjFire, Properties, $timeout, ref;
   var timer = function() {
     setInterval(function() {
       try {$timeout.flush();}catch(err){}
@@ -21,7 +21,8 @@ describe('Objects created by Factories', function() {
       Properties = _Properties_;
       $timeout = _$timeout_;
     });
-    myObjFire = new ObjectiveFire(new Firebase("https://objective-fire.firebaseio.com/"));
+    ref = new Firebase("https://objective-fire.firebaseio.com/")
+    myObjFire = new ObjectiveFire(ref);
     myObjFire.registerFromObject({
       name: "group",
       objectConstructor: function(name, adminUser) {
@@ -79,23 +80,48 @@ describe('Objects created by Factories', function() {
     });*/
   });
 
-  it('should work', function(done) {
+  it('should store primitive data in the firebase', function(done) {
     var user = myObjFire.getByName("user");
     var me = user.new("Davis");
-    var msg = myObjFire.getByName("message");
-    var myMSG = msg.new("test msg", me);
-    me.$load("messages");
-    me.addMessage(myMSG).then(function() {
-      me.$save().then(function() {
-        done();
-      });
+    var ref2 = ref.child("user").child(me.$id);
+    ref2.on("value", function(snapshot) {
+      expect(snapshot.val()).toEqual({name: "Davis"});
+      done();
     });
   });
 
-  it('does stuff', function(done) {
+  it('should store object references in the firebase', function(done) {
     var user = myObjFire.getByName("user");
     var me = user.new("Davis");
-    done();
+    var message = myObjFire.getByName("message");
+    var msg = message.new("This is a message", me);
+    var ref2 = ref.child("message").child(msg.$id);
+    ref2.on("value", function(snapshot) {
+      expect(snapshot.val()).toEqual({text: "This is a message", author: me.$id});
+      done();
+    });
+  });
+
+  it('should store array references in the firebase', function(done) {
+    var user = myObjFire.getByName("user");
+    var me = user.new("Davis");
+    me.$load("messages");
+    var message = myObjFire.getByName("message");
+    var msg = message.new("This is a message", me);
+    me.addMessage(msg).then(function() {
+      var ref2 = ref.child("user").child(me.$id).child("messages");
+      ref2.on("value", function(snapshot) {
+        var data = snapshot.val();
+        var same = false;
+        for (var param in data) {
+          if (data[param] === msg.$id) {
+            same = true;
+          }
+        }
+        expect(same).toEqual(true);
+        done();
+      });
+    });
   });
 
 });
