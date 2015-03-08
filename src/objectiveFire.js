@@ -103,7 +103,7 @@ angular.module('objective-fire')
       return this.objects[name];
     },
     /**
-     * Gets an array factory for the class specified by name/
+     * Gets an array factory for the class specified by name
      * @method getArrayFactory
      * @param name {String} The name of the class.
      * @return {$firebaseArray} An extended $firebaseArray factory for the specified class.

@@ -3,7 +3,7 @@
  *
  * ObjectiveFire 0.0.0
  * https://github.com/daviscook477/objectivefire/
- * Date: 03/06/2015
+ * Date: 03/07/2015
  * License: MIT
  */
 // this is here such that the module definition may be included first
@@ -2620,6 +2620,10 @@ angular.module('objective-fire')
    * with the arguments provided to this method. If no constructor is provided
    * an empty object will be created.
    * Any properties created by the constructor will be $save (d) to the Firebase.
+   * Properties not created in the constructor will not be $load (ed). You must
+   * load them manually after the fact. If you want and object array create it with
+   * new objFire(your instance of objectivefire).getArrayFactory("your_class_for_the_array")(firebase_ref_to_array);
+   * More simple functionality will be created for this in future update.
    * @method new
    * @return New instance of the class
    */
@@ -2855,7 +2859,7 @@ angular.module('objective-fire')
       return this.objects[name];
     },
     /**
-     * Gets an array factory for the class specified by name/
+     * Gets an array factory for the class specified by name
      * @method getArrayFactory
      * @param name {String} The name of the class.
      * @return {$firebaseArray} An extended $firebaseArray factory for the specified class.

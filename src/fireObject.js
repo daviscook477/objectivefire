@@ -26,6 +26,10 @@ angular.module('objective-fire')
    * with the arguments provided to this method. If no constructor is provided
    * an empty object will be created.
    * Any properties created by the constructor will be $save (d) to the Firebase.
+   * Properties not created in the constructor will not be $load (ed). You must
+   * load them manually after the fact. If you want and object array create it with
+   * new objFire(your instance of objectivefire).getArrayFactory("your_class_for_the_array")(firebase_ref_to_array);
+   * More simple functionality will be created for this in future update.
    * @method new
    * @return New instance of the class
    */
