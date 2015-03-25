@@ -7,10 +7,7 @@ angular.module('objective-fire')
    * @class ObjectiveFire
    * @constructor Creates instance of ObjectiveFire at the Firebase reference.
    * @param ref {Firebase} Firebase object at the URL that is your Firebase.
-   * Provide a Firebase object - NOT a URL. This Firebase object may be a
-   * location in the Firebase - it doesn't have to be at the root. Doing
-   * as such will cause all objectivefire operations to be done from only within
-   * that location in the Firebase.
+   * Provide a Firebase object - NOT a URL. This Firebase object must be the root of your Firebase.
    */
   function ObjectiveFire(ref) {
     if (!(ref instanceof Firebase)) {

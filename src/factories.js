@@ -161,7 +161,7 @@ angular.module('objective-fire')
               objectClassName = oaps[i].objectClassName;
               objectClass = this._objFire.getByName(objectClassName);
               var Factory = factories.arrayFactory(objectClass);
-              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name)); // we are obtaining a constructor by a function with parameters then calling that function
+              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
               this._isLoaded[name] = true;
               newRec[name] = arr;
             } else {

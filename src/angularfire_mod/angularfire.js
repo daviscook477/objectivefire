@@ -6,7 +6,7 @@
  *
  * AngularFire 0.0.0
  * https://github.com/firebase/angularfire/
- * Date: 03/03/2015
+ * Date: 03/11/2015
  * License: MIT
  */
 (function(exports) {
@@ -124,27 +124,17 @@
 
         /**
          * Converts an element of the array into JSON.
-         * By that we mean not a string but rather just the object
-         * that will be sent to Firebase.
-         * By default it just copies all values from this object onto
-         * the data that will go to Firebase
-         * The JSON sent to the Firebase will always have any keys prefixed with
-         * '$' stripped from it.
          *
-         * This method is always called with "this" as "this". Important: this
+         * This method is always called with "this" as this array. Important: this
          * means that the individual record is not the this for $toJSON.
-         * @param rec The object to covert to JSON - it will be an element of
+         * @param rec The array element to covert to JSON - it will be an element of
          * this array
          * @return This array element in JSON
          */
         $toJSON: function(rec) {
-          var dat;
-          if( !angular.isObject(rec) ) {
-            rec = {$value: rec};
-          }
-          dat = {};
+          var dat = {};
           $firebaseUtils.each(rec, function (v, k) {
-            dat[k] = v;
+            dat[k] = $firebaseUtils.stripDollarPrefixedKeys(v);
           });
           return dat;
         },
@@ -377,9 +367,9 @@
           if( i === -1 ) {
             // parse data and create record
             var rec = this.$fromJSON(snap);
-	    // deal with primitives
- 	    if( !angular.isObject(rec) ) {
-              rec = {$value: rec};
+	          // deal with primitives
+ 	          if( !angular.isObject(rec) ) {
+               rec = {$value: rec};
             }
             rec.$id = $firebaseUtils.getKey(snap);
             rec.$priority = snap.getPriority();
@@ -1253,25 +1243,16 @@
 
         /**
          * Converts an object into JSON.
-         * By that we mean not a string but rather just the object
-         * that will be sent to Firebase.
-         * By default it just copies all values from this object onto
-         * the data that will go to Firebase
-         * The JSON sent to the Firebase will always have any keys prefixed with
-         * '$' stripped from it.
          *
+         * Priority is automatically handled by AngularFire
          * This method is always called with "this" as "this"
-         * @param rec The object to covert to JSON - it should be this object
-         * @return This object in JSON
+         * @param rec The object to covert to JSON - may not necessarily be this object
+         * @return This object converted to JSON
          */
         $toJSON: function(rec) {
-          var dat;
-          if( !angular.isObject(rec) ) {
-            rec = {$value: rec};
-          }
-          dat = {};
+          var dat = {};
           $firebaseUtils.each(rec, function (v, k) {
-            dat[k] = v;
+            dat[k] = $firebaseUtils.stripDollarPrefixedKeys(v);
           });
           return dat;
         },
@@ -2192,11 +2173,8 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           },
 
           updateRec: function(rec, snap, $fromJSON, context) {
-            var data = snap.val();
+            var data = $fromJSON.call(context, snap);
             var oldData = angular.extend({}, rec);
-            if (angular.isFunction($fromJSON)) {
-              data = $fromJSON.apply(context, [snap]);
-            }
             // deal with primitives
             if( !angular.isObject(data) ) {
               rec.$value = data;
@@ -2277,26 +2255,31 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
            * @param context {Object} the context from which $toJSON will be called
            * @returns {*} the object converted to JSON for the Firebase.
            */
-           toJSON: function(rec, $toJSON, context) { // this method doesn't work right
-             var dat = $toJSON.apply(context, [rec]);
-	     if( !angular.isObject(dat) ) {
-               rec = {$value: dat};
-               dat = {};
-             }
-             if( angular.isDefined(rec.$value) && Object.keys(dat).length === 0 && rec.$value !== null ) {
-               dat['.value'] = rec.$value;
-             }
-             if( angular.isDefined(rec.$priority) && Object.keys(dat).length > 0 && rec.$priority !== null ) {
-               dat['.priority'] = rec.$priority;
-             }
-             angular.forEach(dat, function(v,k) {
-               if (k.match(/[.$\[\]#\/]/) && k !== '.value' && k !== '.priority' ) {
-                 throw new Error('Invalid key ' + k + ' (cannot contain .$[]#)');
+           toJSON: function(rec, $toJSON, context) {
+             var dat = $toJSON.call(context, rec); // convert record to JSON
+             if (dat !== null) {
+               if ( !angular.isObject(dat) ) {
+                 dat = {$value: dat, $priority: rec.$priority};
+               } else {
+                 dat.$priority = rec.$priority;
                }
-               else if( angular.isUndefined(v) ) {
-                 throw new Error('Key '+k+' was undefined. Cannot pass undefined in JSON. Use null instead.');
+               if( angular.isDefined(dat.$value) && dat.$value !== null ) {
+                 dat['.value'] = dat.$value;
                }
-             });
+               if( angular.isDefined(dat.$priority) && Object.keys(dat).length > 1 && dat.$priority !== null ) {
+                 dat['.priority'] = dat.$priority;
+               }
+               delete dat.$value; delete dat.$priority;
+               // assert valid keys
+               angular.forEach(dat, function(v,k) {
+                 if (k.match(/[.$\[\]#\/]/) && k !== '.value' && k !== '.priority' ) {
+                   throw new Error('Invalid key ' + k + ' (cannot contain .$[]#)');
+                 }
+                 else if( angular.isUndefined(v) ) {
+                   throw new Error('Key '+k+' was undefined. Cannot pass undefined in JSON. Use null instead.');
+                 }
+               });
+             }
              return dat;
            },
 
@@ -2356,6 +2339,17 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
             return def.promise;
           },
 
+          stripDollarPrefixedKeys: function(data) {
+            if( !angular.isObject(data) ) { return data; }
+            var out = angular.isArray(data)? [] : {};
+            angular.forEach(data, function(v,k) {
+              if(typeof k !== 'string' || k.charAt(0) !== '$') {
+                out[k] = utils.stripDollarPrefixedKeys(v);
+              }
+            });
+            return out;
+          },
+
           /**
            * AngularFire version number.
            */
@@ -2368,15 +2362,4 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
         return utils;
       }
     ]);
-
-    function stripDollarPrefixedKeys(data) {
-      if( !angular.isObject(data) ) { return data; }
-      var out = angular.isArray(data)? [] : {};
-      angular.forEach(data, function(v,k) {
-        if(typeof k !== 'string' || k.charAt(0) !== '$') {
-          out[k] = stripDollarPrefixedKeys(v);
-        }
-      });
-      return out;
-    }
 })();

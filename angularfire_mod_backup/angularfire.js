@@ -1,16 +1,4 @@
 /*!
- * ObjectiveFire is a utility library that makes interactions with firebase easy by representing data as objects
- *
- * ObjectiveFire 0.0.0
- * https://github.com/daviscook477/objectivefire/
- * Date: 03/24/2015
- * License: MIT
- */
-// this is here such that the module definition may be included first
-// in any concatenation of the objectivefire files (otherwise it brakes angular)
-angular.module('objective-fire', ['firebase']);
-
-/*!
  * AngularFire is the officially supported AngularJS binding for Firebase. Firebase
  * is a full backend so you don't need servers to build your Angular app. AngularFire
  * provides you with the $firebase service which allows you to easily keep your $scope
@@ -18,7 +6,7 @@ angular.module('objective-fire', ['firebase']);
  *
  * AngularFire 0.0.0
  * https://github.com/firebase/angularfire/
- * Date: 03/11/2015
+ * Date: 03/03/2015
  * License: MIT
  */
 (function(exports) {
@@ -136,17 +124,27 @@ angular.module('objective-fire', ['firebase']);
 
         /**
          * Converts an element of the array into JSON.
+         * By that we mean not a string but rather just the object
+         * that will be sent to Firebase.
+         * By default it just copies all values from this object onto
+         * the data that will go to Firebase
+         * The JSON sent to the Firebase will always have any keys prefixed with
+         * '$' stripped from it.
          *
-         * This method is always called with "this" as this array. Important: this
+         * This method is always called with "this" as "this". Important: this
          * means that the individual record is not the this for $toJSON.
-         * @param rec The array element to covert to JSON - it will be an element of
+         * @param rec The object to covert to JSON - it will be an element of
          * this array
          * @return This array element in JSON
          */
         $toJSON: function(rec) {
-          var dat = {};
+          var dat;
+          if( !angular.isObject(rec) ) {
+            rec = {$value: rec};
+          }
+          dat = {};
           $firebaseUtils.each(rec, function (v, k) {
-            dat[k] = $firebaseUtils.stripDollarPrefixedKeys(v);
+            dat[k] = v;
           });
           return dat;
         },
@@ -379,9 +377,9 @@ angular.module('objective-fire', ['firebase']);
           if( i === -1 ) {
             // parse data and create record
             var rec = this.$fromJSON(snap);
-	          // deal with primitives
- 	          if( !angular.isObject(rec) ) {
-               rec = {$value: rec};
+	    // deal with primitives
+ 	    if( !angular.isObject(rec) ) {
+              rec = {$value: rec};
             }
             rec.$id = $firebaseUtils.getKey(snap);
             rec.$priority = snap.getPriority();
@@ -1255,16 +1253,25 @@ angular.module('objective-fire', ['firebase']);
 
         /**
          * Converts an object into JSON.
+         * By that we mean not a string but rather just the object
+         * that will be sent to Firebase.
+         * By default it just copies all values from this object onto
+         * the data that will go to Firebase
+         * The JSON sent to the Firebase will always have any keys prefixed with
+         * '$' stripped from it.
          *
-         * Priority is automatically handled by AngularFire
          * This method is always called with "this" as "this"
-         * @param rec The object to covert to JSON - may not necessarily be this object
-         * @return This object converted to JSON
+         * @param rec The object to covert to JSON - it should be this object
+         * @return This object in JSON
          */
         $toJSON: function(rec) {
-          var dat = {};
+          var dat;
+          if( !angular.isObject(rec) ) {
+            rec = {$value: rec};
+          }
+          dat = {};
           $firebaseUtils.each(rec, function (v, k) {
-            dat[k] = $firebaseUtils.stripDollarPrefixedKeys(v);
+            dat[k] = v;
           });
           return dat;
         },
@@ -2185,8 +2192,11 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           },
 
           updateRec: function(rec, snap, $fromJSON, context) {
-            var data = $fromJSON.call(context, snap);
+            var data = snap.val();
             var oldData = angular.extend({}, rec);
+            if (angular.isFunction($fromJSON)) {
+              data = $fromJSON.apply(context, [snap]);
+            }
             // deal with primitives
             if( !angular.isObject(data) ) {
               rec.$value = data;
@@ -2267,31 +2277,26 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
            * @param context {Object} the context from which $toJSON will be called
            * @returns {*} the object converted to JSON for the Firebase.
            */
-           toJSON: function(rec, $toJSON, context) {
-             var dat = $toJSON.call(context, rec); // convert record to JSON
-             if (dat !== null) {
-               if ( !angular.isObject(dat) ) {
-                 dat = {$value: dat, $priority: rec.$priority};
-               } else {
-                 dat.$priority = rec.$priority;
-               }
-               if( angular.isDefined(dat.$value) && dat.$value !== null ) {
-                 dat['.value'] = dat.$value;
-               }
-               if( angular.isDefined(dat.$priority) && Object.keys(dat).length > 1 && dat.$priority !== null ) {
-                 dat['.priority'] = dat.$priority;
-               }
-               delete dat.$value; delete dat.$priority;
-               // assert valid keys
-               angular.forEach(dat, function(v,k) {
-                 if (k.match(/[.$\[\]#\/]/) && k !== '.value' && k !== '.priority' ) {
-                   throw new Error('Invalid key ' + k + ' (cannot contain .$[]#)');
-                 }
-                 else if( angular.isUndefined(v) ) {
-                   throw new Error('Key '+k+' was undefined. Cannot pass undefined in JSON. Use null instead.');
-                 }
-               });
+           toJSON: function(rec, $toJSON, context) { // this method doesn't work right
+             var dat = $toJSON.apply(context, [rec]);
+	     if( !angular.isObject(dat) ) {
+               rec = {$value: dat};
+               dat = {};
              }
+             if( angular.isDefined(rec.$value) && Object.keys(dat).length === 0 && rec.$value !== null ) {
+               dat['.value'] = rec.$value;
+             }
+             if( angular.isDefined(rec.$priority) && Object.keys(dat).length > 0 && rec.$priority !== null ) {
+               dat['.priority'] = rec.$priority;
+             }
+             angular.forEach(dat, function(v,k) {
+               if (k.match(/[.$\[\]#\/]/) && k !== '.value' && k !== '.priority' ) {
+                 throw new Error('Invalid key ' + k + ' (cannot contain .$[]#)');
+               }
+               else if( angular.isUndefined(v) ) {
+                 throw new Error('Key '+k+' was undefined. Cannot pass undefined in JSON. Use null instead.');
+               }
+             });
              return dat;
            },
 
@@ -2351,17 +2356,6 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
             return def.promise;
           },
 
-          stripDollarPrefixedKeys: function(data) {
-            if( !angular.isObject(data) ) { return data; }
-            var out = angular.isArray(data)? [] : {};
-            angular.forEach(data, function(v,k) {
-              if(typeof k !== 'string' || k.charAt(0) !== '$') {
-                out[k] = utils.stripDollarPrefixedKeys(v);
-              }
-            });
-            return out;
-          },
-
           /**
            * AngularFire version number.
            */
@@ -2374,635 +2368,15 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
         return utils;
       }
     ]);
-})();
 
-"use strict";
-angular.module('objective-fire')
-.factory('Factories', ["$firebaseObject", "$firebaseArray", "$q", function($firebaseObject, $firebaseArray, $q) {
-  var factories = {
-    objectFactory: function(objectClass, rootRef, objFire) {
-      var obj = {};
-      obj._objectClass = objectClass;
-      obj._rootRef = rootRef;
-      obj._objFire = objFire;
-      var methods = objectClass.objectMethods;
-      for (var param in methods) { // apply methods to prototype
-        if (methods.hasOwnProperty(param)) {
-          obj[param] = methods[param];
-        }
-      }
-      // add objectivefire methods
-      obj.$load = function(name) { // TODO: improve upon this method
-        var properties = this._objectClass.properties;
-        var ops = properties.objectP;
-        var oaps = properties.arrayP;
-        var deffered = $q.defer();
-        if (typeof name !== "string") {
-          throw "name must be of type string";
-        }
-        if (!this._doLoad[name]) { // if property is already loaded don't do anything
-          // find the actual property definition
-          var property, i;
-          var kind = "";
-          for (i = 0; i < ops.length; i++) {
-            if (ops[i].name === name) {
-              property = ops[i];
-              kind = "op";
-              break;
-            }
-          }
-          for (i = 0; i < oaps.length; i++) {
-            if (oaps[i].name === name) {
-              property = oaps[i];
-              kind = "oap";
-              break;
-            }
-          }
-          this._doLoad[name] = true; // require that the property is loaded
-          var objectClassName, objectClass;
-          if (this._loaded) { // if already loaded then manually load the property
-            if (kind === "op") {
-              objectClassName = property.objectClassName;
-              objectClass = objFire.getByName(objectClassName);
-              var obj = objectClass.instance(this[name]); // create the object
-              this[name] = obj;
-              this._isLoaded[name] = true;
-              deffered.resolve(this[name]);
-            } else if (kind === "oap") {
-              objectClassName = property.objectClassName;
-              objectClass = objFire.getByName(objectClassName);
-              var Factory = factories.arrayFactory(objectClass);
-              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
-              this[name] = arr;
-              this._isLoaded[name] = true;
-              deffered.resolve(this[name]);
-            }
-          } else { // if we haven't loaded, it will be loaded when the object is loaded
-            // this means that simply changing this._doLoad[name] will load it
-            // make sure it is actually loaded in the object loading (could not due to synchronization issues (I think))
-            this.$loaded().then(function(self) {
-              if (!self._isLoaded[name]) { // if for some reason not loaded manually load the property
-                if (kind === "op") {
-                  objectClassName = property.objectClassName;
-                  objectClass = objFire.getByName(objectClassName);
-                  var obj = objectClass.instance(self[name]); // create the object
-                  self[name] = obj;
-                } else if (kind === "oap") {
-                  objectClassName = property.objectClassName;
-                  objectClass = objFire.getByName(objectClassName);
-                  var Factory = factories.arrayFactory(objectClass);
-                  var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name));
-                  self[name] = arr;
-                }
-              }
-              self._isLoaded[name] = true;
-              deffered.resolve(self[name]);
-            });
-          }
-        } else {
-          deffered.resolve(this[name]);
-        }
-        return deffered.promise;
-      };
-      obj.$toJSON = function(rec) {
-        var properties = this._objectClass.properties;
-        var pps = properties.primitive;
-        var ops = properties.objectP;
-        var oaps = properties.arrayP;
-        var data = {}, i, name;
-        for (i = 0; i < pps.length; i++) { // save primitives
-          name = pps[i].name;
-          data[name] = rec[name];
-        }
-        for (i = 0; i < ops.length; i++) { // save object references
-          name = ops[i].name;
-          if (typeof rec[name] === "object") {
-            data[name] = rec[name].$id; // save just the id of the object
-          } else {
-            data[name] = rec[name];
-          }
-        }
-        for (i = 0; i < oaps.length; i++) { // save object array references
-          name = oaps[i].name;
-          if (typeof rec[name] === "object") {
-            data[name] = [];
-            for (var j = 0; j < rec[name].length; j++) {
-              data[name][j] = rec[name][j].$id; // save just the id of each element in the array
-            }
-          } else {
-            data[name]= rec[name]; // if it is not object it is just the reference so save the reference back
-          }
-        }
-        for (var param in data) { // sanatize firebase input
-          if (data[param] === undefined) {
-            data[param] = null;
-          }
-        }
-        return data; // return the data that we made
-      };
-      obj.$fromJSON = function(snap) {
-        var properties = this._objectClass.properties;
-        var pps = properties.primitive;
-        var ops = properties.objectP;
-        var oaps = properties.arrayP;
-        var data = snap.val();
-        if (data === null) {
-          data = {};
-        }
-        var newRec = {}, i, name;
-        for (i = 0; i < pps.length; i++) { // replace all primitive properties
-          name = pps[i].name;
-          newRec[name] = data[name]; // simply replace primitives
-        }
-        var objectClassName, objectClass;
-        for (i = 0; i < ops.length; i++) { // replace all object properties
-          name = ops[i].name;
-          if (this._doLoad[name]) { // only load property if it should be
-            // only create a new object if the object has changed
-            if (!this[name] || this[name].$id !== data[name]) { // in the firebase only the object reference is stored so if the reference isn't the same as the id of the existing object they must be different
-              objectClassName = ops[i].objectClassName;
-              objectClass = this._objFire.getByName(objectClassName);
-              var obj = objectClass.instance(data[name]);
-              this._isLoaded[name] = true;
-              newRec[name] = obj;
-            } else {
-              newRec[name] = this[name];
-            }
-          } else {
-            newRec[name] = data[name]; // just save the reference if not supposed to load it
-          }
-        }
-        for (i = 0; i < oaps.length; i++) { // replace all object array properties
-          name = oaps[i].name;
-          if (this._doLoad[name]) {
-            if (!this._isLoaded[name]) { // arrays actually must only be loaded once
-              objectClassName = oaps[i].objectClassName;
-              objectClass = this._objFire.getByName(objectClassName);
-              var Factory = factories.arrayFactory(objectClass);
-              var arr = new Factory(this._rootRef.child(this._objectClass.name).child(this.$id).child(name)); // we are obtaining a constructor by a function with parameters then calling that function
-              this._isLoaded[name] = true;
-              newRec[name] = arr;
-            } else {
-              newRec[name] = this[name]; // pull the object of the current object if it exists
-            }
-          } else {
-            newRec[name] = data[name]; // just save the reference if not supposed to load it
-          }
-        }
-        return newRec;
-      };
-      return $firebaseObject.$extend(obj);
-    },
-    arrayFactory: function(fireObject) {
-      return $firebaseArray.$extend({
-        // things that must be accessible
-        _fireObject: fireObject,
-        // methods to override
-        $toJSON: function(rec) {
-          if (rec.$id) {
-            return rec.$id;
-          } else {
-            return null;
-          } // a record should be saved by its reference
-        },
-        $fromJSON: function(snap) {
-          var ob = this._fireObject.instance(snap.val());
-          return ob; // create an object from the snapshot
+    function stripDollarPrefixedKeys(data) {
+      if( !angular.isObject(data) ) { return data; }
+      var out = angular.isArray(data)? [] : {};
+      angular.forEach(data, function(v,k) {
+        if(typeof k !== 'string' || k.charAt(0) !== '$') {
+          out[k] = stripDollarPrefixedKeys(v);
         }
       });
+      return out;
     }
-  };
-  return factories;
-}]);
-
-"use strict";
-angular.module('objective-fire')
-.factory('FireObject', ["Factories", function(Factories) {
-  /**
-   * Internally used "class" of objects - it has methods for initiating new or
-   * existing objects of that class in the Firebase
-   *  This class should not be created directly! (Unless you know what you are doing)
-   * @class FireObject
-   * @constructor
-   * @param objectClass {ObjectClass} The class that this FireObject makes.
-   * @param rootRef {Firebase} Firebase object that is the root of the Firebase.
-   * @param objFire {ObjectiveFire} References to the ObjectiveFire that made this FireObject.
-   */
-  function FireObject(objectClass, rootRef, objFire) {
-    if (typeof objectClass !== "object") {
-      throw new Error("objectClass must be of type ObjectClass");
-    }
-    this.objectClass = objectClass;
-    this.rootRef = rootRef;
-    this.objFire = objFire;
-    // the extended angularfire object factory
-    this.Factory = Factories.objectFactory(objectClass, rootRef, objFire);
-  }
-  /**
-   * Creates a new instance of the class. It invokes the classes' constructor
-   * with the arguments provided to this method. If no constructor is provided
-   * an empty object will be created.
-   * Any properties created by the constructor will be $save (d) to the Firebase.
-   * Properties not created in the constructor will not be $load (ed). You must
-   * load them manually after the fact. If you want and object array create it with
-   * new objFire(your instance of objectivefire).getArrayFactory("your_class_for_the_array")(firebase_ref_to_array);
-   * More simple functionality will be created for this in future update.
-   * @method new
-   * @return New instance of the class
-   */
-  FireObject.prototype.new = function() {
-    // create a new location in the Firebase
-    var ref = this.rootRef.child(this.objectClass.name).push();
-    var obj = new this.Factory(ref); // create an object at that location
-    // private properties of the object
-    obj._isLoaded = {}; // list of properties that are loaded
-    obj._doLoad = {}; // list of properties that should be loaded
-    // call constructor if it exists
-    if (this.objectClass.objectConstructor !== null && typeof this.objectClass.objectConstructor === "function") {
-      // call the object constructor with the correct "this" and pass the arguments
-      this.objectClass.objectConstructor.apply(obj, arguments);
-    } else {
-      throw new Error("new may only be called for classes that have constructors");
-    }
-    // tell the object that all changed properties have been loaded
-
-    // this information should not be visible to users of objectivefire
-    var properties = this.objectClass.properties;
-    var ops = properties.objectP;
-    var oaps = properties.arrayP;
-    var i, name;
-    // check any object properties and set them to be loaded
-    for (i = 0; i < ops.length; i++) {
-      name = ops[i].name;
-      if (name in obj) {
-        obj._isLoaded[name] = true;
-        obj._doLoad[name] = true;
-      }
-    }
-    // check any object array properties and set them to be loaded
-    for (i = 0; i < oaps.length; i++) {
-      name = oaps[i].name;
-      if (name in obj) {
-        obj._isLoaded[name] = true;
-        obj._doLoad[name] = true;
-      }
-    }
-    obj._loaded = true; // new objects are always loaded
-    obj.$save(); // save the new constructed object
-    return obj;
-  };
-  /**
-   * Creates an instance of the class from data existing in the Firebase.
-   * Any parameters passed after id will be interpreted as properties to load.
-   * Ex: myObject.instance("some_firebase_id", "some_property", "some_other_property");
-   * This would cause myObject to automatically $load() "some_property" and "some_other_property"
-   * @method instance
-   * @param id {String} The id of this object in the Firebase. (it's key)
-   * @return Existing instance of the class
-   */
-  FireObject.prototype.instance = function(id) {
-    // get reference at this object location
-    var ref = this.rootRef.child(this.objectClass.name).child(id);
-    var toLoad = Array.prototype.slice.call(arguments, [1]); // pull all arguments except id
-    var obj = new this.Factory(ref); // create the object
-    // private properties again
-    obj._loaded = false; // private property that states if the object has been loaded
-    obj.$loaded().then(function() { // make the _loaded property change to true when the object loads
-      obj._loaded = true;
-    });
-    obj._isLoaded = {};
-    obj._doLoad = {};
-    for (var i = 0; i < toLoad.length; i++) {
-      if (typeof toLoad[i] !== "string") {
-        throw new Error("typeof properties to load must be string");
-      } else {
-        obj._doLoad[toLoad[i]] = true; // set the property to be loaded
-      }
-    }
-    return obj;
-  };
-  return FireObject;
-}])
-;
-
-"use strict";
-angular.module('objective-fire')
-.factory('ObjectClass', function() {
-  /**
-   * "Class" of objects. Similar to a class in other programming languages like java.
-   * It defines the constructor, methods, and properties of any object of the class.
-   * @class ObjectClass
-   * @constructor
-   * @param name {String} The name by which this class will be referenced.
-   * throughout ObjectiveFire.
-   * @param objectConstructor {Function} The constructor that will be used to
-   * create instances of this class. May be null.
-   * @param objectMethods {Object with Function} The methods that will be
-   * available on objects of this class. May be null.
-   * @param properties {Properties} The properties that objects of this class
-   * will have. May not be null.
-   */
-  function ObjectClass(name, objectConstructor, objectMethods, properties) {
-    if (arguments.length !== 4) {
-      throw new Error("ObjectClass constructor may only be invoked with all parameters defined");
-    }
-    if (!(this instanceof ObjectClass)) { // failsafe for accidental function call instead of constructor call
-      return new ObjectClass(name, objectConstructor, objectMethods, properties);
-    }
-    if(typeof name !== "string") {
-      throw new Error("name must be of type string");
-    }
-    if (typeof objectConstructor !== "function" && objectConstructor !== null) {
-      throw new Error("objectConstructor must be of type function or null");
-    }
-    if (typeof objectMethods !== "object" && objectMethods !== null) {
-      throw new Error("objectMethods must be of type object or null");
-    }
-    if (typeof properties !== "object" && properties !== null) {
-      throw new Error("properties must be of type object or null");
-    }
-    if (properties === null) {
-      console.warn("did you mean to create an ObjectClass without properties?");
-      properties = {
-        primitive: [],
-        objectP: [],
-        arrayP: []
-      };
-    }
-    this.name = name;
-    this.objectConstructor = objectConstructor;
-    this.objectMethods = objectMethods;
-    this.properties = properties;
-  }
-  return ObjectClass;
-});
-
-"use strict";
-angular.module('objective-fire')
-.factory('ObjectiveFire', ["FireObject", "Properties", "ObjectClass", "Factories", function(FireObject, Properties, ObjectClass, Factories) {
-  /**
-   * All classes should be registered in an instance of ObjectiveFire created at
-   * your Firebase.
-   * @class ObjectiveFire
-   * @constructor Creates instance of ObjectiveFire at the Firebase reference.
-   * @param ref {Firebase} Firebase object at the URL that is your Firebase.
-   * Provide a Firebase object - NOT a URL. This Firebase object may be a
-   * location in the Firebase - it doesn't have to be at the root. Doing
-   * as such will cause all objectivefire operations to be done from only within
-   * that location in the Firebase.
-   */
-  function ObjectiveFire(ref) {
-    if (!(ref instanceof Firebase)) {
-      throw new Error("must pass a Firebase reference to ObjectiveFire constructor");
-    }
-    if (!(this instanceof ObjectiveFire)) {
-      return new ObjectiveFire(ref);
-    }
-    this.ref = ref;
-    // registry of objects
-    this.objects = {};
-    this.arrayFactories = {};
-  }
-  ObjectiveFire.prototype = {
-    /**
-     * Registers a class from an ObjectClass object.
-     * @method registerFromObjectClass
-     * @param objectClass {ObjectClass} The ObjectClass from which to create the class.
-     * @return {FireObject} The registered class.
-     */
-    registerFromObjectClass: function(objectClass) {
-      var theFireObject = new FireObject(objectClass, this.ref, this);
-      this.objects[objectClass.name] = theFireObject;
-      this.arrayFactories[objectClass.name] = Factories.arrayFactory(theFireObject);
-      return theFireObject;
-    },
-    /**
-     * Registers a class from an object that follows a specific format.
-     * The object must provided in this format.
-     ```
-     *     // TODO: fix the broken formatting in the documentation
-     *     {
-     *       name: name, // see ObjectClass documentation
-     *       objectConstructor: objectConstructor, // see ObjectClass documentation
-     *       objectMethods: { // see ObjectClass documentation
-     *         a_method: function() {},
-     *         another_method: function() {}
-     *       },
-     *       properties: { // see ObjectClass documentation
-     *         primitive: [{name: "a_name"},{name: "another_name"}], // Primitive Properties
-     *         objectP: [{name: "a_name", objectClassName: "a_class_name"}], // Object Properties
-     *         arrayP: [{name: "a_name", objectClassName: "a_class_name"}], // Object Array Properties
-     *       }
-     *     }
-     ```
-     * @method registerFromObject
-     * @param object The object from which to create the class.
-     * @return {FireObject} The registered class.
-     */
-    registerFromObject: function(object) {
-      var properties = new Properties(); // find properties
-      var i, prop;
-      if (object.properties.primitive) {
-        for (i = 0; i < object.properties.primitive.length; i++) {
-          prop = object.properties.primitive[i];
-          properties.addPrimitiveProperty(prop.name);
-        }
-      }
-      if (object.properties.objectP) {
-        for (i = 0; i < object.properties.objectP.length; i++) {
-          prop = object.properties.objectP[i];
-          properties.addObjectProperty(prop.name, prop.objectClassName);
-        }
-      }
-      if (object.properties.arrayP) {
-        for (i = 0; i < object.properties.arrayP.length; i++) {
-          prop = object.properties.arrayP[i];
-          properties.addObjectArrayProperty(prop.name, prop.objectClassName);
-        }
-      }
-      if (!object.objectConstructor) {
-        object.objectConstructor = null;
-      }
-      if (!object.objectMethods) {
-        object.objectMethods = null;
-      }
-      var theClass = new ObjectClass(object.name, object.objectConstructor, object.objectMethods, properties);
-      var theFireObject = new FireObject(theClass, this.ref, this);
-      this.objects[object.name] = theFireObject;
-      this.arrayFactories[object.name] = Factories.arrayFactory(theFireObject);
-      return theFireObject;
-    },
-    /**
-     * Gets registered class by name.
-     * @method getByName
-     * @param name {String} The name of the class.
-     * @return {FireObject} The class for the specified name.
-     */
-    getByName: function(name) {
-      return this.objects[name];
-    },
-    /**
-     * Gets an array factory for the class specified by name
-     * @method getArrayFactory
-     * @param name {String} The name of the class.
-     * @return {$firebaseArray} An extended $firebaseArray factory for the specified class.
-     * The constructor is returned so in order to create an instance it should
-     * be invoked with new.
-     */
-    getArrayFactory: function(name) {
-      return this.arrayFactories[name];
-    }
-  };
-  return ObjectiveFire;
-}]);
-
-"use strict";
-angular.module('objective-fire')
-.factory("ObjectProperty", function() {
-  /**
-   * Property that is an object.
-   * @class ObjectProperty
-   * @constructor
-   * @param name {String} The name of this property.
-   * @param objectClassName {String} The name of the class of object this property is.
-   */
-  function ObjectProperty(name, objectClassName) {
-    if (!(this instanceof ObjectProperty)) {
-      return new ObjectProperty(name, objectClassName);
-    }
-    if (typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    /**
-     * The name of this property.
-     * @property name
-     * @type {String}
-     */
-    this.name = name;
-    /**
-     * The name of the class of object this property is.
-     * @property objectClassName
-     * @type {String}
-     */
-    this.objectClassName = objectClassName;
-  }
-  return ObjectProperty;
-})
-.factory("ObjectArrayProperty", function() {
-  /**
-   * Property that is an array of objects.
-   * @class ObjectArrayProperty
-   * @constructor
-   * @param name {String} The name of this property.
-   * @param objectClassName {String} The name of the class of object this property is.
-   */
-  function ObjectArrayProperty(name, objectClassName) {
-    if (!(this instanceof ObjectArrayProperty)) {
-      return new ObjectArrayProperty(name, objectClassName);
-    }
-    if (typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    /**
-     * The name of this property.
-     * @property name
-     * @type {String}
-     */
-    this.name = name;
-    /**
-     * The name of the class of object this property is.
-     * @property objectClassName
-     * @type {String}
-     */
-    this.objectClassName = objectClassName;
-  }
-  return ObjectArrayProperty;
-})
-.factory("PrimitiveProperty", function() {
-  /**
-   * Property that is raw data.
-   * @class PrimitiveProperty
-   * @constructor
-   * @param name {String} The name of this property.
-   */
-  function PrimitiveProperty(name) {
-    if (!(this instanceof PrimitiveProperty)) {
-      return new PrimitiveProperty(name);
-    }
-    if (typeof name !== "string") {
-      throw "name must be of type string";
-    }
-    /**
-     * The name of this property.
-     * @property name
-     * @type String
-     */
-    this.name = name;
-  }
-  return PrimitiveProperty;
-})
-.factory("Properties", ["PrimitiveProperty", "ObjectProperty", "ObjectArrayProperty", function(PrimitiveProperty, ObjectProperty, ObjectArrayProperty) {
-  /**
-   * Group of properties.
-   * @class Properties
-   * @constructor
-   */
-  function Properties() {
-    if (!(this instanceof Properties)) {
-      return new Properties();
-    }
-    /**
-     * Array of all the PrimtiveProperty.
-     * @property primitive
-     * @type Array of PrimitiveProperty
-     */
-    this.primitive = [];
-    /**
-     * Array of all the ObjectProperty.
-     * @property objectP
-     * @type Array of ObjectProperty
-     */
-    this.objectP = [];
-    /**
-     * Array of all the ObjectArrayProperty.
-     * @property arrayP
-     * @type Array of ObjectArrayProperty
-     */
-    this.arrayP = [];
-  }
-  Properties.prototype = {
-    /**
-     * Adds a property to this group of properties.
-     * @method addProperty
-     * @param property {PrimitiveProperty || ObjectProperty || ObjectArrayProperty} The property to be added.
-     * @return this
-     * @chainable
-     */
-    addProperty: function(property) {
-      if (property instanceof PrimitiveProperty) {
-        this.primitive.push(property);
-      } else if (property instanceof ObjectProperty) {
-        this.objectP.push(property);
-      } else if (property instanceof ObjectArrayProperty) {
-        this.arrayP.push(property);
-      } else {
-        throw "property must be of type PrimitiveProperty || ObjectProperty || ObjectArrayProperty";
-      }
-      return this;
-    },
-    // TODO: doc these and test them
-    addPrimitiveProperty: function(name) {
-      this.primitive.push(new PrimitiveProperty(name));
-      return this;
-    },
-    addObjectProperty: function(name, objectClassName) {
-      this.objectP.push(new ObjectProperty(name, objectClassName));
-      return this;
-    },
-    addObjectArrayProperty: function(name, objectClassName) {
-      this.arrayP.push(new ObjectArrayProperty(name, objectClassName));
-      return this;
-    }
-  };
-  return Properties;
-}]);
+})();
